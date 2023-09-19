@@ -67,6 +67,13 @@ dependencies {
     val androidJUnitVersion = "1.1.5"
     val espressoVersion = "3.5.1"
     val hiltNavVersion = "1.0.0"
+    val retrofitVersion = "2.9.0"
+    val okHttpVersion = "4.11.0"
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.okhttp3:okhttps:$okHttpVersion")
 
     // Room
     implementation("androidx.room:room-runtime:$roomVersion")
