@@ -69,6 +69,11 @@ dependencies {
     val hiltNavVersion = "1.0.0"
     val retrofitVersion = "2.9.0"
     val okHttpVersion = "4.11.0"
+    val pagingVersion = "3.2.1"
+
+    // Paging
+    implementation("androidx.paging:paging-runtime-ktx:$pagingVersion")
+    implementation("androidx.paging:paging-compose:$pagingVersion")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
