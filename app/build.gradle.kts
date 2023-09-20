@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
     packaging {
         resources {
@@ -57,11 +57,11 @@ dependencies {
     val roomVersion = "2.5.2"
     val viewModelKTXVersion = "2.6.2"
     val coroutinesVersion = "1.7.2"
-    val navVersion = "2.7.2"
+    val navVersion = "2.6.0"
     val hiltVersion = "2.47"
-    val coreKTXVersion = "1.12.0"
+    val coreKTXVersion = "1.10.1"
     val lifecycleRuntimeKTXVersion = "2.6.2"
-    val activityComposeVersion = "1.8.0-beta01"
+    val activityComposeVersion = "1.7.2"
     val composeBomVersion = "2023.03.00"
     val jUnitVersion = "4.13.2"
     val androidJUnitVersion = "1.1.5"
@@ -70,6 +70,10 @@ dependencies {
     val retrofitVersion = "2.9.0"
     val okHttpVersion = "4.11.0"
     val pagingVersion = "3.2.1"
+    val coilVersion = "2.4.0"
+
+    // Coil
+    implementation("io.coil-kt:coil-compose:$coilVersion")
 
     // Paging
     implementation("androidx.paging:paging-runtime-ktx:$pagingVersion")
@@ -78,7 +82,7 @@ dependencies {
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-    implementation("com.squareup.okhttp3:okhttps:$okHttpVersion")
+    implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
 
     // Room
@@ -112,6 +116,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material")
     androidTestImplementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")

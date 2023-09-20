@@ -21,9 +21,9 @@ interface WallpaperApi {
      * Для получения первой фотографии в категории
      */
     // Иного способа ограничить количество выдаваемых элементов pixabay не предоставляет
-    @GET("?page=1&per_page=1")
+    @GET("?page=1&per_page=3")
     suspend fun getCategoryPreview(
-        @Query("category") category: Category
+        @Query("category") category: String
     ): WrappedResponse<List<WallpaperResponse>>
 }
 
