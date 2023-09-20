@@ -4,10 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class WallpaperResponse(
     val id: String,
+    @SerializedName("largeImageURL")
     val url: String,
-    @SerializedName("file_size")
-    val fileSize: Int,
-    @SerializedName("file_type")
-    val fileType: String,
-    val path: String
+    @SerializedName("previewURL")
+    val previewUrl: String
 )
