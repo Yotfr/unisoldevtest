@@ -7,7 +7,7 @@ sealed class Screen(val route: String) {
         route = "categories"
     )
     data object CategoryWallpapers : Screen(
-        route = "category_wallpapers/${NavigationConstants.CATEGORY_KEY}"
+        route = "category_wallpapers/{${NavigationConstants.CATEGORY_KEY}}"
     ) {
         fun passCategory(category: Category): String {
             return this.route.replace(

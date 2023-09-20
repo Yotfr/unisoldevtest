@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.ui.categories.screen.CategoriesScreen
+import ru.yotfr.unisoldevtest.ui.categorywallpapers.screen.CategoryWallpaperScreen
 
 @Composable
 fun WallpaperNavHost() {
@@ -35,6 +36,7 @@ fun WallpaperNavHost() {
                     NavigationConstants.CATEGORY_KEY
                 ) ?: throw IllegalArgumentException("Navigated with wrong Category")
             )
+            CategoryWallpaperScreen(category = category)
         }
     }
 }

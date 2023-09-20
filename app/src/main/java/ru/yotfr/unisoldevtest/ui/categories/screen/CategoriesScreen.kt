@@ -1,5 +1,6 @@
 package ru.yotfr.unisoldevtest.ui.categories.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -49,7 +50,12 @@ fun CategoriesScreen(
             columns = GridCells.Fixed(2)
         ) {
             items(state.categories) { categoryModel ->
-                CategoryItem(categoryModel = categoryModel)
+                CategoryItem(
+                    categoryModel = categoryModel,
+                    onClick = {
+                        navigateToCategoryWallpaper(categoryModel.category)
+                    }
+                )
             }
         }
         PullRefreshIndicator(refreshing = state.isLoading, state = pullRefreshState)
@@ -57,8 +63,15 @@ fun CategoriesScreen(
 }
 
 @Composable
-fun CategoryItem(categoryModel: CategoryModel) {
-    Box() {
+fun CategoryItem(
+    categoryModel: CategoryModel,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier.clickable {
+            onClick()
+        }
+    ) {
         AsyncImage(
             modifier = Modifier.fillMaxWidth(),
             model = categoryModel.previewUrl,

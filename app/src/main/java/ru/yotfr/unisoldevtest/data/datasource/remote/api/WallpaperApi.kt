@@ -10,7 +10,7 @@ import ru.yotfr.unisoldevtest.data.datasource.remote.model.WrappedResponse
 import ru.yotfr.unisoldevtest.domain.model.Category
 
 interface WallpaperApi {
-    @GET
+    @GET(".")
     suspend fun getWallpapersByCategory(
         @Query("page") page: Int,
         @Query("per_page") perPage: Int,
