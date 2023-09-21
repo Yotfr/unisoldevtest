@@ -14,5 +14,6 @@ interface WallpaperRepository {
 
     fun getCategories(): Flow<MResponse<List<CategoryModel>>>
     fun getWallpaperById(id: String): Flow<MResponse<Wallpaper>>
+    suspend fun changeWallpaperFavoriteStatus(wallpaper: Wallpaper)
 
 }

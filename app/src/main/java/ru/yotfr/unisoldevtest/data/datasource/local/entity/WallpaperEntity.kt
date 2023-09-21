@@ -9,5 +9,6 @@ import androidx.room.PrimaryKey
 data class WallpaperEntity(
     @PrimaryKey val id: String,
     val url: String,
-    val previewUrl: String
+    val previewUrl: String,
+    val isFavorite: Boolean
 )
