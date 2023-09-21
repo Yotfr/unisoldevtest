@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.ui.categories.viewmodel
+package ru.yotfr.unisoldevtest.ui.wallpaper.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,32 +6,46 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.domain.model.MResponse
-import ru.yotfr.unisoldevtest.domain.usecase.GetCategoriesUseCase
-import ru.yotfr.unisoldevtest.ui.categories.state.CategoriesScreenState
+import ru.yotfr.unisoldevtest.domain.usecase.GetWallpaperByIdUseCase
+import ru.yotfr.unisoldevtest.ui.wallpaper.state.WallpaperScreenState
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
-class CategoriesViewModel @Inject constructor(
-    private val getCategoriesUseCase: GetCategoriesUseCase
+class WallpaperViewModel @Inject constructor(
+    private val getWallpaperByIdUseCase: GetWallpaperByIdUseCase
 ) : ViewModel() {
-
-    private val _state = MutableStateFlow(CategoriesScreenState())
-    val state = _state.asStateFlow()
 
     private val triggerRefresh = MutableStateFlow(false)
 
+    private val _state = MutableStateFlow(WallpaperScreenState())
+    val state = _state.asStateFlow()
+
+    private val id = MutableStateFlow<String?>(null)
+
     init {
         viewModelScope.launch {
-            triggerRefresh.flatMapLatest {
-                getCategoriesUseCase()
-            }.collect { response ->
-                when (response) {
-                    is MResponse.Exception -> {}
+            combine(
+                triggerRefresh,
+                id
+            ) { trigger, id ->
+                Pair(trigger, id)
+            }.flatMapLatest { (_, id) ->
+                id?.let {
+                    getWallpaperByIdUseCase(it)
+                } ?: flow {  }
+            }.collectLatest { response ->
+                when(response) {
+                    is MResponse.Exception -> {
+                        // TODO: Error state
+                    }
                     is MResponse.Loading -> {
                         _state.update {
                             it.copy(
@@ -39,25 +53,20 @@ class CategoriesViewModel @Inject constructor(
                             )
                         }
                     }
-
                     is MResponse.Success -> {
-                        /*
-                        toggle trigger'a необходим для вызова рекомпозиции в Compose скрине при
-                        изменении элементов листа categories.
-                        (Для реализации поэтапной загрузки информации о категории и
-                        добавлении этой категории в список)
-                         */
                         _state.update {
                             it.copy(
                                 isLoading = false,
-                                categories = response.data ?: emptyList(),
-                                trigger = !it.trigger
+                                wallpaper = response.data
                             )
                         }
                     }
                 }
             }
         }
+    }
+    fun changeId(value: String) {
+        id.value = value
     }
 
     fun refresh() {

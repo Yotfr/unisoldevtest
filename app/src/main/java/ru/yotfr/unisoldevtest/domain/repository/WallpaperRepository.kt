@@ -12,6 +12,7 @@ interface WallpaperRepository {
         category: Category
     ): Flow<PagingData<Wallpaper>>
 
-    suspend fun getCategories(): Flow<MResponse<List<CategoryModel>>>
+    fun getCategories(): Flow<MResponse<List<CategoryModel>>>
+    fun getWallpaperById(id: String): Flow<MResponse<Wallpaper>>
 
 }

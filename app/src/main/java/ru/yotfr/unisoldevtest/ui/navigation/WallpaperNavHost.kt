@@ -8,6 +8,7 @@ import androidx.navigation.navArgument
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.ui.categories.screen.CategoriesScreen
 import ru.yotfr.unisoldevtest.ui.categorywallpapers.screen.CategoryWallpaperScreen
+import ru.yotfr.unisoldevtest.ui.wallpaper.screen.WallpaperScreen
 
 @Composable
 fun WallpaperNavHost() {
@@ -37,6 +38,18 @@ fun WallpaperNavHost() {
                 ) ?: throw IllegalArgumentException("Navigated with wrong Category")
             )
             CategoryWallpaperScreen(category = category)
+        }
+
+        composable(
+            route = Screen.Wallpaper.route,
+            arguments = listOf(
+                navArgument(NavigationConstants.WALLPAPER_ID_KEY) {}
+            )
+        ) {backStackEntry ->
+            val id = backStackEntry.arguments?.getString(
+                NavigationConstants.WALLPAPER_ID_KEY
+            ) ?: throw IllegalArgumentException("Navigated with wrong WallpaperID")
+            WallpaperScreen(id = id)
         }
     }
 }

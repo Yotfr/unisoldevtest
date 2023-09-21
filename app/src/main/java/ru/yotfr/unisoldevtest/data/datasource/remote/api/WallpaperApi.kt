@@ -25,6 +25,11 @@ interface WallpaperApi {
     suspend fun getCategoryPreview(
         @Query("category") category: String
     ): WrappedResponse<List<WallpaperResponse>>
+
+    @GET(".")
+    suspend fun getWallpaperById(
+        @Query("id") id: String,
+    ): WrappedResponse<List<WallpaperResponse>>
 }
 
 fun WallpaperApi() : WallpaperApi {

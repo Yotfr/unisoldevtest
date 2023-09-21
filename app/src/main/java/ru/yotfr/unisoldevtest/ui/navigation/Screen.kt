@@ -16,4 +16,15 @@ sealed class Screen(val route: String) {
             )
         }
     }
+
+    data object Wallpaper : Screen(
+        route = "wallpaper/{${NavigationConstants.WALLPAPER_ID_KEY}}"
+    ) {
+        fun passId(id: String): String {
+            return this.route.replace(
+                oldValue = "{${NavigationConstants.WALLPAPER_ID_KEY}}",
+                newValue = id
+            )
+        }
+    }
 }

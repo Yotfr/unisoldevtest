@@ -61,13 +61,13 @@ fun CategoryWallpaperScreen(
                 }
             }
         }
+        if (wallpapers.loadState.refresh == LoadState.Loading) {
+            // TOOD:Error
+        }
         PullRefreshIndicator(
             refreshing = wallpapers.loadState.refresh == LoadState.Loading,
             state = pullRefreshState
         )
-        if (wallpapers.loadState.refresh == LoadState.Loading) {
-            // TOOD:Error
-        }
     }
 
     LaunchedEffect(Unit) {

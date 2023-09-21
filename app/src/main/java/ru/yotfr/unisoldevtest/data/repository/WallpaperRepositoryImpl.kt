@@ -3,10 +3,13 @@ package ru.yotfr.unisoldevtest.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import ru.yotfr.unisoldevtest.data.datasource.remote.api.WallpaperApi
 import ru.yotfr.unisoldevtest.data.datasource.remote.paging.WallpaperPageSource
+import ru.yotfr.unisoldevtest.data.mapper.mapDomain
 import ru.yotfr.unisoldevtest.data.mapper.query
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.domain.model.CategoryModel
@@ -36,7 +39,7 @@ class WallpaperRepositoryImpl @Inject constructor(
     Возвращать информацию о всех категориях сразу слишком долго.
     С данной реализацией, элементы грузятся и добавляются в список поочередно.
      */
-    override suspend fun getCategories(): Flow<MResponse<List<CategoryModel>>> = flow {
+    override fun getCategories() = flow<MResponse<List<CategoryModel>>> {
         emit(MResponse.Loading())
         try {
             val categoriesList: ArrayList<CategoryModel> = arrayListOf()
@@ -54,5 +57,15 @@ class WallpaperRepositoryImpl @Inject constructor(
             emit(MResponse.Exception(message = e.message))
         }
 
-    }
+    }.flowOn(Dispatchers.IO)
+
+    override fun getWallpaperById(id: String) = flow {
+        emit(MResponse.Loading())
+        try {
+            val wallpaper = wallpaperApi.getWallpaperById(id).hits.first().mapDomain()
+            emit(MResponse.Success(data = wallpaper))
+        } catch (e: Exception) {
+            emit(MResponse.Exception(message = e.message))
+        }
+    }.flowOn(Dispatchers.IO)
 }
