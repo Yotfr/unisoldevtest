@@ -9,6 +9,5 @@ import ru.yotfr.unisoldevtest.domain.model.CategoryModel
  */
 data class CategoriesScreenState(
     val isLoading: Boolean = false,
-    val categories: List<CategoryModel> = emptyList(),
-    val trigger: Boolean = false
+    val categories: List<CategoryModel> = emptyList()
 )

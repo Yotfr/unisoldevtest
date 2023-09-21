@@ -1,5 +1,6 @@
 package ru.yotfr.unisoldevtest.data.repository
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -39,23 +40,23 @@ class WallpaperRepositoryImpl @Inject constructor(
 
     /*
     API Pixabay не предоставляет методов для получения краткой информации об имеющихся категориях.
-    Возвращать информацию о всех категориях сразу слишком долго.
-    С данной реализацией, элементы грузятся и добавляются в список поочередно.
      */
-    override fun getCategories() = flow<MResponse<List<CategoryModel>>> {
+    override fun getCategories() = flow {
         emit(MResponse.Loading())
         try {
-            val categoriesList: ArrayList<CategoryModel> = arrayListOf()
-            Category.values().forEach { category ->
-                val categoryResponse = wallpaperApi.getCategoryPreview(category.query())
-                val newLoadedCategory = CategoryModel(
-                    category = category,
+            val categories = Category.values().map {
+                val categoryResponse = wallpaperApi.getCategoryPreview(it.query())
+                CategoryModel(
+                    category = it,
                     previewUrl = categoryResponse.hits.first().previewUrl,
                     wallpapersCount = categoryResponse.total
                 )
-                categoriesList.add(newLoadedCategory)
-                emit(MResponse.Success(data = categoriesList))
             }
+            emit(
+                MResponse.Success(
+                    data = categories
+                )
+            )
         } catch (e: Exception) {
             emit(MResponse.Exception(message = e.message))
         }

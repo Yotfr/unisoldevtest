@@ -1,10 +1,17 @@
 package ru.yotfr.unisoldevtest.ui.navigation
 
+import ru.yotfr.unisoldevtest.R
 import ru.yotfr.unisoldevtest.domain.model.Category
 
-sealed class Screen(val route: String) {
+sealed class Screen(
+    val route: String,
+    val iconResId: Int? = null,
+    val stringResId: Int? = null
+) {
     data object Categories : Screen(
-        route = "categories"
+        route = "categories",
+        iconResId = R.drawable.ic_categories,
+        stringResId = R.string.categories
     )
     data object CategoryWallpapers : Screen(
         route = "category_wallpapers/{${NavigationConstants.CATEGORY_KEY}}"
@@ -27,4 +34,22 @@ sealed class Screen(val route: String) {
             )
         }
     }
+
+    data object FavoriteWallpapers: Screen(
+        route = "favorite_wallpapers",
+        iconResId = R.drawable.ic_favorite,
+        stringResId = R.string.favorite
+    )
+
+    data object SavedWallpapers: Screen(
+        route = "saved_wallpapers",
+        iconResId = R.drawable.ic_saved,
+        stringResId = R.string.saved
+    )
 }
+
+val rootScreens = listOf(
+    Screen.Categories,
+    Screen.FavoriteWallpapers,
+    Screen.SavedWallpapers
+)

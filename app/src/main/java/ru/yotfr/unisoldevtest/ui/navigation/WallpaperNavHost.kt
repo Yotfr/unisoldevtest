@@ -1,9 +1,10 @@
 package ru.yotfr.unisoldevtest.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.ui.categories.screen.CategoriesScreen
@@ -11,11 +12,14 @@ import ru.yotfr.unisoldevtest.ui.categorywallpapers.screen.CategoryWallpaperScre
 import ru.yotfr.unisoldevtest.ui.wallpaper.screen.WallpaperScreen
 
 @Composable
-fun WallpaperNavHost() {
-    val navController = rememberNavController()
+fun WallpaperNavHost(
+    navController: NavHostController,
+    modifier: Modifier
+) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Categories.route
+        startDestination = Screen.Categories.route,
+        modifier = modifier
     ) {
         composable(
             route = Screen.Categories.route

@@ -1,13 +1,21 @@
 package ru.yotfr.unisoldevtest.ui.theme
 
+import ExtraColors
+import LocalExtraColors
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import blackColor
 import darkColors
 import lightColors
+import whiteColor
 
 object WallpaperTheme {
+
+    val extraColors: ExtraColors
+        @Composable
+        get() = LocalExtraColors.current
     val shape: Shape
         @Composable
         get() = LocalShapes.current
@@ -30,13 +38,19 @@ fun WallpaperTheme(
         darkColors
     }
 
+    val extraColors = ExtraColors(
+        onWallpaperText = whiteColor,
+        wallpaperEndGradient = blackColor
+    )
+
     val shape = Shape()
     val spacing = Spacing()
     val typography = WallpaperTypography()
     CompositionLocalProvider(
         LocalSpacing provides spacing,
         LocalShapes provides shape,
-        LocalTypography provides typography
+        LocalTypography provides typography,
+        LocalExtraColors provides extraColors
     ) {
         MaterialTheme(
             colorScheme = colors,

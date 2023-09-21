@@ -41,17 +41,10 @@ class CategoriesViewModel @Inject constructor(
                     }
 
                     is MResponse.Success -> {
-                        /*
-                        toggle trigger'a необходим для вызова рекомпозиции в Compose скрине при
-                        изменении элементов листа categories.
-                        (Для реализации поэтапной загрузки информации о категории и
-                        добавлении этой категории в список)
-                         */
                         _state.update {
                             it.copy(
                                 isLoading = false,
-                                categories = response.data ?: emptyList(),
-                                trigger = !it.trigger
+                                categories = response.data ?: emptyList()
                             )
                         }
                     }

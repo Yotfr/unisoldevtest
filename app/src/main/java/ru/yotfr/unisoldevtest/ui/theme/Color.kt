@@ -1,5 +1,7 @@
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 val light_primary = Color(0xFF3C691B)
@@ -132,3 +134,19 @@ val darkColors = darkColorScheme(
     outlineVariant =  dark_outlineVariant,
     scrim =  dark_scrim,
 )
+
+val whiteColor = Color(0xFFFFFFFF)
+val blackColor = Color(0xFF000000)
+
+@Immutable
+data class ExtraColors(
+    val onWallpaperText: Color,
+    val wallpaperEndGradient: Color
+)
+
+val LocalExtraColors = staticCompositionLocalOf {
+    ExtraColors(
+        onWallpaperText = Color.Unspecified,
+        wallpaperEndGradient = Color.Unspecified
+    )
+}
