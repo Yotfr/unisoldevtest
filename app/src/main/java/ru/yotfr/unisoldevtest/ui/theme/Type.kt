@@ -1,34 +1,33 @@
 package ru.yotfr.unisoldevtest.ui.theme
 
-import androidx.compose.material3.Typography
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import ru.yotfr.unisoldevtest.R
 
-// Set of Material typography styles to start with
-val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+val Geologica = FontFamily(
+    fonts = listOf(
+        Font(R.font.geologica)
     )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
-    ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    )
-    */
 )
+
+@Immutable
+data class WallpaperTypography(
+    val caption: TextStyle = TextStyle(
+        fontSize = 12.sp,
+        fontFamily = Geologica
+    ),
+    val headline: TextStyle = TextStyle(
+        fontSize = 18.sp,
+        fontFamily = Geologica
+    ),
+    val body: TextStyle = TextStyle(
+        fontSize = 18.sp,
+        fontFamily = Geologica
+    )
+)
+
+val LocalTypography = compositionLocalOf { WallpaperTypography() }
