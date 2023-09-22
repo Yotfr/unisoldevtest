@@ -25,6 +25,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.ui.categorywallpapers.viewmodel.CategoryWallpaperViewModel
+import ru.yotfr.unisoldevtest.ui.common.WallpaperItem
 import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
@@ -60,7 +61,7 @@ fun CategoryWallpaperScreen(
                 key = wallpapers.itemKey { it.id }
             ) { index ->
                 wallpapers[index]?.let { wallpaper ->
-                    CategoryWallpaperItem(
+                    WallpaperItem(
                         wallpaper = wallpaper,
                         onClick = {},
                         onFavoriteClicked = vm::changeFavorite

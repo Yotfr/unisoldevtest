@@ -9,6 +9,7 @@ import androidx.navigation.navArgument
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.ui.categories.screen.CategoriesScreen
 import ru.yotfr.unisoldevtest.ui.categorywallpapers.screen.CategoryWallpaperScreen
+import ru.yotfr.unisoldevtest.ui.favoritewallpapers.screen.FavoriteWallpapersScreen
 import ru.yotfr.unisoldevtest.ui.wallpaper.screen.WallpaperScreen
 
 @Composable
@@ -54,6 +55,12 @@ fun WallpaperNavHost(
                 NavigationConstants.WALLPAPER_ID_KEY
             ) ?: throw IllegalArgumentException("Navigated with wrong WallpaperID")
             WallpaperScreen(id = id)
+        }
+
+        composable(
+            route = Screen.FavoriteWallpapers.route
+        ) {
+            FavoriteWallpapersScreen()
         }
     }
 }

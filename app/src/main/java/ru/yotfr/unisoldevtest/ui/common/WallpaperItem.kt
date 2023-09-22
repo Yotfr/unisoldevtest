@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.ui.categorywallpapers.screen
+package ru.yotfr.unisoldevtest.ui.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,7 +21,7 @@ import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 
 @Composable
-fun CategoryWallpaperItem(
+fun WallpaperItem(
     wallpaper: Wallpaper,
     onClick: (Wallpaper) -> Unit,
     onFavoriteClicked: (Wallpaper) -> Unit

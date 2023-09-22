@@ -9,12 +9,14 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.yotfr.unisoldevtest.data.datasource.local.dao.FavoriteWallpapersDao
 import ru.yotfr.unisoldevtest.data.datasource.local.database.FavoriteWallpapersDatabase
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
     @Provides
+    @Singleton
     fun provideFavoriteWallpapersDatabase(
         @ApplicationContext context: Context
     ): FavoriteWallpapersDatabase =
@@ -25,6 +27,7 @@ object DatabaseModule {
         ).build()
 
     @Provides
+    @Singleton
     fun provideFavoriteWallpapersDao(
         favoriteWallpapersDatabase: FavoriteWallpapersDatabase
     ): FavoriteWallpapersDao {

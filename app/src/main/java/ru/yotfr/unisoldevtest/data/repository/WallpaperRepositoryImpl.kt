@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import ru.yotfr.unisoldevtest.data.datasource.local.dao.FavoriteWallpapersDao
 import ru.yotfr.unisoldevtest.data.datasource.remote.api.WallpaperApi
 import ru.yotfr.unisoldevtest.data.paging.source.WallpaperPageSource
@@ -83,6 +84,9 @@ class WallpaperRepositoryImpl @Inject constructor(
             emit(MResponse.Exception(message = e.message))
         }
     }.flowOn(Dispatchers.IO)
+
+    override fun getFavoriteWallpapers(): Flow<List<Wallpaper>> =
+        favoriteWallpapersDao.getFavoriteWallpapers().map { it.map { it.mapDomain() } }
 
     override suspend fun changeWallpaperFavoriteStatus(wallpaper: Wallpaper) {
         wallpapersCache.updateWallpaperIsFavorite(

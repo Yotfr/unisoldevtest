@@ -6,11 +6,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.yotfr.unisoldevtest.data.repository.WallpaperRepositoryImpl
 import ru.yotfr.unisoldevtest.domain.repository.WallpaperRepository
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 interface RepositoryModule {
     @Binds
+    @Singleton
     fun bindWallpaperRepository(
         wallpaperRepositoryImpl: WallpaperRepositoryImpl
     ): WallpaperRepository
