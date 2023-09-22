@@ -13,7 +13,9 @@ interface WallpaperApi {
     suspend fun getWallpapersByCategory(
         @Query("page") page: Int,
         @Query("per_page") perPage: Int,
-        @Query("category") category: String
+        @Query("category") category: String,
+        @Query("safesearch") safesearch: String = "true",
+        @Query("orientation") orientation: String = "vertical"
     ): WrappedResponse<List<WallpaperResponse>>
 
     /**
@@ -22,7 +24,9 @@ interface WallpaperApi {
     // Иного способа ограничить количество выдаваемых элементов pixabay не предоставляет
     @GET("?page=1&per_page=3")
     suspend fun getCategoryPreview(
-        @Query("category") category: String
+        @Query("category") category: String,
+        @Query("safesearch") safesearch: String = "true",
+        @Query("orientation") orientation: String = "vertical"
     ): WrappedResponse<List<WallpaperResponse>>
 
     @GET(".")

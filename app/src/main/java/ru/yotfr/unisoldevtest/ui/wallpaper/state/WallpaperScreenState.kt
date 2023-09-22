@@ -4,5 +4,6 @@ import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 
 data class WallpaperScreenState(
     val isLoading: Boolean = false,
-    val wallpaper: Wallpaper? = null
+    val wallpaper: Wallpaper? = null,
+    val isBarsVisible: Boolean = true
 )

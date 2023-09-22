@@ -7,7 +7,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
@@ -23,8 +22,6 @@ class WallpaperViewModel @Inject constructor(
     private val getWallpaperByIdUseCase: GetWallpaperByIdUseCase
 ) : ViewModel() {
 
-    private val triggerRefresh = MutableStateFlow(false)
-
     private val _state = MutableStateFlow(WallpaperScreenState())
     val state = _state.asStateFlow()
 
@@ -32,12 +29,7 @@ class WallpaperViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            combine(
-                triggerRefresh,
-                id
-            ) { trigger, id ->
-                Pair(trigger, id)
-            }.flatMapLatest { (_, id) ->
+            id.flatMapLatest { id ->
                 id?.let {
                     getWallpaperByIdUseCase(it)
                 } ?: flow {  }
@@ -69,8 +61,12 @@ class WallpaperViewModel @Inject constructor(
         id.value = value
     }
 
-    fun refresh() {
-        triggerRefresh.value = !triggerRefresh.value
+    fun changeButtonsRowVisibility() {
+        _state.update {
+            it.copy(
+                isBarsVisible = !_state.value.isBarsVisible
+            )
+        }
     }
 
 }

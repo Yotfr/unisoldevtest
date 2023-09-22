@@ -25,7 +25,6 @@ class FavoriteWallpapersViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             getFavoriteWallpapersUseCase().collectLatest { wallpapers ->
-                Log.d("TEST","Wallpapers $wallpapers")
                 _favoriteWallpapers.value = wallpapers
             }
         }

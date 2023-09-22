@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.ui.common.WallpaperItem
 import ru.yotfr.unisoldevtest.ui.favoritewallpapers.viewmodel.FavoriteWallpapersViewModel
 import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
@@ -21,7 +22,8 @@ import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FavoriteWallpapersScreen(
-    vm: FavoriteWallpapersViewModel = hiltViewModel()
+    vm: FavoriteWallpapersViewModel = hiltViewModel(),
+    navigateToWallpaper: (Wallpaper) -> Unit
 ) {
     val wallpapers by vm.favoriteWallpapers.collectAsState()
 
@@ -38,7 +40,7 @@ fun FavoriteWallpapersScreen(
             items(wallpapers) { wallpaper ->
                 WallpaperItem(
                     wallpaper = wallpaper,
-                    onClick = {},
+                    onClick = navigateToWallpaper,
                     onFavoriteClicked = vm::changeFavorite
                 )
             }

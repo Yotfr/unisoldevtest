@@ -72,6 +72,7 @@ dependencies {
     val okHttpVersion = "4.11.0"
     val pagingVersion = "3.2.1"
     val coilVersion = "2.4.0"
+    val materialIconsVersion = "1.4.2"
 
     // Coil
     implementation("io.coil-kt:coil-compose:$coilVersion")
@@ -119,6 +120,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material")
+    implementation("androidx.compose.material:material-icons-extended:$materialIconsVersion")
     androidTestImplementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
