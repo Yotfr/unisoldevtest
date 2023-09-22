@@ -1,6 +1,7 @@
 package ru.yotfr.unisoldevtest.ui.navigation.graphs
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,13 +11,15 @@ import ru.yotfr.unisoldevtest.ui.navigation.screens.BottomBarScreens
 import ru.yotfr.unisoldevtest.ui.navigation.screens.WallpaperDetailsScreens
 
 @Composable
-fun HomeNavGraph(
-    navController: NavHostController
+fun BottomBarNavGraph(
+    navController: NavHostController,
+    modifier: Modifier
 ) {
     NavHost(
         navController = navController,
         route = Graphs.BOTTOM_NAV_BAR,
-        startDestination = BottomBarScreens.Categories.route
+        startDestination = BottomBarScreens.Categories.route,
+        modifier = modifier
     ) {
         composable(
             route = BottomBarScreens.Categories.route

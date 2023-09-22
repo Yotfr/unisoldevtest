@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
 import ru.yotfr.unisoldevtest.R
 
-val Geologica = FontFamily(
+private val Geologica = FontFamily(
     fonts = listOf(
         Font(R.font.geologica)
     )
@@ -16,6 +16,19 @@ val Geologica = FontFamily(
 
 @Immutable
 data class WallpaperTypography(
+    val title: TextStyle = TextStyle(
+        fontFamily = Geologica,
+        fontSize = 22.sp,
+        lineHeight = 28.sp
+    ),
+    val label: TextStyle = TextStyle(
+        fontFamily = Geologica,
+        fontSize = 12.sp,
+        lineHeight = 16.sp
+    ),
+
+
+
     val caption: TextStyle = TextStyle(
         fontSize = 12.sp,
         fontFamily = Geologica

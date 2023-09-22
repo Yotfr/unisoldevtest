@@ -73,6 +73,10 @@ dependencies {
     val pagingVersion = "3.2.1"
     val coilVersion = "2.4.0"
     val materialIconsVersion = "1.4.2"
+    val accomnpanistVersion = "0.30.1"
+
+    // Accompanist
+    implementation("com.google.accompanist:accompanist-systemuicontroller:$accomnpanistVersion")
 
     // Coil
     implementation("io.coil-kt:coil-compose:$coilVersion")
