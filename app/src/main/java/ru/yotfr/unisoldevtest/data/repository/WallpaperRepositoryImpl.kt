@@ -37,8 +37,7 @@ class WallpaperRepositoryImpl @Inject constructor(
             coroutineScope = coroutineScope,
             pagingFactory = WallpaperPageSource(
                 wallpaperApi = wallpaperApi,
-                category = category.query(),
-                favoriteWallpapersDao = favoriteWallpapersDao
+                category = category.query()
             )
         ).pagingDataStream
     }

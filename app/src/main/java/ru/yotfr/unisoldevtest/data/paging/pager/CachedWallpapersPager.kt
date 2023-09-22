@@ -23,13 +23,15 @@ class CachedWallpapersPager(
 ) {
 
     companion object {
-        const val pageSize = 20
+        const val pageSize = 50
     }
 
     val pagingDataStream: Flow<PagingData<Wallpaper>> =
         Pager(
             config = PagingConfig(
-                pageSize = pageSize
+                pageSize = pageSize,
+                enablePlaceholders = false,
+                prefetchDistance = pageSize * 2
             ),
             pagingSourceFactory = {
                 pagingFactory

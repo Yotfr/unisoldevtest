@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
@@ -57,8 +59,7 @@ fun CategoryWallpaperScreen(
                 count = wallpapers.itemCount,
                 key = wallpapers.itemKey { it.id }
             ) { index ->
-                val item = wallpapers[index]
-                item?.let { wallpaper ->
+                wallpapers[index]?.let { wallpaper ->
                     CategoryWallpaperItem(
                         wallpaper = wallpaper,
                         onClick = {},
@@ -67,8 +68,11 @@ fun CategoryWallpaperScreen(
                 }
             }
             if (wallpapers.loadState.append == LoadState.Loading) {
-                item {
-                    CircularProgressIndicator()
+                item(span = StaggeredGridItemSpan.FullLine) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(48.dp),
+                        color = WallpaperTheme.extraColors.onWallpaperText
+                    )
                 }
             }
         }
