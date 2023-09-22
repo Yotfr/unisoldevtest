@@ -7,14 +7,13 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import ru.yotfr.unisoldevtest.data.datasource.remote.model.WallpaperResponse
 import ru.yotfr.unisoldevtest.data.datasource.remote.model.WrappedResponse
-import ru.yotfr.unisoldevtest.domain.model.Category
 
 interface WallpaperApi {
     @GET(".")
     suspend fun getWallpapersByCategory(
         @Query("page") page: Int,
         @Query("per_page") perPage: Int,
-        @Query("category") category: Category
+        @Query("category") category: String
     ): WrappedResponse<List<WallpaperResponse>>
 
     /**

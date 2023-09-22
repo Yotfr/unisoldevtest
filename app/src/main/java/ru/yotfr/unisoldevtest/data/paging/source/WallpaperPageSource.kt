@@ -1,15 +1,16 @@
-package ru.yotfr.unisoldevtest.data.datasource.remote.paging
+package ru.yotfr.unisoldevtest.data.paging.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import ru.yotfr.unisoldevtest.data.datasource.local.dao.FavoriteWallpapersDao
 import ru.yotfr.unisoldevtest.data.datasource.remote.api.WallpaperApi
 import ru.yotfr.unisoldevtest.data.mapper.mapDomain
-import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 
 class WallpaperPageSource(
     private val wallpaperApi: WallpaperApi,
-    private val category: Category
+    private val favoriteWallpapersDao: FavoriteWallpapersDao,
+    private val category: String
 ) : PagingSource<Int, Wallpaper>() {
     override fun getRefreshKey(state: PagingState<Int, Wallpaper>): Int? {
         val anchorPosition = state.anchorPosition ?: return null
@@ -25,7 +26,12 @@ class WallpaperPageSource(
             perPage = perPage,
             category = category
         )
-        val wallpapersData = wallpapersResponse.hits.map { it.mapDomain() }
+        val favoriteWallpapersIds = favoriteWallpapersDao.getFavoriteWallpapersIds()
+        val wallpapersData = wallpapersResponse.hits.map {
+            it.mapDomain(
+                isFavorite = favoriteWallpapersIds.contains(it.id)
+            )
+        }
         val nextKey = if (wallpapersData.size < perPage) null else page + 1
         val prevKey = if (page == 1) null else page - 1
         return LoadResult.Page(wallpapersData, prevKey, nextKey)

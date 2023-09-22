@@ -9,6 +9,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import blackColor
 import darkColors
 import lightColors
+import placeHolderColor
 import whiteColor
 
 object WallpaperTheme {
@@ -40,7 +41,8 @@ fun WallpaperTheme(
 
     val extraColors = ExtraColors(
         onWallpaperText = whiteColor,
-        wallpaperEndGradient = blackColor
+        wallpaperEndGradient = blackColor,
+        placeHolderColor = placeHolderColor
     )
 
     val shape = Shape()

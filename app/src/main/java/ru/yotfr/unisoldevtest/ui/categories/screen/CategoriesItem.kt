@@ -1,9 +1,11 @@
 package ru.yotfr.unisoldevtest.ui.categories.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
@@ -39,6 +41,8 @@ fun CategoryItem(
             AsyncImage(
                 modifier = Modifier
                     .fillMaxSize()
+                    .aspectRatio(categoryModel.aspectRatio)
+                    .background(color = WallpaperTheme.extraColors.placeHolderColor)
                     .drawWithCache {
                         onDrawWithContent {
                             drawContent()

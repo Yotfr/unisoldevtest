@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -29,7 +30,7 @@ class CategoriesViewModel @Inject constructor(
         viewModelScope.launch {
             triggerRefresh.flatMapLatest {
                 getCategoriesUseCase()
-            }.collect { response ->
+            }.collectLatest { response ->
                 when (response) {
                     is MResponse.Exception -> {}
                     is MResponse.Loading -> {

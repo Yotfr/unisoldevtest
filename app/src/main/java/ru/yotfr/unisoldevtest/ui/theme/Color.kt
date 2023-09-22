@@ -137,16 +137,19 @@ val darkColors = darkColorScheme(
 
 val whiteColor = Color(0xFFFFFFFF)
 val blackColor = Color(0xFF000000)
+val placeHolderColor = Color(0xFF44483E)
 
 @Immutable
 data class ExtraColors(
     val onWallpaperText: Color,
-    val wallpaperEndGradient: Color
+    val wallpaperEndGradient: Color,
+    val placeHolderColor: Color
 )
 
 val LocalExtraColors = staticCompositionLocalOf {
     ExtraColors(
         onWallpaperText = Color.Unspecified,
-        wallpaperEndGradient = Color.Unspecified
+        wallpaperEndGradient = Color.Unspecified,
+        placeHolderColor = Color.Unspecified
     )
 }

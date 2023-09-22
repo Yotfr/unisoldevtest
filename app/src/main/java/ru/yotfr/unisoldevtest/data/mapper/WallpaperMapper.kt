@@ -4,12 +4,15 @@ import ru.yotfr.unisoldevtest.data.datasource.local.entity.WallpaperEntity
 import ru.yotfr.unisoldevtest.data.datasource.remote.model.WallpaperResponse
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 
-fun WallpaperResponse.mapDomain() : Wallpaper {
+fun WallpaperResponse.mapDomain(isFavorite: Boolean) : Wallpaper {
     return Wallpaper(
         id = id,
         url = url,
         previewUrl = previewUrl,
-        isFavorite = false
+        isFavorite = isFavorite,
+        previewWidth = previewWidth,
+        previewHeight = previewHeight,
+        aspectRatio = previewWidth.toFloat() / previewHeight
     )
 }
 
@@ -18,7 +21,10 @@ fun WallpaperEntity.mapDomain(): Wallpaper {
         id = id,
         url = url,
         previewUrl = previewUrl,
-        isFavorite = isFavorite
+        isFavorite = isFavorite,
+        previewWidth = previewWidth,
+        previewHeight = previewHeight,
+        aspectRatio = previewWidth.toFloat() / previewHeight
     )
 }
 
@@ -27,6 +33,8 @@ fun Wallpaper.mapEntity(): WallpaperEntity {
         id = id,
         url = url,
         previewUrl = previewUrl,
-        isFavorite = isFavorite
+        isFavorite = isFavorite,
+        previewWidth = previewWidth,
+        previewHeight = previewHeight
     )
 }

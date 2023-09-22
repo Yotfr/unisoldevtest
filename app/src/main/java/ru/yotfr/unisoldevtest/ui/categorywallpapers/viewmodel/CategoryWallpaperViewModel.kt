@@ -5,21 +5,21 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.domain.model.Category
+import ru.yotfr.unisoldevtest.domain.model.Wallpaper
+import ru.yotfr.unisoldevtest.domain.usecase.ChangeWallpaperFavoriteStatusUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.GetWallpaperByCategoryUseCase
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class CategoryWallpaperViewModel @Inject constructor(
-    private val getWallpaperByCategoryUseCase: GetWallpaperByCategoryUseCase
+    private val getWallpaperByCategoryUseCase: GetWallpaperByCategoryUseCase,
+    private val changeWallpaperFavoriteStatusUseCase: ChangeWallpaperFavoriteStatusUseCase
 ) : ViewModel() {
 
     private val triggerRefresh = MutableStateFlow(false)
@@ -30,11 +30,16 @@ class CategoryWallpaperViewModel @Inject constructor(
         category, triggerRefresh
     ) { category, refresh ->
         Pair(category, refresh)
-    }.flatMapLatest{
-        (category, _) ->
+    }.flatMapLatest { (category, _) ->
         category?.let {
-            getWallpaperByCategoryUseCase(it)
+            getWallpaperByCategoryUseCase(it, viewModelScope)
         } ?: flow { }
+    }
+
+    fun changeFavorite(wallpaper: Wallpaper) {
+        viewModelScope.launch {
+            changeWallpaperFavoriteStatusUseCase(wallpaper)
+        }
     }
 
     fun setCategory(value: Category) {

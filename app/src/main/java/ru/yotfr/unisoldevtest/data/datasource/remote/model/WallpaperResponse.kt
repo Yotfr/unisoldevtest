@@ -7,5 +7,7 @@ data class WallpaperResponse(
     @SerializedName("largeImageURL")
     val url: String,
     @SerializedName("previewURL")
-    val previewUrl: String
+    val previewUrl: String,
+    val previewWidth: Int,
+    val previewHeight: Int
 )
