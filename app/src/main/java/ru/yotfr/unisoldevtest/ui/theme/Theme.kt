@@ -2,6 +2,8 @@ package ru.yotfr.unisoldevtest.ui.theme
 
 import ExtraColors
 import LocalExtraColors
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -32,6 +34,7 @@ object WallpaperTheme {
         get() = LocalTypography.current
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WallpaperTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
@@ -56,7 +59,8 @@ fun WallpaperTheme(
         LocalSpacing provides spacing,
         LocalShapes provides shape,
         LocalTypography provides typography,
-        LocalExtraColors provides extraColors
+        LocalExtraColors provides extraColors,
+        LocalOverscrollConfiguration provides null
     ) {
         val systemUiController = rememberSystemUiController()
         val blackScrim = Color(0f, 0f, 0f, 0.3f)
