@@ -7,5 +7,8 @@ interface WallpaperDownloadsRepository {
 
     suspend fun deleteDownload(download: WallpaperDownload)
 
-    suspend fun getDownloadById(downloadId: Long): WallpaperDownload
+    suspend fun getDownloadByWallpaperId(wallpaperId: String): WallpaperDownload?
+
+    suspend fun getDownloadByDownloadId(downloadId: Long): WallpaperDownload?
+
 }
