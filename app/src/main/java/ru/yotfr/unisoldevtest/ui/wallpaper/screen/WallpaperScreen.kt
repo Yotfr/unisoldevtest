@@ -58,7 +58,7 @@ fun WallpaperScreen(
         )
         WallpaperBottomButtonBar(
             isVisible = state.isBarsVisible,
-            onSaveClicked = { /*TODO*/ },
+            onSaveClicked = vm::downloadWallpaper,
             onApplyClicked = { /*TODO*/ },
             onDeleteClicked = { /*TODO*/ },
             isFavorite = state.wallpaper?.isFavorite ?: false,
@@ -68,4 +68,6 @@ fun WallpaperScreen(
         )
     }
 }
+
+
 

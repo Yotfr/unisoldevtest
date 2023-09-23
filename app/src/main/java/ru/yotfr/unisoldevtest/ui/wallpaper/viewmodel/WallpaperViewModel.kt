@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.domain.model.MResponse
+import ru.yotfr.unisoldevtest.domain.usecase.DownloadWallpaperUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.GetWallpaperByIdUseCase
 import ru.yotfr.unisoldevtest.ui.wallpaper.state.WallpaperScreenState
 import javax.inject.Inject
@@ -19,7 +20,8 @@ import javax.inject.Inject
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class WallpaperViewModel @Inject constructor(
-    private val getWallpaperByIdUseCase: GetWallpaperByIdUseCase
+    private val getWallpaperByIdUseCase: GetWallpaperByIdUseCase,
+    private val downloadWallpaperUseCase: DownloadWallpaperUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(WallpaperScreenState())
@@ -32,12 +34,13 @@ class WallpaperViewModel @Inject constructor(
             id.flatMapLatest { id ->
                 id?.let {
                     getWallpaperByIdUseCase(it)
-                } ?: flow {  }
+                } ?: flow { }
             }.collectLatest { response ->
-                when(response) {
+                when (response) {
                     is MResponse.Exception -> {
                         // TODO: Error state
                     }
+
                     is MResponse.Loading -> {
                         _state.update {
                             it.copy(
@@ -45,6 +48,7 @@ class WallpaperViewModel @Inject constructor(
                             )
                         }
                     }
+
                     is MResponse.Success -> {
                         _state.update {
                             it.copy(
@@ -57,6 +61,15 @@ class WallpaperViewModel @Inject constructor(
             }
         }
     }
+
+    fun downloadWallpaper() {
+        _state.value.wallpaper?.let {
+            viewModelScope.launch {
+                downloadWallpaperUseCase(it)
+            }
+        }
+    }
+
     fun changeId(value: String) {
         id.value = value
     }
