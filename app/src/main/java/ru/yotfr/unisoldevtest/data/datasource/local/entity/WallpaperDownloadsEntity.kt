@@ -4,9 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "wallpaper_downloads"
+    tableName = "wallpaper_downloads",
+    primaryKeys = ["downloadId","wallpaperId"]
 )
 data class WallpaperDownloadsEntity(
-    @PrimaryKey val downloadId: Long,
+    val downloadId: Long,
     val wallpaperId: String
 )

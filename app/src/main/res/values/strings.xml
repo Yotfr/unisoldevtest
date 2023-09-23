@@ -29,4 +29,9 @@
     <string name="save">Save</string>
     <string name="apply">Apply</string>
 
+
+    <string name="saving">Saving…</string>
+    <string name="failed">Failed</string>
+    <string name="already_saved">Already saved</string>
+
 </resources>

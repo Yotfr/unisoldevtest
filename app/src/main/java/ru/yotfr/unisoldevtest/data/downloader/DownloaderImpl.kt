@@ -3,7 +3,6 @@ package ru.yotfr.unisoldevtest.data.downloader
 import android.app.DownloadManager
 import android.content.Context
 import android.os.Environment
-import android.util.Log
 import android.webkit.MimeTypeMap
 import androidx.core.net.toUri
 import ru.yotfr.unisoldevtest.R
@@ -19,13 +18,11 @@ class DownloaderImpl(
 
     //TODO: Network type
     override fun downloadFile(wallpaper: Wallpaper): Long {
-        Log.d("TEST","DOWNLOADFILE $wallpaper")
         val url = wallpaper.url
         val fileName = wallpaper.id
         val mimeType = getMimeType(url)
         val title = fileName.plus(".").plus(mimeType.substringAfterLast("/"))
         val subPath = "${context.getString(R.string.app_name)}/$title"
-        Log.d("TEST","DOWNLOADFILE subpath $subPath")
         val request = DownloadManager.Request(url.toUri())
             .setMimeType(mimeType)
             // .setAllowedNetworkTypes()
@@ -40,28 +37,22 @@ class DownloaderImpl(
     }
 
     override fun getDownloadStatus(downloadId: Long): Int? {
-        Log.d("TEST","GET STATUS $downloadId")
         val request = DownloadManager.Query()
             .setFilterById(downloadId)
         downloadManager.query(request).use {
             if(it.moveToFirst()) {
-                Log.d("TEST","GET STATUS MOVE TO FIRST")
                 return if (it.count > 0) {
-                    Log.d("TEST","GET STATUS COUNT > 0")
                     val columnIndex = it.getColumnIndex(DownloadManager.COLUMN_STATUS)
                     val result = it.getInt(columnIndex)
-                    Log.d("TEST","GET STATUS RESULT $result")
                     result
                 } else null
             } else {
-                Log.d("TEST","GET STATUS MOVE TO FIRST FALSE")
                 return null
             }
         }
     }
 
     override fun checkIfFileExists(wallpaper: Wallpaper): Boolean {
-        Log.d("TEST","CHECKFILEEXISTS")
         val url = wallpaper.url
         val fileName = wallpaper.id
         val mimeType = getMimeType(url)
@@ -70,7 +61,6 @@ class DownloaderImpl(
             "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)}" +
                     "/${context.getString(R.string.app_name)}/$title"
         )
-        Log.d("TEST","CHECKFILEEXISTS path ${file.path}")
         return file.exists()
     }
 

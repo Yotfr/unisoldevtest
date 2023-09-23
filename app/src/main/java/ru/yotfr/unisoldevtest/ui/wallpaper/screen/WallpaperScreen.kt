@@ -1,11 +1,12 @@
 package ru.yotfr.unisoldevtest.ui.wallpaper.screen
 
+import android.annotation.SuppressLint
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.widget.Toast
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -13,11 +14,20 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -28,11 +38,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import coil.compose.AsyncImage
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import ru.yotfr.unisoldevtest.R
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperEvent
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperScreenEvent
 import ru.yotfr.unisoldevtest.ui.wallpaper.viewmodel.WallpaperViewModel
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WallpaperScreen(
     vm: WallpaperViewModel = hiltViewModel(),
@@ -42,6 +57,11 @@ fun WallpaperScreen(
     val state by vm.state.collectAsState()
     val context = LocalContext.current
     val lifecycle = LocalLifecycleOwner.current.lifecycle
+    val snackBarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+    var job: Job? by remember {
+        mutableStateOf(null)
+    }
 
     LaunchedEffect(Unit) {
         vm.onEvent(WallpaperEvent.EnteredScreen(wallpaperId = id))
@@ -49,19 +69,43 @@ fun WallpaperScreen(
 
     LaunchedEffect(Unit) {
         lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-            vm.event.collectLatest { screenEvent ->
+            vm.event.collect { screenEvent ->
                 when(screenEvent) {
                     WallpaperScreenEvent.ShowDownloadCompleteSnackbar -> {
-                        Toast.makeText(context, "DOWNLOADCOMPLETED", Toast.LENGTH_SHORT).show()
+                        job?.cancel()
+                        job = scope.launch {
+                            snackBarHostState.showSnackbar(
+                                message = context.getString(R.string.saved),
+                                duration = SnackbarDuration.Short
+                            )
+                        }
                     }
                     WallpaperScreenEvent.ShowDownloadFailedProgressSnackbar -> {
-                        Toast.makeText(context, "DOWNLOADFAILED", Toast.LENGTH_SHORT).show()
+                        job?.cancel()
+                        job = scope.launch {
+                            snackBarHostState.showSnackbar(
+                                message = context.getString(R.string.failed),
+                                duration = SnackbarDuration.Short
+                            )
+                        }
                     }
                     WallpaperScreenEvent.ShowDownloadInProgressSnackbar -> {
-                        Toast.makeText(context, "DOWNLOADINPROGRESS", Toast.LENGTH_SHORT).show()
+                        job?.cancel()
+                        job = scope.launch {
+                            snackBarHostState.showSnackbar(
+                                message = context.getString(R.string.saving),
+                                duration = SnackbarDuration.Indefinite
+                            )
+                        }
                     }
                     WallpaperScreenEvent.ShowFileAlreadySavedSnackbar -> {
-                        Toast.makeText(context, "FILEALREADYSAVED", Toast.LENGTH_SHORT).show()
+                        job?.cancel()
+                        job = scope.launch {
+                            snackBarHostState.showSnackbar(
+                                message = context.getString(R.string.already_saved),
+                                duration = SnackbarDuration.Short
+                            )
+                        }
                     }
                 }
             }
@@ -87,42 +131,46 @@ fun WallpaperScreen(
         }
     }
 
-    Box(
-        modifier = Modifier.fillMaxSize()
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackBarHostState) }
     ) {
-        AnimatedVisibility(
-            modifier = Modifier
-                .fillMaxSize(),
-            visible = state.wallpaper != null,
-            enter = fadeIn(),
-            exit = fadeOut()
+        Box(
+            modifier = Modifier.fillMaxSize()
         ) {
-            AsyncImage(
-                modifier = Modifier.clickable {
-                    vm.onEvent(WallpaperEvent.ChangeBarsVisibility)
-                },
-                model = state.wallpaper?.url ?: "",
-                contentDescription = null,
-                contentScale = ContentScale.FillHeight
+            AnimatedVisibility(
+                modifier = Modifier
+                    .fillMaxSize(),
+                visible = state.wallpaper != null,
+                enter = fadeIn(),
+                exit = fadeOut()
+            ) {
+                AsyncImage(
+                    modifier = Modifier.clickable {
+                        vm.onEvent(WallpaperEvent.ChangeBarsVisibility)
+                    },
+                    model = state.wallpaper?.url ?: "",
+                    contentDescription = null,
+                    contentScale = ContentScale.FillHeight
+                )
+            }
+            WallpaperTopBar(
+                onArrowBackPressed = navigateBack,
+                isVisible = state.isBarsVisible,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.TopCenter)
+            )
+            WallpaperBottomButtonBar(
+                isVisible = state.isBarsVisible,
+                onSaveClicked = { vm.onEvent(WallpaperEvent.DownloadWallpaper) },
+                onApplyClicked = { /*TODO*/ },
+                onDeleteClicked = { /*TODO*/ },
+                isFavorite = state.wallpaper?.isFavorite ?: false,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
             )
         }
-        WallpaperTopBar(
-            onArrowBackPressed = navigateBack,
-            isVisible = state.isBarsVisible,
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.TopCenter)
-        )
-        WallpaperBottomButtonBar(
-            isVisible = state.isBarsVisible,
-            onSaveClicked = { vm.onEvent(WallpaperEvent.DownloadWallpaper) },
-            onApplyClicked = { /*TODO*/ },
-            onDeleteClicked = { /*TODO*/ },
-            isFavorite = state.wallpaper?.isFavorite ?: false,
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-        )
     }
 }
 

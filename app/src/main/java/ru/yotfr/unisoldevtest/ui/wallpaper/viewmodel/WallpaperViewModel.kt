@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.domain.model.DownloadStatus
 import ru.yotfr.unisoldevtest.domain.model.MResponse
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
+import ru.yotfr.unisoldevtest.domain.model.WallpaperDownload
 import ru.yotfr.unisoldevtest.domain.usecase.CheckIfFileExistsUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.DeleteWallpaperDownloadUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.DownloadWallpaperUseCase
@@ -28,6 +30,7 @@ import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperScreenEvent
 import ru.yotfr.unisoldevtest.ui.wallpaper.state.WallpaperScreenState
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class WallpaperViewModel @Inject constructor(
     private val getWallpaperByIdUseCase: GetWallpaperByIdUseCase,
@@ -69,6 +72,10 @@ class WallpaperViewModel @Inject constructor(
 
                     is MResponse.Success -> {
                         response.data?.let { wallpaper ->
+                            /*
+                             Для случаев долгой загрузки, для того чтобы уведомить пользовтеля
+                             о статусе загрузки при возвращении на экран
+                             */
                             getDownloadStatus(wallpaper)
                             _state.update {
                                 it.copy(
@@ -107,33 +114,64 @@ class WallpaperViewModel @Inject constructor(
         viewModelScope.launch {
             val model = getDownloadByDownloadIdUseCase(downloadId)
             if (id.value != null && model != null && id.value == model.wallpaperId) {
-                viewModelScope.launch {
-                    _event.send(WallpaperScreenEvent.ShowDownloadCompleteSnackbar)
-                    deleteWallpaperDownloadUseCase(model)
+                // После получения бродкаста о звершении загрузки проверяет статус загрузки
+                getDownloadStatus(model, true)
+            }
+        }
+    }
+
+    private fun getDownloadStatus(wallpaperDownload: WallpaperDownload, fromBroadcast: Boolean) {
+        viewModelScope.launch {
+            wallpaperDownload.downloadId.let { downloadId ->
+                _state.value.wallpaper?.let { wallpaper ->
+                    val downloadStatus = getDownloadStatusUseCase(downloadId)
+                    processDownloadStatus(
+                        downloadStatus,
+                        wallpaper,
+                        wallpaperDownload,
+                        fromBroadcast
+                    )
                 }
             }
         }
     }
 
     private fun getDownloadStatus(wallpaper: Wallpaper) {
-        if (isFileExists(wallpaper)) {
-            return
-        }
         viewModelScope.launch {
             val wallpaperDownload = getDownloadByWallpaperIdUseCase(wallpaper.id)
             wallpaperDownload?.downloadId?.let { downloadId ->
-                when (getDownloadStatusUseCase(downloadId)) {
-                    DownloadStatus.FAILED -> {
-                        _event.send(WallpaperScreenEvent.ShowDownloadFailedProgressSnackbar)
-                    }
+                val downloadStatus = getDownloadStatusUseCase(downloadId)
+                processDownloadStatus(downloadStatus, wallpaper, wallpaperDownload)
+            }
+        }
+    }
 
-                    DownloadStatus.IN_PROGRESS -> {
-                        _event.send(WallpaperScreenEvent.ShowDownloadFailedProgressSnackbar)
-                    }
 
-                    DownloadStatus.SUCCEED -> {
-                        _event.send(WallpaperScreenEvent.ShowDownloadFailedProgressSnackbar)
+    private fun processDownloadStatus(
+        wallpaperStatus: DownloadStatus,
+        wallpaper: Wallpaper,
+        wallpaperDownload: WallpaperDownload,
+        fromBroadcast: Boolean = false
+    ) {
+        Log.d("TEST", "PROCESS STATUS $wallpaperStatus")
+        viewModelScope.launch {
+            when (wallpaperStatus) {
+                DownloadStatus.FAILED -> {
+                    _event.send(WallpaperScreenEvent.ShowDownloadFailedProgressSnackbar)
+                    // Удаление модели загрузки из БД
+                    deleteWallpaperDownloadUseCase(wallpaperDownload)
+                }
+
+                DownloadStatus.IN_PROGRESS -> {
+                    _event.send(WallpaperScreenEvent.ShowDownloadInProgressSnackbar)
+                }
+
+                DownloadStatus.SUCCEED -> {
+                    if (!isFileExists(wallpaper) || fromBroadcast) {
+                        _event.send(WallpaperScreenEvent.ShowDownloadCompleteSnackbar)
                     }
+                    // Удаление модели загрузки из БД
+                    deleteWallpaperDownloadUseCase(wallpaperDownload)
                 }
             }
         }
@@ -141,18 +179,16 @@ class WallpaperViewModel @Inject constructor(
 
     private fun isFileExists(wallpaper: Wallpaper): Boolean = checkIfFileExistsUseCase(wallpaper)
 
+
     private fun downloadWallpaper() {
-        _state.value.wallpaper?.let {
-            if (isFileExists(it)) {
-                viewModelScope.launch {
+        viewModelScope.launch {
+            _state.value.wallpaper?.let {
+                if (isFileExists(it)) {
                     _event.send(WallpaperScreenEvent.ShowFileAlreadySavedSnackbar)
+                    return@launch
                 }
-                return
-            } else {
-                viewModelScope.launch {
-                    downloadWallpaperUseCase(it)
-                    getDownloadStatus(it)
-                }
+                downloadWallpaperUseCase(it)
+                getDownloadStatus(it)
             }
         }
     }

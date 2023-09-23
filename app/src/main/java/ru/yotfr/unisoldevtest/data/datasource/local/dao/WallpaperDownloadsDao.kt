@@ -1,6 +1,7 @@
 package ru.yotfr.unisoldevtest.data.datasource.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -12,7 +13,7 @@ interface WallpaperDownloadsDao {
     @Insert(entity = WallpaperDownloadsEntity::class, onConflict = OnConflictStrategy.REPLACE)
     suspend fun addNewDownload(download: WallpaperDownloadsEntity)
 
-    @Insert(entity = WallpaperDownloadsEntity::class)
+    @Delete(entity = WallpaperDownloadsEntity::class)
     suspend fun deleteDownload(download: WallpaperDownloadsEntity)
 
     @Query("SELECT * FROM wallpaper_downloads WHERE wallpaperId = :wallpaperId")

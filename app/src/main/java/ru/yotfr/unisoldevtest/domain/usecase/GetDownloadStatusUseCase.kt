@@ -11,13 +11,19 @@ class GetDownloadStatusUseCase @Inject constructor(
     operator fun invoke(downloadId: Long): DownloadStatus {
         return when (downloader.getDownloadStatus(downloadId)) {
             null,
-            DownloadManager.STATUS_FAILED -> DownloadStatus.FAILED
+            DownloadManager.STATUS_FAILED -> {
+                DownloadStatus.FAILED
+            }
 
             DownloadManager.STATUS_PENDING,
             DownloadManager.STATUS_RUNNING,
-            DownloadManager.STATUS_PAUSED -> DownloadStatus.IN_PROGRESS
+            DownloadManager.STATUS_PAUSED -> {
+                DownloadStatus.IN_PROGRESS
+            }
 
-            DownloadManager.STATUS_SUCCESSFUL -> DownloadStatus.SUCCEED
+            DownloadManager.STATUS_SUCCESSFUL -> {
+                DownloadStatus.SUCCEED
+            }
 
             else -> throw IllegalArgumentException("Wrong DownloadStatus")
 
