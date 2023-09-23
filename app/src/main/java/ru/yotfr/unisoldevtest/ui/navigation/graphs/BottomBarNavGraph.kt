@@ -1,25 +1,20 @@
 package ru.yotfr.unisoldevtest.ui.navigation.graphs
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navigation
 import ru.yotfr.unisoldevtest.ui.categories.screen.CategoriesScreen
 import ru.yotfr.unisoldevtest.ui.favoritewallpapers.screen.FavoriteWallpapersScreen
 import ru.yotfr.unisoldevtest.ui.navigation.screens.BottomBarScreens
-import ru.yotfr.unisoldevtest.ui.navigation.screens.WallpaperDetailsScreens
+import ru.yotfr.unisoldevtest.ui.navigation.screens.RootScreens
 
-@Composable
-fun BottomBarNavGraph(
-    navController: NavHostController,
-    modifier: Modifier
+fun NavGraphBuilder.bottomBarNavGraph(
+    navController: NavHostController
 ) {
-    NavHost(
-        navController = navController,
-        route = Graphs.BOTTOM_NAV_BAR,
-        startDestination = BottomBarScreens.Categories.route,
-        modifier = modifier
+    navigation(
+        route = RootScreens.BottomNav.route,
+        startDestination = BottomBarScreens.Categories.route
     ) {
         composable(
             route = BottomBarScreens.Categories.route
@@ -27,7 +22,7 @@ fun BottomBarNavGraph(
             CategoriesScreen(
                 navigateToCategoryWallpaper = { category ->
                     navController.navigate(
-                        WallpaperDetailsScreens.WallpapersByCategory.passCategory(
+                        RootScreens.WallpapersByCategory.passCategory(
                             category
                         )
                     )
@@ -40,7 +35,7 @@ fun BottomBarNavGraph(
             FavoriteWallpapersScreen(
                 navigateToWallpaper = {
                     navController.navigate(
-                        WallpaperDetailsScreens.WallpaperDetails.passId(
+                        RootScreens.WallpaperDetails.passId(
                             it.id
                         )
                     )
@@ -52,6 +47,5 @@ fun BottomBarNavGraph(
         ) {
             // TODO: Saved wallpapers
         }
-        wallpaperDetailsNavGraph(navController)
     }
 }

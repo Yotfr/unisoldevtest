@@ -1,18 +1,18 @@
 package ru.yotfr.unisoldevtest.ui.wallpaper.screen
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.FileDownload
 import androidx.compose.material.icons.outlined.Wallpaper
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -23,11 +23,11 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import ru.yotfr.unisoldevtest.R
 
 @Composable
-fun WallpaperBottomAppBar(
+fun WallpaperBottomButtonBar(
+    modifier: Modifier,
     isVisible: Boolean,
     onSaveClicked: () -> Unit,
     onApplyClicked: () -> Unit,
@@ -35,11 +35,18 @@ fun WallpaperBottomAppBar(
     isFavorite: Boolean
 ) {
     AnimatedVisibility(
+        modifier = modifier,
         visible = isVisible,
-        enter = slideInVertically(),
-        exit = slideOutVertically()
+        enter = slideInVertically(
+            initialOffsetY = { it * 2 },
+            animationSpec = tween(durationMillis = 400)
+        ),
+        exit = slideOutVertically(
+            targetOffsetY = { it * 2 },
+            animationSpec = tween(durationMillis = 400)
+        )
     ) {
-        BottomAppBar(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .drawWithCache {
@@ -47,9 +54,7 @@ fun WallpaperBottomAppBar(
                         drawRect(
                             brush = Brush.verticalGradient(
                                 colors = listOf(
-                                    Color.Black.copy(
-                                        alpha = 0.5f
-                                    ),
+                                    Color.Black.copy(alpha = 0.5f),
                                     Color.Transparent
                                 ),
                                 startY = size.height,
@@ -59,39 +64,35 @@ fun WallpaperBottomAppBar(
                         )
                         drawContent()
                     }
-                },
-            containerColor = Color.Transparent
+                }
+                .navigationBarsPadding(),
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.SpaceEvenly
+            IconButton(
+                onClick = onSaveClicked
             ) {
-                IconButton(
-                    onClick = onSaveClicked
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.FileDownload,
-                        contentDescription = stringResource(id = R.string.save)
-                    )
-                }
-                IconButton(
-                    onClick = onApplyClicked
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Wallpaper,
-                        contentDescription = stringResource(id = R.string.apply)
-                    )
-                }
-                IconButton(
-                    onClick = onDeleteClicked
-                ) {
-                    Icon(
-                        imageVector = if(isFavorite) Icons.Outlined.Favorite
-                        else Icons.Outlined.FavoriteBorder,
-                        contentDescription = stringResource(id = R.string.favorite)
-                    )
-                }
+                Icon(
+                    imageVector = Icons.Outlined.FileDownload,
+                    contentDescription = stringResource(id = R.string.save)
+                )
+            }
+            IconButton(
+                onClick = onApplyClicked
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Wallpaper,
+                    contentDescription = stringResource(id = R.string.apply)
+                )
+            }
+            IconButton(
+                onClick = onDeleteClicked
+            ) {
+                Icon(
+                    imageVector = if(isFavorite) Icons.Outlined.Favorite
+                    else Icons.Outlined.FavoriteBorder,
+                    contentDescription = stringResource(id = R.string.favorite)
+                )
             }
         }
     }

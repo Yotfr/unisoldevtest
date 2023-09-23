@@ -3,9 +3,12 @@ package ru.yotfr.unisoldevtest.ui.categories.screen
 import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,10 +30,13 @@ fun CategoriesContent(
         ) {
             StaggeredGridCells.Adaptive(175.dp)
         } else StaggeredGridCells.Fixed(2),
-        modifier = Modifier.padding(WallpaperTheme.spacing.medium),
+        modifier = Modifier.padding(horizontal = WallpaperTheme.spacing.medium),
         verticalItemSpacing = WallpaperTheme.spacing.small,
         horizontalArrangement = Arrangement.spacedBy(WallpaperTheme.spacing.small)
     ) {
+        item(span = StaggeredGridItemSpan.FullLine) {
+            Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
+        }
         items(
             items = state.categories,
             key = { it.category }
@@ -39,6 +45,9 @@ fun CategoriesContent(
                 categoryModel = categoryModel,
                 onClick = onCategoryClicked
             )
+        }
+        item(span = StaggeredGridItemSpan.FullLine) {
+            Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
         }
     }
 }

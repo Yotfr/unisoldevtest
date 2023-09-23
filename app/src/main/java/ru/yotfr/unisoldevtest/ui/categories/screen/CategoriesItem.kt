@@ -77,11 +77,13 @@ fun CategoryItem(
             ) {
                 Text(
                     text = categoryModel.category.displayName(),
-                    color = WallpaperTheme.extraColors.onWallpaperText
+                    color = WallpaperTheme.extraColors.onWallpaperText,
+                    style = WallpaperTheme.typography.body
                 )
                 Text(
                     text = categoryModel.wallpapersCount.toString(),
-                    color = WallpaperTheme.extraColors.onWallpaperText
+                    color = WallpaperTheme.extraColors.onWallpaperText,
+                    style = WallpaperTheme.typography.body
                 )
             }
         }

@@ -2,7 +2,7 @@ package ru.yotfr.unisoldevtest.ui.navigation.screens
 
 import ru.yotfr.unisoldevtest.domain.model.Category
 
-sealed class WallpaperDetailsScreens(
+sealed class RootScreens(
     val route: String
 ) {
 
@@ -10,7 +10,11 @@ sealed class WallpaperDetailsScreens(
         const val CATEGORY_KEY = "CATEGORY"
         const val WALLPAPER_ID_KEY = "WALLPAPER_ID"
     }
-    data object WallpapersByCategory : WallpaperDetailsScreens(
+    data object BottomNav : RootScreens(
+        route = "bottom_nav"
+    )
+
+    data object WallpapersByCategory : RootScreens(
         route = "category_wallpapers/{$CATEGORY_KEY}"
     ) {
         fun passCategory(category: Category): String {
@@ -21,7 +25,7 @@ sealed class WallpaperDetailsScreens(
         }
     }
 
-    data object WallpaperDetails : WallpaperDetailsScreens(
+    data object WallpaperDetails : RootScreens(
         route = "wallpaper/{$WALLPAPER_ID_KEY}"
     ) {
         fun passId(id: String): String {

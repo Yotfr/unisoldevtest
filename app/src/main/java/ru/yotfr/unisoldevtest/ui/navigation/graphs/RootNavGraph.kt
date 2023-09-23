@@ -1,29 +1,37 @@
 package ru.yotfr.unisoldevtest.ui.navigation.graphs
 
-import androidx.navigation.NavGraphBuilder
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import androidx.navigation.navigation
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.ui.categorywallpapers.screen.CategoryWallpaperScreen
-import ru.yotfr.unisoldevtest.ui.navigation.screens.WallpaperDetailsScreens
+import ru.yotfr.unisoldevtest.ui.navigation.screens.BottomBarScreens
+import ru.yotfr.unisoldevtest.ui.navigation.screens.RootScreens
 import ru.yotfr.unisoldevtest.ui.wallpaper.screen.WallpaperScreen
 
-fun NavGraphBuilder.wallpaperDetailsNavGraph(navController: NavHostController) {
-    navigation(
-        route = Graphs.WALLPAPER_DETAILS,
-        startDestination = WallpaperDetailsScreens.WallpapersByCategory.route
+@Composable
+fun RootNavGraph(
+    navController: NavHostController,
+    modifier: Modifier
+) {
+    NavHost(
+        navController = navController,
+        startDestination = RootScreens.BottomNav.route,
+        modifier = modifier
     ) {
+        bottomBarNavGraph(navController)
         composable(
-            route = WallpaperDetailsScreens.WallpapersByCategory.route,
+            route = RootScreens.WallpapersByCategory.route,
             arguments = listOf(
-                navArgument(WallpaperDetailsScreens.CATEGORY_KEY) {}
+                navArgument(RootScreens.CATEGORY_KEY) {}
             )
         ) { backStackEntry ->
             val category = Category.valueOf(
                 backStackEntry.arguments?.getString(
-                    WallpaperDetailsScreens.CATEGORY_KEY
+                    RootScreens.CATEGORY_KEY
                 ) ?: throw IllegalArgumentException("Navigated with wrong Category")
             )
             CategoryWallpaperScreen(
@@ -31,7 +39,7 @@ fun NavGraphBuilder.wallpaperDetailsNavGraph(navController: NavHostController) {
                 navigateBack = { navController.popBackStack() },
                 navigateToWallpaper = { wallpaper ->
                     navController.navigate(
-                        WallpaperDetailsScreens.WallpaperDetails.passId(
+                        RootScreens.WallpaperDetails.passId(
                             wallpaper.id
                         )
                     )
@@ -39,13 +47,13 @@ fun NavGraphBuilder.wallpaperDetailsNavGraph(navController: NavHostController) {
             )
         }
         composable(
-            route = WallpaperDetailsScreens.WallpaperDetails.route,
+            route = RootScreens.WallpaperDetails.route,
             arguments = listOf(
-                navArgument(WallpaperDetailsScreens.WALLPAPER_ID_KEY) {}
+                navArgument(RootScreens.WALLPAPER_ID_KEY) {}
             )
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getString(
-                WallpaperDetailsScreens.WALLPAPER_ID_KEY
+                RootScreens.WALLPAPER_ID_KEY
             ) ?: throw IllegalArgumentException("Navigated with wrong WallpaperID")
             WallpaperScreen(
                 id = id,

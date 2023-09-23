@@ -1,8 +1,7 @@
 package ru.yotfr.unisoldevtest.ui.root
 
-import androidx.compose.foundation.layout.WindowInsets
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -12,9 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import ru.yotfr.unisoldevtest.ui.navigation.graphs.BottomBarNavGraph
+import ru.yotfr.unisoldevtest.ui.navigation.graphs.RootNavGraph
 import ru.yotfr.unisoldevtest.ui.navigation.screens.BottomBarScreens
-
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RootScreen() {
@@ -54,12 +53,16 @@ fun RootScreen() {
                 )
             }
         },
-        contentWindowInsets = WindowInsets.systemBars,
         containerColor = MaterialTheme.colorScheme.background
-    ) { innerPadding ->
-        BottomBarNavGraph(
+    ) {  innerPadding ->
+        RootNavGraph(
             navController = navController,
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.then(
+                if (isBottomBarDestination) {
+                        Modifier
+                            .padding(innerPadding)
+                    } else Modifier
+            )
         )
     }
 

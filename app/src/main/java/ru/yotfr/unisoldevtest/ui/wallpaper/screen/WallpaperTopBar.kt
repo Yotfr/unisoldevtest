@@ -1,6 +1,7 @@
 package ru.yotfr.unisoldevtest.ui.wallpaper.screen
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
@@ -24,12 +25,20 @@ import ru.yotfr.unisoldevtest.R
 @Composable
 fun WallpaperTopBar(
     onArrowBackPressed: () -> Unit,
-    isVisible: Boolean
+    isVisible: Boolean,
+    modifier: Modifier
 ) {
     AnimatedVisibility(
+        modifier = modifier,
         visible = isVisible,
-        enter = slideInVertically(),
-        exit = slideOutVertically()
+        enter = slideInVertically(
+            initialOffsetY = { -it * 2 },
+            animationSpec = tween(durationMillis = 400)
+        ),
+        exit = slideOutVertically(
+            targetOffsetY = { -it * 2 },
+            animationSpec = tween(durationMillis = 400)
+        )
     ) {
         TopAppBar(
             title = {},
@@ -53,9 +62,7 @@ fun WallpaperTopBar(
                     drawRect(
                         brush = Brush.verticalGradient(
                             colors = listOf(
-                                Color.Black.copy(
-                                    alpha = 0.5f
-                                ),
+                                Color.Black.copy(alpha = 0.5f),
                                 Color.Transparent
                             ),
                             startY = 0f,

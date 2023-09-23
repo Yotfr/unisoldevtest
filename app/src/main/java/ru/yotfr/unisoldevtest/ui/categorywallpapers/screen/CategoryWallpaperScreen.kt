@@ -1,24 +1,10 @@
 package ru.yotfr.unisoldevtest.ui.categorywallpapers.screen
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -27,19 +13,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemKey
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.ui.categories.util.displayName
 import ru.yotfr.unisoldevtest.ui.categorywallpapers.viewmodel.CategoryWallpaperViewModel
-import ru.yotfr.unisoldevtest.ui.common.WallpaperItem
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class,
+@OptIn(
+    ExperimentalMaterialApi::class,
     ExperimentalMaterial3Api::class
 )
 @Composable
@@ -62,22 +45,9 @@ fun CategoryWallpaperScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                navigationIcon = {
-                    IconButton(
-                        onClick = navigateBack
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.ArrowBack,
-                            contentDescription = null
-                        )
-                    }
-                },
-                title = {
-                    Text(
-                        text = category.displayName()
-                    )
-                }
+            CategoryWallpaperTopBar(
+                navigateBack = navigateBack,
+                title = category.displayName()
             )
         }
     ) { innerPadding ->
@@ -87,36 +57,11 @@ fun CategoryWallpaperScreen(
                 .padding(innerPadding)
                 .pullRefresh(pullRefreshState)
         ) {
-            LazyVerticalStaggeredGrid(
-                columns = StaggeredGridCells.Adaptive(150.dp),
-                contentPadding = PaddingValues(WallpaperTheme.spacing.medium),
-                verticalItemSpacing = WallpaperTheme.spacing.small,
-                horizontalArrangement = Arrangement.spacedBy(WallpaperTheme.spacing.small)
-            ) {
-                items(
-                    count = wallpapers.itemCount,
-                    key = wallpapers.itemKey { it.id }
-                ) { index ->
-                    wallpapers[index]?.let { wallpaper ->
-                        WallpaperItem(
-                            wallpaper = wallpaper,
-                            onClick = navigateToWallpaper,
-                            onFavoriteClicked = vm::changeFavorite
-                        )
-                    }
-                }
-                if (wallpapers.loadState.append == LoadState.Loading) {
-                    item(span = StaggeredGridItemSpan.FullLine) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.size(48.dp),
-                            color = WallpaperTheme.extraColors.onWallpaperText
-                        )
-                    }
-                }
-            }
-            if (wallpapers.loadState.refresh == LoadState.Loading) {
-                // TOOD:Error
-            }
+            CategoryWallpaperContent(
+                wallpapers = wallpapers,
+                navigateToWallpaper = navigateToWallpaper,
+                changeFavorite = vm::changeFavorite
+            )
             PullRefreshIndicator(
                 refreshing = wallpapers.loadState.refresh == LoadState.Loading,
                 state = pullRefreshState,
