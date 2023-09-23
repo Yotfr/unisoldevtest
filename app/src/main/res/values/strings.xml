@@ -31,7 +31,19 @@
 
 
     <string name="saving">Saving…</string>
+    <string name="applying">Applying…</string>
     <string name="failed">Failed</string>
     <string name="already_saved">Already saved</string>
+    <string name="applied">Wallpaper applied</string>
+
+
+    <string name="set_home">Set Home Screen</string>
+    <string name="set_lock">Set Lock Screen</string>
+    <string name="set_both">Set Both</string>
+    <string name="set_with">Set With</string>
+
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

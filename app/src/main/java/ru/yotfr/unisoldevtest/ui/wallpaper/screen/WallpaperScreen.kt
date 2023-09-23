@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -28,7 +27,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -39,7 +37,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import coil.compose.AsyncImage
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.R
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperEvent
@@ -62,6 +59,7 @@ fun WallpaperScreen(
     var job: Job? by remember {
         mutableStateOf(null)
     }
+    var isShowInstallDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         vm.onEvent(WallpaperEvent.EnteredScreen(wallpaperId = id))
@@ -70,7 +68,7 @@ fun WallpaperScreen(
     LaunchedEffect(Unit) {
         lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
             vm.event.collect { screenEvent ->
-                when(screenEvent) {
+                when (screenEvent) {
                     WallpaperScreenEvent.ShowDownloadCompleteSnackbar -> {
                         job?.cancel()
                         job = scope.launch {
@@ -80,6 +78,7 @@ fun WallpaperScreen(
                             )
                         }
                     }
+
                     WallpaperScreenEvent.ShowDownloadFailedProgressSnackbar -> {
                         job?.cancel()
                         job = scope.launch {
@@ -89,6 +88,7 @@ fun WallpaperScreen(
                             )
                         }
                     }
+
                     WallpaperScreenEvent.ShowDownloadInProgressSnackbar -> {
                         job?.cancel()
                         job = scope.launch {
@@ -98,12 +98,43 @@ fun WallpaperScreen(
                             )
                         }
                     }
+
                     WallpaperScreenEvent.ShowFileAlreadySavedSnackbar -> {
                         job?.cancel()
                         job = scope.launch {
                             snackBarHostState.showSnackbar(
                                 message = context.getString(R.string.already_saved),
                                 duration = SnackbarDuration.Short
+                            )
+                        }
+                    }
+
+                    WallpaperScreenEvent.ShowInstallCompletedSnackbar -> {
+                        job?.cancel()
+                        job = scope.launch {
+                            snackBarHostState.showSnackbar(
+                                message = context.getString(R.string.applied),
+                                duration = SnackbarDuration.Short
+                            )
+                        }
+                    }
+
+                    WallpaperScreenEvent.ShowInstallFailedSnackbar -> {
+                        job?.cancel()
+                        job = scope.launch {
+                            snackBarHostState.showSnackbar(
+                                message = context.getString(R.string.failed),
+                                duration = SnackbarDuration.Short
+                            )
+                        }
+                    }
+
+                    WallpaperScreenEvent.ShowInstallInProgressSnackbar -> {
+                        job?.cancel()
+                        job = scope.launch {
+                            snackBarHostState.showSnackbar(
+                                message = context.getString(R.string.applying),
+                                duration = SnackbarDuration.Indefinite
                             )
                         }
                     }
@@ -132,7 +163,26 @@ fun WallpaperScreen(
     }
 
     Scaffold(
-        snackbarHost = { SnackbarHost(snackBarHostState) }
+        snackbarHost = { SnackbarHost(snackBarHostState) },
+        topBar = {
+            WallpaperTopBar(
+                onArrowBackPressed = navigateBack,
+                isVisible = state.isBarsVisible,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+        },
+        bottomBar = {
+            WallpaperBottomButtonBar(
+                isVisible = state.isBarsVisible,
+                onSaveClicked = { vm.onEvent(WallpaperEvent.DownloadWallpaper) },
+                onApplyClicked = { isShowInstallDialog = true },
+                onFavoriteClicked = { vm.onEvent(WallpaperEvent.ChangeFavoriteStatus) },
+                isFavorite = state.wallpaper?.isFavorite ?: false,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+        }
     ) {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -153,23 +203,23 @@ fun WallpaperScreen(
                     contentScale = ContentScale.FillHeight
                 )
             }
-            WallpaperTopBar(
-                onArrowBackPressed = navigateBack,
-                isVisible = state.isBarsVisible,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.TopCenter)
-            )
-            WallpaperBottomButtonBar(
-                isVisible = state.isBarsVisible,
-                onSaveClicked = { vm.onEvent(WallpaperEvent.DownloadWallpaper) },
-                onApplyClicked = { /*TODO*/ },
-                onDeleteClicked = { /*TODO*/ },
-                isFavorite = state.wallpaper?.isFavorite ?: false,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.BottomCenter)
-            )
+            AnimatedVisibility(
+                visible = isShowInstallDialog,
+                enter = fadeIn(),
+                exit = fadeOut()
+            ) {
+                InstallOptionsDialog(
+                    onDismiss = { isShowInstallDialog = false },
+                    onOkPressed = { installOption ->
+                        isShowInstallDialog = false
+                        vm.onEvent(
+                            WallpaperEvent.InstallWallpaper(
+                                wallpaperInstallOption = installOption
+                            )
+                        )
+                    }
+                )
+            }
         }
     }
 }

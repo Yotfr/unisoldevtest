@@ -31,7 +31,7 @@ fun WallpaperBottomButtonBar(
     isVisible: Boolean,
     onSaveClicked: () -> Unit,
     onApplyClicked: () -> Unit,
-    onDeleteClicked: () -> Unit,
+    onFavoriteClicked: () -> Unit,
     isFavorite: Boolean
 ) {
     AnimatedVisibility(
@@ -86,7 +86,7 @@ fun WallpaperBottomButtonBar(
                 )
             }
             IconButton(
-                onClick = onDeleteClicked
+                onClick = onFavoriteClicked
             ) {
                 Icon(
                     imageVector = if(isFavorite) Icons.Outlined.Favorite

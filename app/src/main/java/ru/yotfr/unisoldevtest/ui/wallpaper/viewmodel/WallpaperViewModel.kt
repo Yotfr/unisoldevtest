@@ -1,6 +1,5 @@
 package ru.yotfr.unisoldevtest.ui.wallpaper.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +17,8 @@ import ru.yotfr.unisoldevtest.domain.model.DownloadStatus
 import ru.yotfr.unisoldevtest.domain.model.MResponse
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.model.WallpaperDownload
+import ru.yotfr.unisoldevtest.domain.model.WallpaperInstallOption
+import ru.yotfr.unisoldevtest.domain.usecase.ChangeWallpaperFavoriteStatusUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.CheckIfFileExistsUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.DeleteWallpaperDownloadUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.DownloadWallpaperUseCase
@@ -25,6 +26,7 @@ import ru.yotfr.unisoldevtest.domain.usecase.GetDownloadByDownloadIdUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.GetDownloadByWallpaperIdUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.GetDownloadStatusUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.GetWallpaperByIdUseCase
+import ru.yotfr.unisoldevtest.domain.usecase.InstallWallpaperUseCase
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperEvent
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperScreenEvent
 import ru.yotfr.unisoldevtest.ui.wallpaper.state.WallpaperScreenState
@@ -39,7 +41,9 @@ class WallpaperViewModel @Inject constructor(
     private val getDownloadByDownloadIdUseCase: GetDownloadByDownloadIdUseCase,
     private val getDownloadStatusUseCase: GetDownloadStatusUseCase,
     private val deleteWallpaperDownloadUseCase: DeleteWallpaperDownloadUseCase,
-    private val getDownloadByWallpaperIdUseCase: GetDownloadByWallpaperIdUseCase
+    private val getDownloadByWallpaperIdUseCase: GetDownloadByWallpaperIdUseCase,
+    private val installWallpaperUseCase: InstallWallpaperUseCase,
+    private val changeWallpaperFavoriteStatusUseCase: ChangeWallpaperFavoriteStatusUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(WallpaperScreenState())
@@ -107,6 +111,47 @@ class WallpaperViewModel @Inject constructor(
             is WallpaperEvent.DownloadCompleted -> {
                 onDownloadComplete(downloadId = event.downloadId)
             }
+
+            is WallpaperEvent.InstallWallpaper -> {
+                installWallpaper(event.wallpaperInstallOption)
+            }
+
+            WallpaperEvent.ChangeFavoriteStatus -> {
+                changeFavoriteStatusUseCase()
+            }
+        }
+    }
+
+    private fun changeFavoriteStatusUseCase() {
+        _state.value.wallpaper?.let { wallpaper ->
+            viewModelScope.launch {
+                changeWallpaperFavoriteStatusUseCase(
+                    wallpaper = wallpaper
+                )
+            }
+        }
+    }
+
+    private fun installWallpaper(wallpaperInstallOption: WallpaperInstallOption) {
+        _state.value.wallpaper?.let { wallpaper ->
+            viewModelScope.launch {
+                installWallpaperUseCase(
+                    wallpaper,
+                    wallpaperInstallOption
+                ).collectLatest { response ->
+                    when(response) {
+                        is MResponse.Exception -> {
+
+                        }
+                        is MResponse.Loading -> {
+                            _event.send(WallpaperScreenEvent.ShowInstallInProgressSnackbar)
+                        }
+                        is MResponse.Success -> {
+                            _event.send(WallpaperScreenEvent.ShowInstallCompletedSnackbar)
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -153,7 +198,6 @@ class WallpaperViewModel @Inject constructor(
         wallpaperDownload: WallpaperDownload,
         fromBroadcast: Boolean = false
     ) {
-        Log.d("TEST", "PROCESS STATUS $wallpaperStatus")
         viewModelScope.launch {
             when (wallpaperStatus) {
                 DownloadStatus.FAILED -> {
