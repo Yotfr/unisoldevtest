@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import ru.yotfr.unisoldevtest.data.datasource.local.dao.FavoriteWallpapersDao
 import ru.yotfr.unisoldevtest.data.datasource.remote.api.WallpaperApi
+import ru.yotfr.unisoldevtest.data.datasource.remote.exception.NoConnectivityException
 import ru.yotfr.unisoldevtest.data.paging.source.WallpaperPageSource
 import ru.yotfr.unisoldevtest.data.mapper.mapDomain
 import ru.yotfr.unisoldevtest.data.mapper.mapEntity
@@ -17,10 +18,13 @@ import ru.yotfr.unisoldevtest.data.paging.pager.CachedWallpapersPager
 import ru.yotfr.unisoldevtest.data.paging.pagingcache.WallpapersCache
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.domain.model.CategoryModel
-import ru.yotfr.unisoldevtest.domain.model.MResponse
+import ru.yotfr.unisoldevtest.domain.model.ExceptionCause
+import ru.yotfr.unisoldevtest.domain.model.ResponseResult
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.repository.WallpaperRepository
+import java.net.SocketTimeoutException
 import javax.inject.Inject
+
 class WallpaperRepositoryImpl @Inject constructor(
     private val wallpaperApi: WallpaperApi,
     private val favoriteWallpapersDao: FavoriteWallpapersDao,
@@ -30,7 +34,7 @@ class WallpaperRepositoryImpl @Inject constructor(
         category: Category,
         coroutineScope: CoroutineScope
     ): Flow<PagingData<Wallpaper>> {
-        // Добавление избранныз обоев из БД в кэш
+        // Добавление избранных обоев из БД в кэш
         val favoriteWallpaperIds = favoriteWallpapersDao.getFavoriteWallpapersIds()
         wallpapersCache.initializeCacheWithDbData(favoriteWallpaperIds)
         return CachedWallpapersPager(
@@ -45,7 +49,7 @@ class WallpaperRepositoryImpl @Inject constructor(
 
 
     override fun getCategories() = flow {
-        emit(MResponse.Loading())
+        emit(ResponseResult.Loading())
         try {
             /*
             API Pixabay не предоставляет методов для получения доступных
@@ -62,26 +66,34 @@ class WallpaperRepositoryImpl @Inject constructor(
                 )
             }
             emit(
-                MResponse.Success(
+                ResponseResult.Success(
                     data = categories
                 )
             )
         } catch (e: Exception) {
-            emit(MResponse.Exception(message = e.message))
+            emit(
+                ResponseResult.Exception(
+                    cause = e.mapExceptionCause()
+                )
+            )
         }
 
     }.flowOn(Dispatchers.IO)
 
     override fun getWallpaperById(id: String) = flow {
-        emit(MResponse.Loading())
+        emit(ResponseResult.Loading())
         try {
             val favoriteWallpapersIds = favoriteWallpapersDao.getFavoriteWallpapersIds()
             val wallpaper = wallpaperApi.getWallpaperById(id).hits.first().mapDomain(
                 isFavorite = favoriteWallpapersIds.contains(id)
             )
-            emit(MResponse.Success(data = wallpaper))
+            emit(ResponseResult.Success(data = wallpaper))
         } catch (e: Exception) {
-            emit(MResponse.Exception(message = e.message))
+            emit(
+                ResponseResult.Exception(
+                    cause = e.mapExceptionCause()
+                )
+            )
         }
     }.flowOn(Dispatchers.IO)
 
@@ -98,6 +110,24 @@ class WallpaperRepositoryImpl @Inject constructor(
             favoriteWallpapersDao.deleteWallpaper(wallpaper.mapEntity())
         } else {
             favoriteWallpapersDao.upsertWallpaper(changedWallpaper.mapEntity())
+        }
+    }
+
+    private fun Exception.mapExceptionCause(): ExceptionCause {
+        return when (this) {
+            is SocketTimeoutException -> {
+                ExceptionCause.TimeOut
+            }
+
+            is NoConnectivityException -> {
+                ExceptionCause.NoConnectivity
+            }
+
+            else -> {
+                ExceptionCause.Unknown(
+                    message = this.message ?: "Something went wrong"
+                )
+            }
         }
     }
 }

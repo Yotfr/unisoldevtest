@@ -16,7 +16,6 @@ class DownloaderImpl(
 
     private val downloadManager = context.getSystemService(DownloadManager::class.java)
 
-    //TODO: Network type
     override fun downloadFile(wallpaper: Wallpaper): Long {
         val url = wallpaper.url
         val fileName = wallpaper.id
@@ -25,8 +24,8 @@ class DownloaderImpl(
         val subPath = "${context.getString(R.string.app_name)}/$title"
         val request = DownloadManager.Request(url.toUri())
             .setMimeType(mimeType)
-            // .setAllowedNetworkTypes()
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+            // Загрузка невидима для других приложений
             .setVisibleInDownloadsUi(false)
             .setTitle(title)
             .setDestinationInExternalPublicDir(
@@ -40,7 +39,7 @@ class DownloaderImpl(
         val request = DownloadManager.Query()
             .setFilterById(downloadId)
         downloadManager.query(request).use {
-            if(it.moveToFirst()) {
+            if (it.moveToFirst()) {
                 return if (it.count > 0) {
                     val columnIndex = it.getColumnIndex(DownloadManager.COLUMN_STATUS)
                     val result = it.getInt(columnIndex)

@@ -1,7 +1,7 @@
 package ru.yotfr.unisoldevtest.domain.usecase
 
 import kotlinx.coroutines.flow.Flow
-import ru.yotfr.unisoldevtest.domain.model.MResponse
+import ru.yotfr.unisoldevtest.domain.model.ResponseResult
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.model.WallpaperInstallOption
 import ru.yotfr.unisoldevtest.domain.wallpaperinstaller.WallpaperInstaller
@@ -13,7 +13,7 @@ class InstallWallpaperUseCase @Inject constructor(
     operator fun invoke(
         wallpaper: Wallpaper,
         wallpaperInstallOption: WallpaperInstallOption
-    ): Flow<MResponse<Unit>> {
+    ): Flow<ResponseResult<Unit>> {
         return wallpaperInstaller.installWallpaper(
             wallpaper = wallpaper,
             wallpaperInstallOption = wallpaperInstallOption

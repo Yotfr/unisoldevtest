@@ -6,7 +6,8 @@ import android.graphics.BitmapFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import ru.yotfr.unisoldevtest.domain.model.MResponse
+import ru.yotfr.unisoldevtest.domain.model.ExceptionCause
+import ru.yotfr.unisoldevtest.domain.model.ResponseResult
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.model.WallpaperInstallOption
 import ru.yotfr.unisoldevtest.domain.wallpaperinstaller.WallpaperInstaller
@@ -22,7 +23,7 @@ class WallpaperInstallerImpl(
         wallpaper: Wallpaper,
         wallpaperInstallOption: WallpaperInstallOption
     ) = flow {
-        emit(MResponse.Loading())
+        emit(ResponseResult.Loading())
         try {
             val url = URL(wallpaper.url)
             val bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
@@ -39,9 +40,15 @@ class WallpaperInstallerImpl(
                     wallpaperManager.setBitmap(bitmap)
                 }
             }
-            emit(MResponse.Success(Unit))
+            emit(ResponseResult.Success(Unit))
         } catch (e: Exception) {
-            emit(MResponse.Exception(e.message))
+            emit(
+                ResponseResult.Exception(
+                    cause = ExceptionCause.Unknown(
+                        message = e.message ?: "Something went wrong"
+                    )
+                )
+            )
         }
     }.flowOn(Dispatchers.IO)
 }

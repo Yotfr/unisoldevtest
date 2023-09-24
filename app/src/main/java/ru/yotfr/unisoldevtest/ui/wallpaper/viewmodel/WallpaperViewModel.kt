@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.domain.model.DownloadStatus
-import ru.yotfr.unisoldevtest.domain.model.MResponse
+import ru.yotfr.unisoldevtest.domain.model.ResponseResult
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.model.WallpaperDownload
 import ru.yotfr.unisoldevtest.domain.model.WallpaperInstallOption
@@ -62,11 +62,11 @@ class WallpaperViewModel @Inject constructor(
                 } ?: flow { }
             }.collectLatest { response ->
                 when (response) {
-                    is MResponse.Exception -> {
+                    is ResponseResult.Exception -> {
                         // TODO: Error state
                     }
 
-                    is MResponse.Loading -> {
+                    is ResponseResult.Loading -> {
                         _state.update {
                             it.copy(
                                 isLoading = true
@@ -74,7 +74,7 @@ class WallpaperViewModel @Inject constructor(
                         }
                     }
 
-                    is MResponse.Success -> {
+                    is ResponseResult.Success -> {
                         response.data?.let { wallpaper ->
                             /*
                              Для случаев долгой загрузки, для того чтобы уведомить пользовтеля
@@ -140,13 +140,13 @@ class WallpaperViewModel @Inject constructor(
                     wallpaperInstallOption
                 ).collectLatest { response ->
                     when(response) {
-                        is MResponse.Exception -> {
+                        is ResponseResult.Exception -> {
 
                         }
-                        is MResponse.Loading -> {
+                        is ResponseResult.Loading -> {
                             _event.send(WallpaperScreenEvent.ShowInstallInProgressSnackbar)
                         }
-                        is MResponse.Success -> {
+                        is ResponseResult.Success -> {
                             _event.send(WallpaperScreenEvent.ShowInstallCompletedSnackbar)
                         }
                     }

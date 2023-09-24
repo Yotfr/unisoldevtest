@@ -5,7 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.domain.model.CategoryModel
-import ru.yotfr.unisoldevtest.domain.model.MResponse
+import ru.yotfr.unisoldevtest.domain.model.ResponseResult
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 
 interface WallpaperRepository {
@@ -14,8 +14,8 @@ interface WallpaperRepository {
         coroutineScope: CoroutineScope
     ): Flow<PagingData<Wallpaper>>
 
-    fun getCategories(): Flow<MResponse<List<CategoryModel>>>
-    fun getWallpaperById(id: String): Flow<MResponse<Wallpaper>>
+    fun getCategories(): Flow<ResponseResult<List<CategoryModel>>>
+    fun getWallpaperById(id: String): Flow<ResponseResult<Wallpaper>>
     suspend fun changeWallpaperFavoriteStatus(wallpaper: Wallpaper)
     fun getFavoriteWallpapers(): Flow<List<Wallpaper>>
 

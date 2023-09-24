@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.yotfr.unisoldevtest.domain.model.MResponse
+import ru.yotfr.unisoldevtest.domain.model.ResponseResult
 import ru.yotfr.unisoldevtest.domain.usecase.GetCategoriesUseCase
 import ru.yotfr.unisoldevtest.ui.categories.state.CategoriesScreenState
 import javax.inject.Inject
@@ -32,8 +32,8 @@ class CategoriesViewModel @Inject constructor(
                 getCategoriesUseCase()
             }.collectLatest { response ->
                 when (response) {
-                    is MResponse.Exception -> {}
-                    is MResponse.Loading -> {
+                    is ResponseResult.Exception -> {}
+                    is ResponseResult.Loading -> {
                         _state.update {
                             it.copy(
                                 isLoading = true
@@ -41,7 +41,7 @@ class CategoriesViewModel @Inject constructor(
                         }
                     }
 
-                    is MResponse.Success -> {
+                    is ResponseResult.Success -> {
                         _state.update {
                             it.copy(
                                 isLoading = false,

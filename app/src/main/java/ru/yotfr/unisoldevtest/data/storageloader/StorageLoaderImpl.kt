@@ -9,16 +9,17 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import ru.yotfr.unisoldevtest.R
 import ru.yotfr.unisoldevtest.domain.model.DownloadedImages
-import ru.yotfr.unisoldevtest.domain.model.MResponse
+import ru.yotfr.unisoldevtest.domain.model.ExceptionCause
+import ru.yotfr.unisoldevtest.domain.model.ResponseResult
 import ru.yotfr.unisoldevtest.domain.storageloader.StorageLoader
 
 class StorageLoaderImpl(
     private val context: Context
 ) : StorageLoader {
 
-    override suspend fun getSavedImages() = flow<MResponse<List<DownloadedImages>?>> {
+    override suspend fun getSavedImages() = flow<ResponseResult<List<DownloadedImages>?>> {
         try {
-            emit(MResponse.Loading())
+            emit(ResponseResult.Loading())
 
             val collection = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
@@ -77,9 +78,15 @@ class StorageLoaderImpl(
                 }
                 cursor.close()
             }
-            emit(MResponse.Success(data = imageList))
+            emit(ResponseResult.Success(data = imageList))
         } catch (e: Exception) {
-            emit(MResponse.Exception(message = e.message))
+            emit(
+                ResponseResult.Exception(
+                    cause = ExceptionCause.Unknown(
+                        message = e.message ?: "Something went wrong"
+                    )
+                )
+            )
         }
     }.flowOn(Dispatchers.IO)
 

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.yotfr.unisoldevtest.domain.model.MResponse
+import ru.yotfr.unisoldevtest.domain.model.ResponseResult
 import ru.yotfr.unisoldevtest.domain.usecase.GetDownloadedWallpapersUseCase
 import ru.yotfr.unisoldevtest.ui.savedwallpapers.state.SavedWallpaperScreenState
 import javax.inject.Inject
@@ -25,17 +25,17 @@ class SavedWallpaperViewModel @Inject constructor(
         viewModelScope.launch {
             getDownloadedWallpapersUseCase().collectLatest { response ->
                 when (response) {
-                    is MResponse.Exception -> {
+                    is ResponseResult.Exception -> {
                         // TODO: Error state
                     }
-                    is MResponse.Loading -> {
+                    is ResponseResult.Loading -> {
                         _state.update {
                             it.copy(
                                 isLoading = true
                             )
                         }
                     }
-                    is MResponse.Success -> {
+                    is ResponseResult.Success -> {
                         _state.update {
                             it.copy(
                                 isLoading = true,
