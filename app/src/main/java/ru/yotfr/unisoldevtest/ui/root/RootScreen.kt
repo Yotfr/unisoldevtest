@@ -13,6 +13,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import ru.yotfr.unisoldevtest.ui.navigation.graphs.RootNavGraph
 import ru.yotfr.unisoldevtest.ui.navigation.screens.BottomBarScreens
+import ru.yotfr.unisoldevtest.ui.navigation.screens.RootScreens
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,20 +50,22 @@ fun RootScreen() {
             if (isBottomBarDestination) {
                 WallpaperRootTopAppBar(
                     onSettingsClicked = {
-                        // TODO
+                        navController.navigate(
+                            RootScreens.Settings.route
+                        )
                     }
                 )
             }
         },
         containerColor = MaterialTheme.colorScheme.background
-    ) {  innerPadding ->
+    ) { innerPadding ->
         RootNavGraph(
             navController = navController,
             modifier = Modifier.then(
                 if (isBottomBarDestination) {
-                        Modifier
-                            .padding(innerPadding)
-                    } else Modifier
+                    Modifier
+                        .padding(innerPadding)
+                } else Modifier
             )
         )
     }

@@ -5,7 +5,6 @@ import ru.yotfr.unisoldevtest.domain.model.Category
 sealed class RootScreens(
     val route: String
 ) {
-
     companion object{
         const val CATEGORY_KEY = "CATEGORY"
         const val WALLPAPER_ID_KEY = "WALLPAPER_ID"
@@ -35,4 +34,8 @@ sealed class RootScreens(
             )
         }
     }
+
+    data object Settings : RootScreens(
+        route = "settings"
+    )
 }

@@ -31,16 +31,11 @@ data class WallpaperTypography(
         fontSize = 12.sp,
         lineHeight = 16.sp
     ),
-
-
-    val caption: TextStyle = TextStyle(
-        fontSize = 12.sp,
-        fontFamily = Geologica
+    val bodyLarge: TextStyle = TextStyle(
+        fontFamily = Geologica,
+        fontSize = 16.sp,
+        lineHeight = 22.sp
     ),
-    val headline: TextStyle = TextStyle(
-        fontSize = 18.sp,
-        fontFamily = Geologica
-    )
 )
 
 val LocalTypography = compositionLocalOf { WallpaperTypography() }

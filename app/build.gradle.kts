@@ -74,6 +74,10 @@ dependencies {
     val coilVersion = "2.4.0"
     val materialIconsVersion = "1.4.2"
     val accomnpanistVersion = "0.30.1"
+    val dataStoreVersion =  "1.0.0"
+
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:$dataStoreVersion")
 
     // Accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accomnpanistVersion")
