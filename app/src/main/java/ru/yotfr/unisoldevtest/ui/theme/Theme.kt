@@ -16,6 +16,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import darkColors
 import lightColors
 import placeHolderColor
+import ru.yotfr.unisoldevtest.domain.model.ThemeModel
 import whiteColor
 
 object WallpaperTheme {
@@ -37,13 +38,24 @@ object WallpaperTheme {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WallpaperTheme(
-    useDarkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable() () -> Unit
+    theme: ThemeModel,
+    content: @Composable () -> Unit
 ) {
-    val colors = if (useDarkTheme) {
-        darkColors
-    } else {
-        lightColors
+
+    val colors = when (theme) {
+        ThemeModel.LIGHT -> {
+            lightColors
+        }
+        ThemeModel.DARK -> {
+            darkColors
+        }
+        ThemeModel.SYSTEM_DEFAULT -> {
+            if (isSystemInDarkTheme()) {
+                darkColors
+            } else {
+                lightColors
+            }
+        }
     }
 
     val extraColors = ExtraColors(
@@ -62,21 +74,42 @@ fun WallpaperTheme(
         LocalExtraColors provides extraColors,
         LocalOverscrollConfiguration provides null
     ) {
-        val systemUiController = rememberSystemUiController()
-        val blackScrim = Color(0f, 0f, 0f, 0.3f)
-        SideEffect {
-            systemUiController.setSystemBarsColor(
-                color = Color.Transparent,
-                darkIcons = !useDarkTheme,
-                isNavigationBarContrastEnforced = false,
-                transformColorForLightContent = { original ->
-                    blackScrim.compositeOver(original)
-                }
-            )
-        }
+        ConfigureSystemBars(theme = theme)
         MaterialTheme(
             colorScheme = colors,
             content = content
+        )
+    }
+}
+
+@Composable
+fun ConfigureSystemBars(
+    theme: ThemeModel
+) {
+    val systemUiController = rememberSystemUiController()
+    val isSystemDarkTheme = isSystemInDarkTheme()
+    val blackScrim = Color(0f, 0f, 0f, 0.3f)
+
+    val useDarkIcons = when (theme) {
+        ThemeModel.SYSTEM_DEFAULT -> {
+            !isSystemDarkTheme
+        }
+        ThemeModel.DARK -> {
+            false
+        }
+        ThemeModel.LIGHT -> {
+            true
+        }
+    }
+
+    SideEffect {
+        systemUiController.setSystemBarsColor(
+            color = Color.Transparent,
+            darkIcons = useDarkIcons,
+            isNavigationBarContrastEnforced = false,
+            transformColorForLightContent = { original ->
+                blackScrim.compositeOver(original)
+            }
         )
     }
 }
