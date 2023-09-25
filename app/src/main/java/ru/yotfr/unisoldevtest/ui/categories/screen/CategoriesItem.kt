@@ -1,5 +1,6 @@
 package ru.yotfr.unisoldevtest.ui.categories.screen
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +20,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
+import coil.request.CachePolicy
+import coil.request.ImageRequest
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.domain.model.CategoryModel
 import ru.yotfr.unisoldevtest.ui.categories.util.displayName
@@ -27,7 +30,8 @@ import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 @Composable
 fun CategoryItem(
     categoryModel: CategoryModel,
-    onClick: (Category) -> Unit
+    onClick: (Category) -> Unit,
+    context: Context
 ) {
     Surface(
         shape = WallpaperTheme.shape.default
@@ -59,7 +63,12 @@ fun CategoryItem(
                             )
                         }
                     },
-                model = categoryModel.previewUrl,
+                model = ImageRequest.Builder(context.applicationContext)
+                    .data(categoryModel.previewUrl)
+                    .crossfade(true)
+                    .diskCacheKey(categoryModel.previewUrl)
+                    .diskCachePolicy(CachePolicy.ENABLED)
+                    .build(),
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,
             )

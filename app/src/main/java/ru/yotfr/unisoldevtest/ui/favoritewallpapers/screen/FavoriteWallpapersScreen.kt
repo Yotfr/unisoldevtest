@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
@@ -29,6 +30,7 @@ fun FavoriteWallpapersScreen(
     navigateToWallpaper: (Wallpaper) -> Unit
 ) {
     val wallpapers by vm.favoriteWallpapers.collectAsState()
+    val context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -54,7 +56,8 @@ fun FavoriteWallpapersScreen(
                                 wallpaper = wall
                             )
                         )
-                    }
+                    },
+                    context = context
                 )
             }
         }

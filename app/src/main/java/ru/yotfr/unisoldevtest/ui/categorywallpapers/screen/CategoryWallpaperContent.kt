@@ -1,5 +1,6 @@
 package ru.yotfr.unisoldevtest.ui.categorywallpapers.screen
 
+import android.content.Context
 import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
@@ -31,7 +32,8 @@ fun CategoryWallpaperContent(
     wallpapers: LazyPagingItems<Wallpaper>,
     navigateToWallpaper: (Wallpaper) -> Unit,
     changeFavorite: (Wallpaper) -> Unit,
-    showToast: (String) -> Unit
+    showToast: (String) -> Unit,
+    context: Context
 ) {
     LazyVerticalStaggeredGrid(
         columns = if (
@@ -54,7 +56,8 @@ fun CategoryWallpaperContent(
                 WallpaperItem(
                     wallpaper = wallpaper,
                     onClick = navigateToWallpaper,
-                    onFavoriteClicked = changeFavorite
+                    onFavoriteClicked = changeFavorite,
+                    context = context
                 )
             }
         }

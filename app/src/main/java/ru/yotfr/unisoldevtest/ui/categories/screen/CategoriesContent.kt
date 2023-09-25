@@ -1,5 +1,6 @@
 package ru.yotfr.unisoldevtest.ui.categories.screen
 
+import android.content.Context
 import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +23,8 @@ import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 @Composable
 fun CategoriesContent(
     state: CategoriesScreenState,
-    onCategoryClicked: (Category) -> Unit
+    onCategoryClicked: (Category) -> Unit,
+    context: Context
 ) {
     LazyVerticalStaggeredGrid(
         columns = if (
@@ -43,7 +45,8 @@ fun CategoriesContent(
         ) { categoryModel ->
             CategoryItem(
                 categoryModel = categoryModel,
-                onClick = onCategoryClicked
+                onClick = onCategoryClicked,
+                context = context
             )
         }
         item(span = StaggeredGridItemSpan.FullLine) {

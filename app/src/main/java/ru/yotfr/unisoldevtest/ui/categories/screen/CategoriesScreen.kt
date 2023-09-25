@@ -76,7 +76,8 @@ fun CategoriesScreen(
         ) {
             CategoriesContent(
                 state = state,
-                onCategoryClicked = navigateToCategoryWallpaper
+                onCategoryClicked = navigateToCategoryWallpaper,
+                context = context
             )
             PullRefreshIndicator(
                 refreshing = state.isLoading,

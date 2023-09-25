@@ -1,5 +1,6 @@
 package ru.yotfr.unisoldevtest.ui.common
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -17,6 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
+import coil.request.CachePolicy
+import coil.request.ImageRequest
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 
@@ -24,7 +27,8 @@ import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 fun WallpaperItem(
     wallpaper: Wallpaper,
     onClick: (Wallpaper) -> Unit,
-    onFavoriteClicked: (Wallpaper) -> Unit
+    onFavoriteClicked: (Wallpaper) -> Unit,
+    context: Context
 ) {
     Surface(
         shape = WallpaperTheme.shape.default,
@@ -41,7 +45,12 @@ fun WallpaperItem(
                     .fillMaxSize()
                     .background(color = WallpaperTheme.extraColors.placeHolderColor)
                     .aspectRatio(wallpaper.aspectRatio),
-                model = wallpaper.previewUrl,
+                model = ImageRequest.Builder(context.applicationContext)
+                    .data(wallpaper.previewUrl)
+                    .crossfade(true)
+                    .diskCacheKey(wallpaper.previewUrl)
+                    .diskCachePolicy(CachePolicy.ENABLED)
+                    .build(),
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,
             )

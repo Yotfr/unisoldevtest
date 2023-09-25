@@ -36,6 +36,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import coil.compose.AsyncImage
+import coil.request.CachePolicy
+import coil.request.ImageRequest
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.R
@@ -206,14 +208,22 @@ fun WallpaperScreen(
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {
-                AsyncImage(
-                    modifier = Modifier.clickable {
-                        vm.onEvent(WallpaperEvent.ChangeBarsVisibility)
-                    },
-                    model = state.wallpaper?.url ?: "",
-                    contentDescription = null,
-                    contentScale = ContentScale.FillHeight
-                )
+                state.wallpaper?.url?.let { url ->
+                    AsyncImage(
+                        modifier = Modifier.clickable {
+                            vm.onEvent(WallpaperEvent.ChangeBarsVisibility)
+                        },
+                        model = ImageRequest.Builder(context.applicationContext)
+                            .data(url)
+                            .crossfade(true)
+                            .diskCacheKey(url)
+                            .diskCachePolicy(CachePolicy.ENABLED)
+                            .build(),
+                        contentDescription = null,
+                        contentScale = ContentScale.FillHeight
+                    )
+                }
+
             }
             AnimatedVisibility(
                 visible = isShowInstallDialog,
