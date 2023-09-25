@@ -1,6 +1,5 @@
 package ru.yotfr.unisoldevtest.ui.wallpaper.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -140,6 +139,13 @@ class WallpaperViewModel @Inject constructor(
                     wallpaper = wallpaper
                 )
             }
+        }
+        _state.update {
+            it.copy(
+                wallpaper = it.wallpaper?.copy(
+                    isFavorite = !it.wallpaper.isFavorite
+                )
+            )
         }
     }
 

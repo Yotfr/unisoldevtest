@@ -116,7 +116,6 @@ class WallpaperRepositoryImpl @Inject constructor(
     }
 
     private fun Exception.mapExceptionCause(): ErrorCause {
-        Log.d("TEST","EXCEPTION $this")
         return when (this) {
             is SocketTimeoutException -> {
                 ErrorCause.TimeOut
