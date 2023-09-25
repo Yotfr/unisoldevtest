@@ -11,4 +11,5 @@ sealed interface WallpaperScreenEvent {
     data object ShowInstallCompletedSnackbar : WallpaperScreenEvent
     data object ShowInstallFailedSnackbar : WallpaperScreenEvent
     data class ShowErrorSnackbar(val errorCause: ErrorCause) : WallpaperScreenEvent
+    data object ShowDownloadOnlyByWifiAllowedSnackbar : WallpaperScreenEvent
 }

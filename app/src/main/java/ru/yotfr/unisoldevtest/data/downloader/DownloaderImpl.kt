@@ -16,6 +16,13 @@ class DownloaderImpl(
 
     private val downloadManager = context.getSystemService(DownloadManager::class.java)
 
+    /*
+     setAllowedNetworkType не используется,
+     так при использовании VPN
+     DownloadManager не распознает NETWORK_TYPE
+
+     Проверка на network type производится в UseCase
+     */
     override fun downloadFile(wallpaper: Wallpaper): Long {
         val url = wallpaper.url
         val fileName = wallpaper.id

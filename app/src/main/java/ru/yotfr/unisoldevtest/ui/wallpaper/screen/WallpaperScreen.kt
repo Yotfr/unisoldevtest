@@ -152,6 +152,16 @@ fun WallpaperScreen(
                             )
                         }
                     }
+
+                    WallpaperScreenEvent.ShowDownloadOnlyByWifiAllowedSnackbar -> {
+                        job?.cancel()
+                        job = scope.launch {
+                            snackBarHostState.showSnackbar(
+                                message = context.getString(R.string.only_wifi_enabled),
+                                duration = SnackbarDuration.Long
+                            )
+                        }
+                    }
                 }
             }
         }

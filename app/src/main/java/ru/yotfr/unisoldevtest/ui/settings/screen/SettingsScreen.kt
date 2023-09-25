@@ -8,13 +8,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -78,6 +81,33 @@ fun SettingsScreen(
                         text = state.currentTheme.displayName(),
                         style = WallpaperTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.secondary
+                    )
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            isChangeThemeDialogVisible = true
+                        }
+                        .padding(
+                            vertical = WallpaperTheme.spacing.medium
+                        ),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.wi_fi_only_settings),
+                        style = WallpaperTheme.typography.bodyLarge
+                    )
+                    Switch(
+                        checked = state.onlyWifiEnabled,
+                        onCheckedChange = { newState ->
+                            vm.onEvent(
+                                SettingsEvent.WiFiOnlyChanged(
+                                    newValue = newState
+                                )
+                            )
+                        }
                     )
                 }
             }

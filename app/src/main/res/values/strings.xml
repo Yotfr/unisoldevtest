@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Wallpaper Installer</string>
+    <string name="app_name">WallpaperInstaller</string>
 
     <string name="categories">Categories</string>
     <string name="favorite">Favorite</string>
@@ -53,6 +53,8 @@
     <string name="no_saved">No saved</string>
 
     <string name="no_connectivity">No internet connection</string>
+    <string name="wi_fi_only_settings">Download Wallpapers \n on Wi-Fi Only</string>
+    <string name="only_wifi_enabled">Please connect to Wi-Fi and tru again, \n or disable this option in Settings</string>
     <string name="time_out">This service is not available in Russian Federation.\n Please enable VPN to continue using the application</string>
 
 </resources>

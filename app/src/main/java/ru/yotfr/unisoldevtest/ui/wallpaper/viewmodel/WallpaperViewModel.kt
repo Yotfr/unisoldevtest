@@ -1,5 +1,6 @@
 package ru.yotfr.unisoldevtest.ui.wallpaper.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -245,7 +246,14 @@ class WallpaperViewModel @Inject constructor(
                     _event.send(WallpaperScreenEvent.ShowFileAlreadySavedSnackbar)
                     return@launch
                 }
-                downloadWallpaperUseCase(it)
+                /*
+                 Возвращает false в случае если недоступен WiFi и
+                 разрешена загрузка изображений только по WiFi
+                 */
+                val downloadAllowed = downloadWallpaperUseCase(it)
+                if (!downloadAllowed) {
+                    _event.send(WallpaperScreenEvent.ShowDownloadOnlyByWifiAllowedSnackbar)
+                }
                 getDownloadStatus(it)
             }
         }
