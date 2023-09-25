@@ -1,13 +1,18 @@
 package ru.yotfr.unisoldevtest.ui.savedwallpapers.screen
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
@@ -18,6 +23,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -26,13 +32,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
+import ru.yotfr.unisoldevtest.R
 import ru.yotfr.unisoldevtest.ui.common.displayText
 import ru.yotfr.unisoldevtest.ui.savedwallpapers.event.SavedWallpapersEvent
 import ru.yotfr.unisoldevtest.ui.savedwallpapers.event.SavedWallpapersScreenEvent
@@ -77,7 +86,10 @@ fun SavedWallpaperScreen(
     }
 
     Scaffold(
-        snackbarHost = { SnackbarHost(snackBarHostState) }
+        snackbarHost = { SnackbarHost(snackBarHostState) },
+        contentWindowInsets = WindowInsets(0,0,0,0),
+        modifier = Modifier
+            .fillMaxSize()
     ) {
         Box(
             modifier = Modifier
@@ -85,15 +97,36 @@ fun SavedWallpaperScreen(
                 .pullRefresh(pullRefreshState)
         ) {
             LazyVerticalStaggeredGrid(
-                columns = StaggeredGridCells.Adaptive(150.dp),
-                contentPadding = PaddingValues(WallpaperTheme.spacing.medium),
+                columns = if (
+                    LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+                ) {
+                    StaggeredGridCells.Adaptive(175.dp)
+                } else StaggeredGridCells.Fixed(2),
+                modifier = Modifier.padding(horizontal = WallpaperTheme.spacing.medium),
                 verticalItemSpacing = WallpaperTheme.spacing.small,
                 horizontalArrangement = Arrangement.spacedBy(WallpaperTheme.spacing.small)
             ) {
+                item(span = StaggeredGridItemSpan.FullLine) {
+                    Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
+                }
                 items(state.wallpapers) { savedImage ->
                     SavedWallpaperItem(
                         downloadedImage = savedImage,
                         onClick = navigateToWallpaper
+                    )
+                }
+                item(span = StaggeredGridItemSpan.FullLine) {
+                    Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
+                }
+            }
+            if (state.wallpapers.isEmpty()) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.no_saved),
+                        style = WallpaperTheme.typography.title
                     )
                 }
             }

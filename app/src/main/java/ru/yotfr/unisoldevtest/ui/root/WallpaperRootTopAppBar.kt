@@ -8,19 +8,18 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
-import ru.yotfr.unisoldevtest.R
 import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WallpaperRootTopAppBar(
-    onSettingsClicked: () -> Unit
+    onSettingsClicked: () -> Unit,
+    title: String
 ) {
     TopAppBar(
         title = {
             Text(
-                text = stringResource(id = R.string.app_name),
+                text = title,
                 style = WallpaperTheme.typography.title
             )
         },

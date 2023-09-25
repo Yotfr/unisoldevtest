@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.domain.model.DownloadStatus
+import ru.yotfr.unisoldevtest.domain.model.ErrorCause
 import ru.yotfr.unisoldevtest.domain.model.ResponseResult
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.model.WallpaperDownload
@@ -63,9 +64,19 @@ class WallpaperViewModel @Inject constructor(
             }.collectLatest { response ->
                 when (response) {
                     is ResponseResult.Error -> {
-                        // TODO: Error state
+                        _state.update {
+                            it.copy(
+                                isLoading = false
+                            )
+                        }
+                        _event.send(
+                            WallpaperScreenEvent.ShowErrorSnackbar(
+                                errorCause = response.cause ?: ErrorCause.Unknown(
+                                    message = "Somethings went wrong"
+                                )
+                            )
+                        )
                     }
-
                     is ResponseResult.Loading -> {
                         _state.update {
                             it.copy(
@@ -73,7 +84,6 @@ class WallpaperViewModel @Inject constructor(
                             )
                         }
                     }
-
                     is ResponseResult.Success -> {
                         response.data?.let { wallpaper ->
                             /*
@@ -139,9 +149,15 @@ class WallpaperViewModel @Inject constructor(
                     wallpaper,
                     wallpaperInstallOption
                 ).collectLatest { response ->
-                    when(response) {
+                    when (response) {
                         is ResponseResult.Error -> {
-
+                            _event.send(
+                                WallpaperScreenEvent.ShowErrorSnackbar(
+                                    errorCause = response.cause ?: ErrorCause.Unknown(
+                                        message = "Somethings went wrong"
+                                    )
+                                )
+                            )
                         }
                         is ResponseResult.Loading -> {
                             _event.send(WallpaperScreenEvent.ShowInstallInProgressSnackbar)
@@ -205,11 +221,9 @@ class WallpaperViewModel @Inject constructor(
                     // Удаление модели загрузки из БД
                     deleteWallpaperDownloadUseCase(wallpaperDownload)
                 }
-
                 DownloadStatus.IN_PROGRESS -> {
                     _event.send(WallpaperScreenEvent.ShowDownloadInProgressSnackbar)
                 }
-
                 DownloadStatus.SUCCEED -> {
                     if (!isFileExists(wallpaper) || fromBroadcast) {
                         _event.send(WallpaperScreenEvent.ShowDownloadCompleteSnackbar)

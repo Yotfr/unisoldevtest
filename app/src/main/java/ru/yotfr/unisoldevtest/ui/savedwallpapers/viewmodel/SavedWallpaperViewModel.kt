@@ -41,6 +41,11 @@ class SavedWallpaperViewModel @Inject constructor(
             }.collectLatest { response ->
                 when (response) {
                     is ResponseResult.Error -> {
+                        _state.update {
+                            it.copy(
+                                isLoading = false
+                            )
+                        }
                         _event.send(
                             SavedWallpapersScreenEvent.ShowErrorToast(
                                 error = response.cause ?: ErrorCause.Unknown(

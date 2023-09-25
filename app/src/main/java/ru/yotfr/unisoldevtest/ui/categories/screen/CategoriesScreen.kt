@@ -2,6 +2,7 @@ package ru.yotfr.unisoldevtest.ui.categories.screen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.Scaffold
@@ -52,7 +53,7 @@ fun CategoriesScreen(
     LaunchedEffect(Unit) {
         lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
             vm.event.collect { screenEvent ->
-                when(screenEvent) {
+                when (screenEvent) {
                     is CategoriesScreenEvent.ShowErrorToast -> {
                         scope.launch {
                             snackBarHostState.showSnackbar(
@@ -67,12 +68,15 @@ fun CategoriesScreen(
     }
 
     Scaffold(
-        snackbarHost = { SnackbarHost(snackBarHostState) }
+        modifier = Modifier
+            .fillMaxSize()
+            .pullRefresh(pullRefreshState),
+        snackbarHost = { SnackbarHost(snackBarHostState) },
+        contentWindowInsets = WindowInsets(0, 0, 0, 0)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .pullRefresh(pullRefreshState)
         ) {
             CategoriesContent(
                 state = state,

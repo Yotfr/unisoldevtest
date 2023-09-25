@@ -8,9 +8,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import ru.yotfr.unisoldevtest.R
 import ru.yotfr.unisoldevtest.ui.navigation.graphs.RootNavGraph
 import ru.yotfr.unisoldevtest.ui.navigation.screens.BottomBarScreens
 import ru.yotfr.unisoldevtest.ui.navigation.screens.RootScreens
@@ -29,7 +31,6 @@ fun RootScreen() {
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-
     val isBottomBarDestination = bottomBarScreens.any { it.route == currentDestination?.route }
 
     Scaffold(
@@ -53,7 +54,24 @@ fun RootScreen() {
                         navController.navigate(
                             RootScreens.Settings.route
                         )
-                    }
+                    },
+                    title =
+                    currentDestination?.route?.let {
+                        when (it) {
+                            BottomBarScreens.Categories.route -> {
+                                stringResource(id = R.string.app_name)
+                            }
+                            BottomBarScreens.FavoriteWallpapers.route -> {
+                                stringResource(id = R.string.favorite)
+                            }
+                            BottomBarScreens.SavedWallpapers.route -> {
+                                stringResource(id = R.string.saved)
+                            }
+                            else -> {
+                                ""
+                            }
+                        }
+                    } ?: ""
                 )
             }
         },

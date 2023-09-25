@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WallpaperInstaller</string>
+    <string name="app_name">Wallpaper Installer</string>
 
     <string name="categories">Categories</string>
     <string name="favorite">Favorite</string>
@@ -48,6 +48,9 @@
     <string name="light">Light</string>
     <string name="dark">Dark</string>
     <string name="appearance">Appearance</string>
+
+    <string name="no_favorites">No favorites</string>
+    <string name="no_saved">No saved</string>
 
     <string name="no_connectivity">No internet connection</string>
     <string name="time_out">This service is not available in Russian Federation.\n Please enable VPN to continue using the application</string>

@@ -2,6 +2,7 @@ package ru.yotfr.unisoldevtest.ui.categorywallpapers.screen
 
 import android.content.Context
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
@@ -61,7 +62,8 @@ fun CategoryWallpaperScreen(
                 title = category.displayName()
             )
         },
-        snackbarHost = { SnackbarHost(snackBarHostState) }
+        snackbarHost = { SnackbarHost(snackBarHostState) },
+        contentWindowInsets = WindowInsets(0,0,0,0)
     ) { innerPadding ->
         Box(
             modifier = Modifier
