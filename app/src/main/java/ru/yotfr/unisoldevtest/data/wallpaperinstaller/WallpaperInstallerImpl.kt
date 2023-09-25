@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import ru.yotfr.unisoldevtest.domain.model.ExceptionCause
+import ru.yotfr.unisoldevtest.domain.model.ErrorCause
 import ru.yotfr.unisoldevtest.domain.model.ResponseResult
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.model.WallpaperInstallOption
@@ -43,8 +43,8 @@ class WallpaperInstallerImpl(
             emit(ResponseResult.Success(Unit))
         } catch (e: Exception) {
             emit(
-                ResponseResult.Exception(
-                    cause = ExceptionCause.Unknown(
+                ResponseResult.Error(
+                    cause = ErrorCause.Unknown(
                         message = e.message ?: "Something went wrong"
                     )
                 )

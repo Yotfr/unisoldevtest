@@ -62,7 +62,7 @@ class WallpaperViewModel @Inject constructor(
                 } ?: flow { }
             }.collectLatest { response ->
                 when (response) {
-                    is ResponseResult.Exception -> {
+                    is ResponseResult.Error -> {
                         // TODO: Error state
                     }
 
@@ -140,7 +140,7 @@ class WallpaperViewModel @Inject constructor(
                     wallpaperInstallOption
                 ).collectLatest { response ->
                     when(response) {
-                        is ResponseResult.Exception -> {
+                        is ResponseResult.Error -> {
 
                         }
                         is ResponseResult.Loading -> {

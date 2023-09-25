@@ -39,6 +39,7 @@ import coil.compose.AsyncImage
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.R
+import ru.yotfr.unisoldevtest.ui.common.displayText
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperEvent
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperScreenEvent
 import ru.yotfr.unisoldevtest.ui.wallpaper.viewmodel.WallpaperViewModel
@@ -56,6 +57,7 @@ fun WallpaperScreen(
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     val snackBarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+    // Needed to dismiss Indefinite Snackbar
     var job: Job? by remember {
         mutableStateOf(null)
     }
@@ -135,6 +137,16 @@ fun WallpaperScreen(
                             snackBarHostState.showSnackbar(
                                 message = context.getString(R.string.applying),
                                 duration = SnackbarDuration.Indefinite
+                            )
+                        }
+                    }
+
+                    is WallpaperScreenEvent.ShowErrorSnackbar -> {
+                        job?.cancel()
+                        job = scope.launch {
+                            snackBarHostState.showSnackbar(
+                                message = screenEvent.errorCause.displayText(context),
+                                duration = SnackbarDuration.Long
                             )
                         }
                     }

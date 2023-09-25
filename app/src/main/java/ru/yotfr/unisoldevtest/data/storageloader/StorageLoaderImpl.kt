@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import ru.yotfr.unisoldevtest.R
 import ru.yotfr.unisoldevtest.domain.model.DownloadedImages
-import ru.yotfr.unisoldevtest.domain.model.ExceptionCause
+import ru.yotfr.unisoldevtest.domain.model.ErrorCause
 import ru.yotfr.unisoldevtest.domain.model.ResponseResult
 import ru.yotfr.unisoldevtest.domain.storageloader.StorageLoader
 
@@ -81,8 +81,8 @@ class StorageLoaderImpl(
             emit(ResponseResult.Success(data = imageList))
         } catch (e: Exception) {
             emit(
-                ResponseResult.Exception(
-                    cause = ExceptionCause.Unknown(
+                ResponseResult.Error(
+                    cause = ErrorCause.Unknown(
                         message = e.message ?: "Something went wrong"
                     )
                 )

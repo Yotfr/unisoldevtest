@@ -9,16 +9,23 @@ import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.ui.categories.util.displayName
+import ru.yotfr.unisoldevtest.ui.categorywallpapers.event.CategoryWallpapersEvent
 import ru.yotfr.unisoldevtest.ui.categorywallpapers.viewmodel.CategoryWallpaperViewModel
 
 @OptIn(
@@ -33,14 +40,15 @@ fun CategoryWallpaperScreen(
     navigateToWallpaper: (Wallpaper) -> Unit
 ) {
     val wallpapers = vm.wallpapers.collectAsLazyPagingItems()
-
+    val scope = rememberCoroutineScope()
+    val snackBarHostState = remember { SnackbarHostState() }
     val pullRefreshState = rememberPullRefreshState(
         refreshing = wallpapers.loadState.refresh == LoadState.Loading,
-        onRefresh = vm::refresh
+        onRefresh = { vm.onEvent(CategoryWallpapersEvent.PullRefresh) }
     )
 
     LaunchedEffect(Unit) {
-        vm.setCategory(category)
+        vm.onEvent(CategoryWallpapersEvent.SetCategory(category))
     }
 
     Scaffold(
@@ -49,7 +57,8 @@ fun CategoryWallpaperScreen(
                 navigateBack = navigateBack,
                 title = category.displayName()
             )
-        }
+        },
+        snackbarHost = { SnackbarHost(snackBarHostState) }
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -60,7 +69,21 @@ fun CategoryWallpaperScreen(
             CategoryWallpaperContent(
                 wallpapers = wallpapers,
                 navigateToWallpaper = navigateToWallpaper,
-                changeFavorite = vm::changeFavorite
+                changeFavorite = { wallpaper ->
+                    vm.onEvent(
+                        CategoryWallpapersEvent.ChangeFavorite(
+                            wallpaper = wallpaper
+                        )
+                    )
+                },
+                showToast = { message ->
+                    scope.launch {
+                        snackBarHostState.showSnackbar(
+                            message = message,
+                            duration = SnackbarDuration.Long
+                        )
+                    }
+                }
             )
             PullRefreshIndicator(
                 refreshing = wallpapers.loadState.refresh == LoadState.Loading,

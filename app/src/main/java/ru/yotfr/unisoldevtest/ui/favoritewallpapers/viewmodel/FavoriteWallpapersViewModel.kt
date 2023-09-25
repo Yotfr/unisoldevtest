@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.usecase.ChangeWallpaperFavoriteStatusUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.GetFavoriteWallpapersUseCase
+import ru.yotfr.unisoldevtest.ui.favoritewallpapers.event.FavoriteWallpapersEvent
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,7 +30,15 @@ class FavoriteWallpapersViewModel @Inject constructor(
         }
     }
 
-    fun changeFavorite(wallpaper: Wallpaper) {
+    fun onEvent(event: FavoriteWallpapersEvent) {
+        when(event) {
+            is FavoriteWallpapersEvent.ChangeFavorite -> {
+                changeFavorite(event.wallpaper)
+            }
+        }
+    }
+
+    private fun changeFavorite(wallpaper: Wallpaper) {
         viewModelScope.launch {
             changeWallpaperFavoriteStatusUseCase(wallpaper)
         }

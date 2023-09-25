@@ -49,4 +49,7 @@
     <string name="dark">Dark</string>
     <string name="appearance">Appearance</string>
 
+    <string name="no_connectivity">No internet connection</string>
+    <string name="time_out">This service is not available in Russian Federation.\n Please enable VPN to continue using the application</string>
+
 </resources>

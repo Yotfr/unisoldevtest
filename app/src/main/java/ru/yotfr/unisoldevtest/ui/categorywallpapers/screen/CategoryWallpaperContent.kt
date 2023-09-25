@@ -30,7 +30,8 @@ import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 fun CategoryWallpaperContent(
     wallpapers: LazyPagingItems<Wallpaper>,
     navigateToWallpaper: (Wallpaper) -> Unit,
-    changeFavorite: (Wallpaper) -> Unit
+    changeFavorite: (Wallpaper) -> Unit,
+    showToast: (String) -> Unit
 ) {
     LazyVerticalStaggeredGrid(
         columns = if (
@@ -61,7 +62,8 @@ fun CategoryWallpaperContent(
             item(span = StaggeredGridItemSpan.FullLine) {
                 Box(modifier = Modifier.fillMaxWidth()) {
                     CircularProgressIndicator(
-                        modifier = Modifier.size(48.dp)
+                        modifier = Modifier
+                            .size(48.dp)
                             .align(Alignment.Center),
                         color = WallpaperTheme.extraColors.onWallpaperText
                     )
@@ -72,7 +74,10 @@ fun CategoryWallpaperContent(
             Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
         }
     }
-    if (wallpapers.loadState.refresh == LoadState.Loading) {
-        // TOOD:Error
+    if (wallpapers.loadState.refresh is LoadState.Error) {
+        showToast(
+            (wallpapers.loadState.refresh as LoadState.Error).error.message
+                ?: "Somethings went wrong"
+        )
     }
 }

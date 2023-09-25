@@ -1,5 +1,6 @@
 package ru.yotfr.unisoldevtest.data.repository
 
+import android.util.Log
 import androidx.paging.PagingData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,12 +19,13 @@ import ru.yotfr.unisoldevtest.data.paging.pager.CachedWallpapersPager
 import ru.yotfr.unisoldevtest.data.paging.pagingcache.WallpapersCache
 import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.domain.model.CategoryModel
-import ru.yotfr.unisoldevtest.domain.model.ExceptionCause
+import ru.yotfr.unisoldevtest.domain.model.ErrorCause
 import ru.yotfr.unisoldevtest.domain.model.ResponseResult
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.repository.WallpaperRepository
 import java.net.SocketTimeoutException
 import javax.inject.Inject
+import javax.net.ssl.SSLHandshakeException
 
 class WallpaperRepositoryImpl @Inject constructor(
     private val wallpaperApi: WallpaperApi,
@@ -72,7 +74,7 @@ class WallpaperRepositoryImpl @Inject constructor(
             )
         } catch (e: Exception) {
             emit(
-                ResponseResult.Exception(
+                ResponseResult.Error(
                     cause = e.mapExceptionCause()
                 )
             )
@@ -90,7 +92,7 @@ class WallpaperRepositoryImpl @Inject constructor(
             emit(ResponseResult.Success(data = wallpaper))
         } catch (e: Exception) {
             emit(
-                ResponseResult.Exception(
+                ResponseResult.Error(
                     cause = e.mapExceptionCause()
                 )
             )
@@ -113,18 +115,23 @@ class WallpaperRepositoryImpl @Inject constructor(
         }
     }
 
-    private fun Exception.mapExceptionCause(): ExceptionCause {
+    private fun Exception.mapExceptionCause(): ErrorCause {
+        Log.d("TEST","EXCEPTION $this")
         return when (this) {
             is SocketTimeoutException -> {
-                ExceptionCause.TimeOut
+                ErrorCause.TimeOut
+            }
+
+            is SSLHandshakeException -> {
+                ErrorCause.VPNDisabled
             }
 
             is NoConnectivityException -> {
-                ExceptionCause.NoConnectivity
+                ErrorCause.NoConnectivity
             }
 
             else -> {
-                ExceptionCause.Unknown(
+                ErrorCause.Unknown(
                     message = this.message ?: "Something went wrong"
                 )
             }

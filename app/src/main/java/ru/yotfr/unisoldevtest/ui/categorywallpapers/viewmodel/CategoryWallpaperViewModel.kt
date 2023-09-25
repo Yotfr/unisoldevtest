@@ -13,6 +13,7 @@ import ru.yotfr.unisoldevtest.domain.model.Category
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.usecase.ChangeWallpaperFavoriteStatusUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.GetWallpaperByCategoryUseCase
+import ru.yotfr.unisoldevtest.ui.categorywallpapers.event.CategoryWallpapersEvent
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -36,17 +37,31 @@ class CategoryWallpaperViewModel @Inject constructor(
         } ?: flow { }
     }
 
-    fun changeFavorite(wallpaper: Wallpaper) {
+    fun onEvent(event: CategoryWallpapersEvent) {
+        when(event) {
+            is CategoryWallpapersEvent.ChangeFavorite -> {
+                changeFavorite(event.wallpaper)
+            }
+            CategoryWallpapersEvent.PullRefresh -> {
+                refresh()
+            }
+            is CategoryWallpapersEvent.SetCategory -> {
+                setCategory(event.category)
+            }
+        }
+    }
+
+    private fun changeFavorite(wallpaper: Wallpaper) {
         viewModelScope.launch {
             changeWallpaperFavoriteStatusUseCase(wallpaper)
         }
     }
 
-    fun setCategory(value: Category) {
+    private fun setCategory(value: Category) {
         category.value = value
     }
 
-    fun refresh() {
+    private fun refresh() {
         triggerRefresh.value = !triggerRefresh.value
     }
 

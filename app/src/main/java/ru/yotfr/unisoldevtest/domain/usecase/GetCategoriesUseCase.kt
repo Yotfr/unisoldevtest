@@ -9,5 +9,6 @@ import javax.inject.Inject
 class GetCategoriesUseCase @Inject constructor(
     private val wallpaperRepository: WallpaperRepository
 ) {
-    suspend operator fun invoke(): Flow<ResponseResult<List<CategoryModel>>> = wallpaperRepository.getCategories()
+    suspend operator fun invoke(): Flow<ResponseResult<List<CategoryModel>>> =
+        wallpaperRepository.getCategories()
 }
