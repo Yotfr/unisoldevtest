@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.data.storageloader
+package ru.yotfr.storageloader.storageloader
 
 import android.content.ContentUris
 import android.content.Context
@@ -7,18 +7,17 @@ import android.provider.MediaStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import ru.yotfr.unisoldevtest.R
 import ru.yotfr.model.DownloadedImages
+import ru.yotfr.model.ErrorCause
 import ru.yotfr.model.ResponseResult
-import ru.yotfr.unisoldevtest.domain.storageloader.StorageLoader
 
-class StorageLoaderImpl(
+internal class StorageLoaderImpl(
     private val context: Context
 ) : StorageLoader {
 
-    override suspend fun getSavedImages() = flow<ru.yotfr.model.ResponseResult<List<ru.yotfr.model.DownloadedImages>?>> {
+    override suspend fun getSavedImages() = flow<ResponseResult<List<DownloadedImages>?>> {
         try {
-            emit(ru.yotfr.model.ResponseResult.Loading())
+            emit(ResponseResult.Loading())
 
             val collection = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
@@ -35,11 +34,11 @@ class StorageLoaderImpl(
                 MediaStore.MediaColumns.WIDTH
             )
 
-            val selectionArgs = arrayOf("%${context.getString(R.string.app_name)}%")
+            val selectionArgs = arrayOf("%WallpaperInstaller%")
 
             val sortOrder = MediaStore.MediaColumns.DATE_ADDED + " COLLATE NOCASE DESC"
 
-            val imageList: MutableList<ru.yotfr.model.DownloadedImages> = mutableListOf()
+            val imageList: MutableList<DownloadedImages> = mutableListOf()
 
             context.contentResolver?.query(
                 collection,
@@ -72,16 +71,22 @@ class StorageLoaderImpl(
                         id
                     )
 
-                    imageList.add(ru.yotfr.model.DownloadedImages(id, contentUri, displayName))
+                    imageList.add(
+                        DownloadedImages(
+                            id,
+                            contentUri.toString(),
+                            displayName
+                        )
+                    )
 
                 }
                 cursor.close()
             }
-            emit(ru.yotfr.model.ResponseResult.Success(data = imageList))
+            emit(ResponseResult.Success(data = imageList))
         } catch (e: Exception) {
             emit(
-                ru.yotfr.model.ResponseResult.Error(
-                    cause = ru.yotfr.model.ErrorCause.Unknown(
+                ResponseResult.Error(
+                    cause = ErrorCause.Unknown(
                         message = e.message ?: "Something went wrong"
                     )
                 )
