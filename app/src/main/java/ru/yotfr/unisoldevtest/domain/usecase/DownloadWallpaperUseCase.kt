@@ -2,10 +2,8 @@ package ru.yotfr.unisoldevtest.domain.usecase
 
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import ru.yotfr.unisoldevtest.domain.downloader.Downloader
-import ru.yotfr.model.Wallpaper
-import ru.yotfr.model.WallpaperDownload
-import ru.yotfr.unisoldevtest.domain.repository.WallpaperDownloadsRepository
+import ru.yotfr.downloader.downloader.Downloader
+import ru.yotfr.downloader.repository.WallpaperDownloadsRepository
 import ru.yotfr.unisoldevtest.domain.userpreference.UserPreference
 import javax.inject.Inject
 

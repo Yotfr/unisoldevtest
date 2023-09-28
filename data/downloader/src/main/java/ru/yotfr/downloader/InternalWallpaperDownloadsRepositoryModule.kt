@@ -1,21 +1,16 @@
-package ru.yotfr.unisoldevtest.di
+package ru.yotfr.downloader
 
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.yotfr.downloader.repository.WallpaperDownloadsRepositoryImpl
 import ru.yotfr.downloader.repository.WallpaperDownloadsRepository
+import ru.yotfr.downloader.repository.WallpaperDownloadsRepositoryImpl
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface RepositoryModule {
-    @Binds
-    @Singleton
-    fun bindWallpaperRepository(
-        wallpaperRepositoryImpl: WallpaperRepositoryImpl
-    ): WallpaperRepository
+internal interface InternalWallpaperDownloadsRepositoryModule {
 
     @Binds
     @Singleton

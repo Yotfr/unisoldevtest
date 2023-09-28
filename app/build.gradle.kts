@@ -56,6 +56,15 @@ android {
 dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:database"))
+    implementation(project(":core:memorycache"))
+    implementation(project(":data:categories"))
+    implementation(project(":data:categorywallpapers"))
+    implementation(project(":data:favoritewallpapers"))
+    implementation(project(":data:downloader"))
+    implementation(project(":data:shared"))
+    implementation(project(":data:wallpaperdetails"))
+    implementation(project(":domain:categories"))
+    implementation(project(":domain:model"))
 
     dataStore()
     accompanist()

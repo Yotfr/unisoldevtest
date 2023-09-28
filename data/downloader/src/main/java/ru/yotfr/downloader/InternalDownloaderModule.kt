@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.di
+package ru.yotfr.downloader
 
 import android.content.Context
 import dagger.Module
@@ -6,13 +6,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ru.yotfr.downloader.downloader.DownloaderImpl
 import ru.yotfr.downloader.downloader.Downloader
+import ru.yotfr.downloader.downloader.DownloaderImpl
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DownloaderModule {
+internal object InternalDownloaderModule {
 
     @Provides
     @Singleton

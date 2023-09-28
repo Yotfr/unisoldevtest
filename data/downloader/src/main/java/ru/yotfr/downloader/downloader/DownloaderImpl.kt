@@ -1,16 +1,14 @@
-package ru.yotfr.unisoldevtest.data.downloader
+package ru.yotfr.downloader.downloader
 
 import android.app.DownloadManager
 import android.content.Context
 import android.os.Environment
 import android.webkit.MimeTypeMap
 import androidx.core.net.toUri
-import ru.yotfr.unisoldevtest.R
-import ru.yotfr.unisoldevtest.domain.downloader.Downloader
 import ru.yotfr.model.Wallpaper
 import java.io.File
 
-class DownloaderImpl(
+internal class DownloaderImpl(
     private val context: Context
 ) : Downloader {
 
@@ -23,12 +21,13 @@ class DownloaderImpl(
 
      Проверка на network type производится в UseCase
      */
-    override fun downloadFile(wallpaper: ru.yotfr.model.Wallpaper): Long {
+    override fun downloadFile(wallpaper: Wallpaper): Long {
         val url = wallpaper.url
         val fileName = wallpaper.id
         val mimeType = getMimeType(url)
         val title = fileName.plus(".").plus(mimeType.substringAfterLast("/"))
-        val subPath = "${context.getString(R.string.app_name)}/$title"
+        // TODO: ASSETS MODULE
+        val subPath = "WallpaperInstaller/$title"
         val request = DownloadManager.Request(url.toUri())
             .setMimeType(mimeType)
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
@@ -58,14 +57,15 @@ class DownloaderImpl(
         }
     }
 
-    override fun checkIfFileExists(wallpaper: ru.yotfr.model.Wallpaper): Boolean {
+    override fun checkIfFileExists(wallpaper: Wallpaper): Boolean {
         val url = wallpaper.url
         val fileName = wallpaper.id
         val mimeType = getMimeType(url)
         val title = fileName.plus(".").plus(mimeType.substringAfterLast("/"))
+        // TODO: ASSETS MODULE
         val file = File(
             "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)}" +
-                    "/${context.getString(R.string.app_name)}/$title"
+                    "/WallpaperInstaller/$title"
         )
         return file.exists()
     }

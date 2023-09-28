@@ -1,8 +1,7 @@
 package ru.yotfr.unisoldevtest.domain.usecase
 
 import android.app.DownloadManager
-import ru.yotfr.unisoldevtest.domain.downloader.Downloader
-import ru.yotfr.model.DownloadStatus
+import ru.yotfr.downloader.downloader.Downloader
 import javax.inject.Inject
 
 class GetDownloadStatusUseCase @Inject constructor(

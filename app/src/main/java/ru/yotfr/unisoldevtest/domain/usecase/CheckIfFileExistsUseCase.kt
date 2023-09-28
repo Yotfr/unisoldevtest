@@ -1,7 +1,6 @@
 package ru.yotfr.unisoldevtest.domain.usecase
 
-import ru.yotfr.unisoldevtest.domain.downloader.Downloader
-import ru.yotfr.model.Wallpaper
+import ru.yotfr.downloader.downloader.Downloader
 import javax.inject.Inject
 
 class CheckIfFileExistsUseCase @Inject constructor(
