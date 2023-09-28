@@ -5,9 +5,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.yotfr.unisoldevtest.data.repository.WallpaperDownloadsRepositoryImpl
-import ru.yotfr.unisoldevtest.data.repository.WallpaperRepositoryImpl
 import ru.yotfr.unisoldevtest.domain.repository.WallpaperDownloadsRepository
-import ru.yotfr.unisoldevtest.domain.repository.WallpaperRepository
 import javax.inject.Singleton
 
 @Module

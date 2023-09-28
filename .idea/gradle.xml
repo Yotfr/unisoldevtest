@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/data/categorywallpapers" />
             <option value="$PROJECT_DIR$/data/favoritewallpapers" />
             <option value="$PROJECT_DIR$/data/shared" />
+            <option value="$PROJECT_DIR$/data/wallpaperdetails" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/categories" />
             <option value="$PROJECT_DIR$/domain/model" />

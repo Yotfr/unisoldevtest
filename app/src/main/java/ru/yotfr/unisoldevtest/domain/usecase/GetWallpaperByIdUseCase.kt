@@ -3,7 +3,6 @@ package ru.yotfr.unisoldevtest.domain.usecase
 import kotlinx.coroutines.flow.Flow
 import ru.yotfr.model.ResponseResult
 import ru.yotfr.model.Wallpaper
-import ru.yotfr.unisoldevtest.domain.repository.WallpaperRepository
 import javax.inject.Inject
 
 class GetWallpaperByIdUseCase @Inject constructor(

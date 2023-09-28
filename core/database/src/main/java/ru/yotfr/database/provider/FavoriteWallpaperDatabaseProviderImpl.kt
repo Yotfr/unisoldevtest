@@ -23,4 +23,8 @@ internal class FavoriteWallpaperDatabaseProviderImpl @Inject constructor(
     override suspend fun getFavoriteWallpapersIds(): List<String> {
         return favoriteWallpapersDao.getFavoriteWallpapersIds()
     }
+
+    override suspend fun getFavoriteWallpaperById(id: String): WallpaperEntity? {
+        return favoriteWallpapersDao.getFavoriteWallpaperById(id = id)
+    }
 }

@@ -11,4 +11,6 @@ interface FavoriteWallpaperDatabaseProvider {
     fun getFavoriteWallpapers(): Flow<List<WallpaperEntity>>
 
     suspend fun getFavoriteWallpapersIds(): List<String>
+
+    suspend fun getFavoriteWallpaperById(id: String): WallpaperEntity?
 }

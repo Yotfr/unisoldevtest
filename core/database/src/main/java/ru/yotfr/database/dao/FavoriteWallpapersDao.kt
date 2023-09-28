@@ -21,5 +21,8 @@ internal interface FavoriteWallpapersDao {
     @Query("SELECT id FROM wallpapers WHERE isFavorite = 1")
     suspend fun getFavoriteWallpapersIds(): List<String>
 
+    @Query("SELECT * FROM wallpapers WHERE id = :id")
+    suspend fun getFavoriteWallpaperById(id: String): WallpaperEntity?
+
 
 }

@@ -3,7 +3,6 @@ package ru.yotfr.unisoldevtest.domain.usecase
 import kotlinx.coroutines.flow.Flow
 import ru.yotfr.model.CategoryModel
 import ru.yotfr.model.ResponseResult
-import ru.yotfr.unisoldevtest.domain.repository.WallpaperRepository
 import javax.inject.Inject
 
 class GetCategoriesUseCase @Inject constructor(

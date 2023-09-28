@@ -2,8 +2,9 @@ package ru.yotfr.shared
 
 import ru.yotfr.database.entity.WallpaperEntity
 import ru.yotfr.model.Wallpaper
+import ru.yotfr.network.model.WallpaperResponse
 
-fun ru.yotfr.network.model.WallpaperResponse.mapDomain(isFavorite: Boolean) : Wallpaper {
+fun WallpaperResponse.mapDomain(isFavorite: Boolean = false) : Wallpaper {
     return Wallpaper(
         id = id,
         url = url,
@@ -16,7 +17,7 @@ fun ru.yotfr.network.model.WallpaperResponse.mapDomain(isFavorite: Boolean) : Wa
 }
 
 fun WallpaperEntity.mapDomain(): Wallpaper {
-    return ru.yotfr.model.Wallpaper(
+    return Wallpaper(
         id = id,
         url = url,
         previewUrl = previewUrl,
