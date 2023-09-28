@@ -4,7 +4,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import ru.yotfr.categories.util.query
+import ru.yotfr.shared.query
 import ru.yotfr.model.Category
 import ru.yotfr.model.CategoryModel
 import ru.yotfr.model.ResponseResult

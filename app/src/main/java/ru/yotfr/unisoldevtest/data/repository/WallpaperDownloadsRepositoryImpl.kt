@@ -1,7 +1,7 @@
 package ru.yotfr.unisoldevtest.data.repository
 
-import ru.yotfr.unisoldevtest.data.mapper.mapDomain
-import ru.yotfr.unisoldevtest.data.mapper.mapEntity
+import ru.yotfr.shared.mapDomain
+import ru.yotfr.shared.mapEntity
 import ru.yotfr.model.WallpaperDownload
 import ru.yotfr.unisoldevtest.domain.repository.WallpaperDownloadsRepository
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.data.paging.pagingcache
+package ru.yotfr.categorywallpapers.paging.pagingcache
 
 import kotlinx.coroutines.flow.Flow
 
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
  * все пагинируемые данные после каждого изменения элемента, либо подтягивать флоу с БД со списком id избранных обоев
  * до экрана и узнавать наличие каждого элемента  слишком дорого
  */
-interface WallpapersCache {
+internal interface WallpapersCache {
     fun initializeCacheWithDbData(favoriteWallpaperIds: List<String>)
     fun getCachedWallpapersIsFavoriteFieldStream(): Flow<Map<String, Boolean>>
     fun updateWallpaperIsFavorite(wallpaperId: String, isFavorite: Boolean)

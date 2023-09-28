@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal interface InternalCategoriesDataModule {
+internal interface InternalCategoriesRepositoryModule {
     @Binds
     @Singleton
     fun bindCategoriesRepository(

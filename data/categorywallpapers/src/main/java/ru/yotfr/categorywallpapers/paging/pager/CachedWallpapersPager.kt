@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.data.paging.pager
+package ru.yotfr.categorywallpapers.paging.pager
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -8,15 +8,15 @@ import androidx.paging.map
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import ru.yotfr.unisoldevtest.data.paging.pagingcache.WallpapersCache
-import ru.yotfr.unisoldevtest.data.paging.source.WallpaperPageSource
+import ru.yotfr.categorywallpapers.paging.pagingcache.WallpapersCache
+import ru.yotfr.categorywallpapers.paging.source.WallpaperPageSource
 import ru.yotfr.model.Wallpaper
 
 /**
  * [CachedWallpapersPager] Кастомный Pager, соединяет данные, полученные с pagingSourc'а
  * с данными в кэше
  */
-class CachedWallpapersPager(
+internal class CachedWallpapersPager(
     private val wallpapersCache: WallpapersCache,
     coroutineScope: CoroutineScope,
     private val pagingFactory: WallpaperPageSource
@@ -26,7 +26,7 @@ class CachedWallpapersPager(
         const val pageSize = 50
     }
 
-    val pagingDataStream: Flow<PagingData<ru.yotfr.model.Wallpaper>> =
+    val pagingDataStream: Flow<PagingData<Wallpaper>> =
         Pager(
             config = PagingConfig(
                 pageSize = pageSize,
@@ -51,9 +51,9 @@ class CachedWallpapersPager(
     }
 
     private fun mergeWithCache(
-        item: ru.yotfr.model.Wallpaper,
+        item: Wallpaper,
         cachedIsFavoriteMap: Map<String, Boolean>
-    ): ru.yotfr.model.Wallpaper {
+    ): Wallpaper {
         val cachedIsFavoriteField = cachedIsFavoriteMap[item.id]
         return item.copy(isFavorite = cachedIsFavoriteField ?: false)
     }
