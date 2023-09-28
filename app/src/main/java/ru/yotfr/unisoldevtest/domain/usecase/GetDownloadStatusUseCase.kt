@@ -1,14 +1,14 @@
 package ru.yotfr.unisoldevtest.domain.usecase
 
 import android.app.DownloadManager
-import ru.yotfr.downloader.downloader.Downloader
+import ru.yotfr.wallpaperdownloads.wallpaperdownloader.WallpaperDownloader
 import javax.inject.Inject
 
 class GetDownloadStatusUseCase @Inject constructor(
-    private val downloader: Downloader
+    private val wallpaperDownloader: WallpaperDownloader
 ) {
     operator fun invoke(downloadId: Long): ru.yotfr.model.DownloadStatus {
-        return when (downloader.getDownloadStatus(downloadId)) {
+        return when (wallpaperDownloader.getWallpaperDownloadStatus(downloadId)) {
             null,
             DownloadManager.STATUS_FAILED -> {
                 ru.yotfr.model.DownloadStatus.FAILED

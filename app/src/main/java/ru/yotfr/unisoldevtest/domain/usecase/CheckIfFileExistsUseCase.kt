@@ -1,12 +1,12 @@
 package ru.yotfr.unisoldevtest.domain.usecase
 
-import ru.yotfr.downloader.downloader.Downloader
+import ru.yotfr.wallpaperdownloads.wallpaperdownloader.WallpaperDownloader
 import javax.inject.Inject
 
 class CheckIfFileExistsUseCase @Inject constructor(
-    private val downloader: Downloader,
+    private val wallpaperDownloader: WallpaperDownloader,
 ) {
     operator fun invoke(wallpaper: ru.yotfr.model.Wallpaper): Boolean {
-        return downloader.checkIfFileExists(wallpaper = wallpaper)
+        return wallpaperDownloader.checkIfWallpaperExists(wallpaper = wallpaper)
     }
 }

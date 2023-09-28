@@ -1,6 +1,6 @@
 package ru.yotfr.unisoldevtest.domain.usecase
 
-import ru.yotfr.downloader.repository.WallpaperDownloadsRepository
+import ru.yotfr.wallpaperdownloads.repository.WallpaperDownloadsRepository
 import javax.inject.Inject
 
 class GetDownloadByDownloadIdUseCase @Inject constructor(

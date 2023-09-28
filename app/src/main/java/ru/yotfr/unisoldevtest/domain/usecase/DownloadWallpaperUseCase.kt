@@ -2,8 +2,8 @@ package ru.yotfr.unisoldevtest.domain.usecase
 
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import ru.yotfr.downloader.downloader.Downloader
-import ru.yotfr.downloader.repository.WallpaperDownloadsRepository
+import ru.yotfr.wallpaperdownloads.wallpaperdownloader.WallpaperDownloader
+import ru.yotfr.wallpaperdownloads.repository.WallpaperDownloadsRepository
 import ru.yotfr.unisoldevtest.domain.userpreference.UserPreference
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ import javax.inject.Inject
  * загрузка изображений только по WiFi
  */
 class DownloadWallpaperUseCase @Inject constructor(
-    private val downloader: Downloader,
+    private val wallpaperDownloader: WallpaperDownloader,
     private val wallpaperDownloadsRepository: WallpaperDownloadsRepository,
     private val userPreference: UserPreference,
     private val connectivityManager: ConnectivityManager
@@ -28,7 +28,7 @@ class DownloadWallpaperUseCase @Inject constructor(
          так при использовании VPN
          DownloadManager не распознает NETWORK_TYPE
         */
-        val downloadId = downloader.downloadFile(
+        val downloadId = wallpaperDownloader.downloadWallpaper(
             wallpaper = wallpaper
         )
         val wallpaperDownloadModel = ru.yotfr.model.WallpaperDownload(
