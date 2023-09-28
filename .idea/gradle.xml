@@ -15,10 +15,12 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/database" />
+            <option value="$PROJECT_DIR$/core/memorycache" />
             <option value="$PROJECT_DIR$/core/network" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/categories" />
             <option value="$PROJECT_DIR$/data/categorywallpapers" />
+            <option value="$PROJECT_DIR$/data/favoritewallpapers" />
             <option value="$PROJECT_DIR$/data/shared" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/categories" />

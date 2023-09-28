@@ -4,9 +4,9 @@ import androidx.paging.PagingData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import ru.yotfr.categorywallpapers.paging.pager.CachedWallpapersPager
-import ru.yotfr.categorywallpapers.paging.pagingcache.WallpapersCache
 import ru.yotfr.categorywallpapers.paging.source.WallpaperPageSource
 import ru.yotfr.database.provider.FavoriteWallpaperDatabaseProvider
+import ru.yotfr.memorycache.pagingcache.WallpapersPagingCache
 import ru.yotfr.model.Category
 import ru.yotfr.model.Wallpaper
 import ru.yotfr.network.provider.WallpaperNetworkProvider
@@ -16,7 +16,7 @@ import javax.inject.Inject
 internal class CategoryWallpapersRepositoryImpl @Inject constructor(
     private val wallpaperNetworkProvider: WallpaperNetworkProvider,
     private val favoriteWallpaperDatabaseProvider: FavoriteWallpaperDatabaseProvider,
-    private val wallpapersCache: WallpapersCache
+    private val wallpapersCache: WallpapersPagingCache
 ) : CategoryWallpapersRepository {
     override suspend fun getWallpapersByCategory(
         category: Category,

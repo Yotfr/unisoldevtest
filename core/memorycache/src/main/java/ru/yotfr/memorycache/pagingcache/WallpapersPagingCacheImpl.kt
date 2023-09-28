@@ -1,10 +1,10 @@
-package ru.yotfr.categorywallpapers.paging.pagingcache
+package ru.yotfr.memorycache.pagingcache
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
- * [WallpapersCacheImpl] нужен для изменения элементов pagingData (изменения статуса isFavorite)
+ * [WallpapersPagingCacheImpl] нужен для изменения элементов pagingData (изменения статуса isFavorite)
  *
  * [initializeCacheWithDbData] добавляет в кэш все избранные обои из базы данных Room
  * [getCachedWallpapersIsFavoriteFieldStream] отдает кэш избранных обоев Map<Id обоев, IsFavorite статус>
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
  * все пагинируемые данные после каждого изменения элемента, либо подтягивать флоу с БД со списком id избранных обоев
  * до экрана и узнавать наличие каждого элемента  слишком дорого
  */
-internal class WallpapersCacheImpl : WallpapersCache {
+internal class WallpapersPagingCacheImpl : WallpapersPagingCache {
 
     private val cachedWallpapersIsFavoriteFieldStream =
         MutableStateFlow<Map<String, Boolean>>(emptyMap())

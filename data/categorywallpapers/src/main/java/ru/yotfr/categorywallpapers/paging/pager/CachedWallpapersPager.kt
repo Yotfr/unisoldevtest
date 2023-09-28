@@ -8,8 +8,8 @@ import androidx.paging.map
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import ru.yotfr.categorywallpapers.paging.pagingcache.WallpapersCache
 import ru.yotfr.categorywallpapers.paging.source.WallpaperPageSource
+import ru.yotfr.memorycache.pagingcache.WallpapersPagingCache
 import ru.yotfr.model.Wallpaper
 
 /**
@@ -17,7 +17,7 @@ import ru.yotfr.model.Wallpaper
  * с данными в кэше
  */
 internal class CachedWallpapersPager(
-    private val wallpapersCache: WallpapersCache,
+    private val wallpapersCache: WallpapersPagingCache,
     coroutineScope: CoroutineScope,
     private val pagingFactory: WallpaperPageSource
 ) {

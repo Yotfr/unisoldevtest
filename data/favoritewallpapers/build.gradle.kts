@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.yotfr.categorywallpapers"
+    namespace = "ru.yotfr.favoritewallpapers"
     compileSdk = 33
 
     defaultConfig {
@@ -34,13 +34,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:network"))
     implementation(project(":core:database"))
     implementation(project(":core:memorycache"))
     implementation(project(":data:shared"))
     implementation(project(":domain:model"))
 
-    paging()
     coroutinesCore()
     hilt()
 }

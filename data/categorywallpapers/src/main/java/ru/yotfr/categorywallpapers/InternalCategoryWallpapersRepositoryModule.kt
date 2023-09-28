@@ -8,7 +8,7 @@ import ru.yotfr.categorywallpapers.repository.CategoryWallpapersRepository
 import ru.yotfr.categorywallpapers.repository.CategoryWallpapersRepositoryImpl
 import javax.inject.Singleton
 
-@Module(includes = [InternalPagingCacheDataModule::class])
+@Module
 @InstallIn(SingletonComponent::class)
 internal interface InternalCategoryWallpapersRepositoryModule {
 
