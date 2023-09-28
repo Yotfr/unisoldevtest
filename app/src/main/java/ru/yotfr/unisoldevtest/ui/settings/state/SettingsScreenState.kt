@@ -1,8 +1,8 @@
 package ru.yotfr.unisoldevtest.ui.settings.state
 
-import ru.yotfr.unisoldevtest.domain.model.ThemeModel
+import ru.yotfr.model.ThemeModel
 
 data class SettingsScreenState(
-    val currentTheme: ThemeModel = ThemeModel.SYSTEM_DEFAULT,
+    val currentTheme: ru.yotfr.model.ThemeModel = ru.yotfr.model.ThemeModel.SYSTEM_DEFAULT,
     val onlyWifiEnabled: Boolean = true
 )

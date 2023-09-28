@@ -1,12 +1,12 @@
 package ru.yotfr.unisoldevtest.domain.wallpaperinstaller
 
 import kotlinx.coroutines.flow.Flow
-import ru.yotfr.unisoldevtest.domain.model.ResponseResult
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
-import ru.yotfr.unisoldevtest.domain.model.WallpaperInstallOption
+import ru.yotfr.model.ResponseResult
+import ru.yotfr.model.Wallpaper
+import ru.yotfr.model.WallpaperInstallOption
 
 interface WallpaperInstaller {
     fun installWallpaper(
-        wallpaper: Wallpaper, wallpaperInstallOption: WallpaperInstallOption
-    ) : Flow<ResponseResult<Unit>>
+        wallpaper: ru.yotfr.model.Wallpaper, wallpaperInstallOption: ru.yotfr.model.WallpaperInstallOption
+    ) : Flow<ru.yotfr.model.ResponseResult<Unit>>
 }

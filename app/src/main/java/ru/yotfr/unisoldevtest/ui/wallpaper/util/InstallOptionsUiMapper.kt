@@ -3,13 +3,13 @@ package ru.yotfr.unisoldevtest.ui.wallpaper.util
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import ru.yotfr.unisoldevtest.R
-import ru.yotfr.unisoldevtest.domain.model.WallpaperInstallOption
+import ru.yotfr.model.WallpaperInstallOption
 
 @Composable
-fun WallpaperInstallOption.displayName(): String {
+fun ru.yotfr.model.WallpaperInstallOption.displayName(): String {
     return when(this) {
-        WallpaperInstallOption.HOME_SCREEN -> stringResource(id = R.string.set_home)
-        WallpaperInstallOption.LOCK_SCREEN -> stringResource(id = R.string.set_lock)
-        WallpaperInstallOption.BOTH -> stringResource(id = R.string.set_both)
+        ru.yotfr.model.WallpaperInstallOption.HOME_SCREEN -> stringResource(id = R.string.set_home)
+        ru.yotfr.model.WallpaperInstallOption.LOCK_SCREEN -> stringResource(id = R.string.set_lock)
+        ru.yotfr.model.WallpaperInstallOption.BOTH -> stringResource(id = R.string.set_both)
     }
 }

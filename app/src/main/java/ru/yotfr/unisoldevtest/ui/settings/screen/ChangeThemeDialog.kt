@@ -21,20 +21,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import ru.yotfr.unisoldevtest.R
-import ru.yotfr.unisoldevtest.domain.model.ThemeModel
+import ru.yotfr.model.ThemeModel
 import ru.yotfr.unisoldevtest.ui.settings.util.displayName
 import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 
 @Composable
 fun ChangeThemeDialog(
-    currentTheme: ThemeModel,
+    currentTheme: ru.yotfr.model.ThemeModel,
     onDismiss: () -> Unit,
-    onOkPressed: (selectedTheme: ThemeModel) -> Unit
+    onOkPressed: (selectedTheme: ru.yotfr.model.ThemeModel) -> Unit
 ) {
     val options = listOf(
-        ThemeModel.LIGHT,
-        ThemeModel.DARK,
-        ThemeModel.SYSTEM_DEFAULT
+        ru.yotfr.model.ThemeModel.LIGHT,
+        ru.yotfr.model.ThemeModel.DARK,
+        ru.yotfr.model.ThemeModel.SYSTEM_DEFAULT
     )
     var selectedOption by remember { mutableStateOf(currentTheme) }
     AlertDialog(

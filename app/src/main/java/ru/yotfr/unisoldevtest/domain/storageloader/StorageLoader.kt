@@ -1,9 +1,9 @@
 package ru.yotfr.unisoldevtest.domain.storageloader
 
 import kotlinx.coroutines.flow.Flow
-import ru.yotfr.unisoldevtest.domain.model.DownloadedImages
-import ru.yotfr.unisoldevtest.domain.model.ResponseResult
+import ru.yotfr.model.DownloadedImages
+import ru.yotfr.model.ResponseResult
 
 interface StorageLoader {
-    suspend fun getSavedImages(): Flow<ResponseResult<List<DownloadedImages>?>>
+    suspend fun getSavedImages(): Flow<ru.yotfr.model.ResponseResult<List<ru.yotfr.model.DownloadedImages>?>>
 }

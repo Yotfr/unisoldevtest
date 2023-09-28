@@ -16,6 +16,12 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/database" />
             <option value="$PROJECT_DIR$/core/network" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/categories" />
+            <option value="$PROJECT_DIR$/data/shared" />
+            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/domain/categories" />
+            <option value="$PROJECT_DIR$/domain/model" />
           </set>
         </option>
       </GradleProjectSettings>

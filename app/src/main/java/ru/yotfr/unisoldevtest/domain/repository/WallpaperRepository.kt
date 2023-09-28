@@ -3,20 +3,14 @@ package ru.yotfr.unisoldevtest.domain.repository
 import androidx.paging.PagingData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
-import ru.yotfr.unisoldevtest.domain.model.Category
-import ru.yotfr.unisoldevtest.domain.model.CategoryModel
-import ru.yotfr.unisoldevtest.domain.model.ResponseResult
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 
 interface WallpaperRepository {
     suspend fun getWallpapersByCategory(
-        category: Category,
+        category: ru.yotfr.model.Category,
         coroutineScope: CoroutineScope
-    ): Flow<PagingData<Wallpaper>>
-
-    fun getCategories(): Flow<ResponseResult<List<CategoryModel>>>
-    fun getWallpaperById(id: String): Flow<ResponseResult<Wallpaper>>
-    suspend fun changeWallpaperFavoriteStatus(wallpaper: Wallpaper)
-    fun getFavoriteWallpapers(): Flow<List<Wallpaper>>
+    ): Flow<PagingData<ru.yotfr.model.Wallpaper>>
+    fun getWallpaperById(id: String): Flow<ru.yotfr.model.ResponseResult<ru.yotfr.model.Wallpaper>>
+    suspend fun changeWallpaperFavoriteStatus(wallpaper: ru.yotfr.model.Wallpaper)
+    fun getFavoriteWallpapers(): Flow<List<ru.yotfr.model.Wallpaper>>
 
 }

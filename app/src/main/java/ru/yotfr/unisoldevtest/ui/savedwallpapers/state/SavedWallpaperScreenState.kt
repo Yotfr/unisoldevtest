@@ -1,8 +1,8 @@
 package ru.yotfr.unisoldevtest.ui.savedwallpapers.state
 
-import ru.yotfr.unisoldevtest.domain.model.DownloadedImages
+import ru.yotfr.model.DownloadedImages
 
 data class SavedWallpaperScreenState(
     val isLoading: Boolean = false,
-    val wallpapers: List<DownloadedImages> = emptyList()
+    val wallpapers: List<ru.yotfr.model.DownloadedImages> = emptyList()
 )

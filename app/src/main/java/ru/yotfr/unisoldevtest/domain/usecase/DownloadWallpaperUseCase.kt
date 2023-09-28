@@ -3,8 +3,8 @@ package ru.yotfr.unisoldevtest.domain.usecase
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import ru.yotfr.unisoldevtest.domain.downloader.Downloader
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
-import ru.yotfr.unisoldevtest.domain.model.WallpaperDownload
+import ru.yotfr.model.Wallpaper
+import ru.yotfr.model.WallpaperDownload
 import ru.yotfr.unisoldevtest.domain.repository.WallpaperDownloadsRepository
 import ru.yotfr.unisoldevtest.domain.userpreference.UserPreference
 import javax.inject.Inject
@@ -20,7 +20,7 @@ class DownloadWallpaperUseCase @Inject constructor(
     private val connectivityManager: ConnectivityManager
 ) {
 
-    suspend operator fun invoke(wallpaper: Wallpaper): Boolean {
+    suspend operator fun invoke(wallpaper: ru.yotfr.model.Wallpaper): Boolean {
         val allowedOnlyWifi = userPreference.getAllowedOnlyWifiValue()
         if (!isWiFiAvailable() && allowedOnlyWifi) {
             return false
@@ -33,7 +33,7 @@ class DownloadWallpaperUseCase @Inject constructor(
         val downloadId = downloader.downloadFile(
             wallpaper = wallpaper
         )
-        val wallpaperDownloadModel = WallpaperDownload(
+        val wallpaperDownloadModel = ru.yotfr.model.WallpaperDownload(
             downloadId = downloadId,
             wallpaperId = wallpaper.id
         )

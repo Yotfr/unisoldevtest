@@ -1,6 +1,6 @@
 package ru.yotfr.unisoldevtest.ui.navigation.screens
 
-import ru.yotfr.unisoldevtest.domain.model.Category
+import ru.yotfr.model.Category
 
 sealed class RootScreens(
     val route: String
@@ -16,7 +16,7 @@ sealed class RootScreens(
     data object WallpapersByCategory : RootScreens(
         route = "category_wallpapers/{$CATEGORY_KEY}"
     ) {
-        fun passCategory(category: Category): String {
+        fun passCategory(category: ru.yotfr.model.Category): String {
             return this.route.replace(
                 oldValue = "{$CATEGORY_KEY}",
                 newValue = category.name

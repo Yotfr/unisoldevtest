@@ -1,7 +1,7 @@
 package ru.yotfr.unisoldevtest.ui
 
-import ru.yotfr.unisoldevtest.domain.model.ThemeModel
+import ru.yotfr.model.ThemeModel
 
 data class MainActivityState(
-    val theme: ThemeModel = ThemeModel.SYSTEM_DEFAULT
+    val theme: ru.yotfr.model.ThemeModel = ru.yotfr.model.ThemeModel.SYSTEM_DEFAULT
 )

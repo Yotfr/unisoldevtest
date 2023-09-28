@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.domain.model
+package ru.yotfr.model
 
 data class WallpaperDownload(
     val downloadId: Long,

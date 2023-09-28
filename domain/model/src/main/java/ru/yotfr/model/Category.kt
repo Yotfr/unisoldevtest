@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.domain.model
+package ru.yotfr.model
 
 /**
  * Хардкод категорий, т.к. pixabay не содержит метода для получения возможных категорий

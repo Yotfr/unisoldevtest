@@ -3,12 +3,11 @@ package ru.yotfr.unisoldevtest.data.downloader
 import android.app.DownloadManager
 import android.content.Context
 import android.os.Environment
-import android.util.Log
 import android.webkit.MimeTypeMap
 import androidx.core.net.toUri
 import ru.yotfr.unisoldevtest.R
 import ru.yotfr.unisoldevtest.domain.downloader.Downloader
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
+import ru.yotfr.model.Wallpaper
 import java.io.File
 
 class DownloaderImpl(
@@ -24,7 +23,7 @@ class DownloaderImpl(
 
      Проверка на network type производится в UseCase
      */
-    override fun downloadFile(wallpaper: Wallpaper): Long {
+    override fun downloadFile(wallpaper: ru.yotfr.model.Wallpaper): Long {
         val url = wallpaper.url
         val fileName = wallpaper.id
         val mimeType = getMimeType(url)
@@ -59,7 +58,7 @@ class DownloaderImpl(
         }
     }
 
-    override fun checkIfFileExists(wallpaper: Wallpaper): Boolean {
+    override fun checkIfFileExists(wallpaper: ru.yotfr.model.Wallpaper): Boolean {
         val url = wallpaper.url
         val fileName = wallpaper.id
         val mimeType = getMimeType(url)

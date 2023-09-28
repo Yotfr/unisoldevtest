@@ -1,7 +1,7 @@
 package ru.yotfr.unisoldevtest.ui.savedwallpapers.event
 
-import ru.yotfr.unisoldevtest.domain.model.ErrorCause
+import ru.yotfr.model.ErrorCause
 
 sealed interface SavedWallpapersScreenEvent {
-    data class ShowErrorToast(val error: ErrorCause) : SavedWallpapersScreenEvent
+    data class ShowErrorToast(val error: ru.yotfr.model.ErrorCause) : SavedWallpapersScreenEvent
 }

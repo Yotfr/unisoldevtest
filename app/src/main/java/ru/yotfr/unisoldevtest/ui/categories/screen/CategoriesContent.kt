@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import ru.yotfr.unisoldevtest.domain.model.Category
+import ru.yotfr.model.Category
 import ru.yotfr.unisoldevtest.ui.categories.state.CategoriesScreenState
 import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 
@@ -23,7 +23,7 @@ import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 @Composable
 fun CategoriesContent(
     state: CategoriesScreenState,
-    onCategoryClicked: (Category) -> Unit,
+    onCategoryClicked: (ru.yotfr.model.Category) -> Unit,
     context: Context
 ) {
     LazyVerticalStaggeredGrid(

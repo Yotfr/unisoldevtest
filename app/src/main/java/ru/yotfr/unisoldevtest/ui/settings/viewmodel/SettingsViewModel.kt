@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.yotfr.unisoldevtest.domain.model.ThemeModel
+import ru.yotfr.model.ThemeModel
 import ru.yotfr.unisoldevtest.domain.usecase.ChangeThemeUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.ChangeWiFiOnlyUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.GetThemeUseCase
@@ -64,7 +64,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    private fun changeTheme(newTheme: ThemeModel) {
+    private fun changeTheme(newTheme: ru.yotfr.model.ThemeModel) {
         viewModelScope.launch {
             changeThemeUseCase(newTheme)
         }

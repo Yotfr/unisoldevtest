@@ -22,15 +22,15 @@ import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
-import ru.yotfr.unisoldevtest.domain.model.Category
-import ru.yotfr.unisoldevtest.domain.model.CategoryModel
+import ru.yotfr.model.Category
+import ru.yotfr.model.CategoryModel
 import ru.yotfr.unisoldevtest.ui.categories.util.displayName
 import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 
 @Composable
 fun CategoryItem(
-    categoryModel: CategoryModel,
-    onClick: (Category) -> Unit,
+    categoryModel: ru.yotfr.model.CategoryModel,
+    onClick: (ru.yotfr.model.Category) -> Unit,
     context: Context
 ) {
     Surface(

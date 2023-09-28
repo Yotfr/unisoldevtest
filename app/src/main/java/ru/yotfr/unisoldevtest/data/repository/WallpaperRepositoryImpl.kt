@@ -1,6 +1,5 @@
 package ru.yotfr.unisoldevtest.data.repository
 
-import android.util.Log
 import androidx.paging.PagingData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -8,20 +7,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import ru.yotfr.database.dao.FavoriteWallpapersDao
-import ru.yotfr.network.api.WallpaperApi
 import ru.yotfr.network.exception.NoConnectivityException
 import ru.yotfr.unisoldevtest.data.paging.source.WallpaperPageSource
 import ru.yotfr.unisoldevtest.data.mapper.mapDomain
 import ru.yotfr.unisoldevtest.data.mapper.mapEntity
-import ru.yotfr.unisoldevtest.data.mapper.query
+import ru.yotfr.categories.query
 import ru.yotfr.unisoldevtest.data.paging.pager.CachedWallpapersPager
 import ru.yotfr.unisoldevtest.data.paging.pagingcache.WallpapersCache
-import ru.yotfr.unisoldevtest.domain.model.Category
-import ru.yotfr.unisoldevtest.domain.model.CategoryModel
-import ru.yotfr.unisoldevtest.domain.model.ErrorCause
-import ru.yotfr.unisoldevtest.domain.model.ResponseResult
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
+import ru.yotfr.model.Category
+import ru.yotfr.model.CategoryModel
+import ru.yotfr.model.ErrorCause
+import ru.yotfr.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.repository.WallpaperRepository
 import java.net.SocketTimeoutException
 import javax.inject.Inject
@@ -33,9 +29,9 @@ class WallpaperRepositoryImpl @Inject constructor(
     private val wallpapersCache: WallpapersCache
 ) : WallpaperRepository {
     override suspend fun getWallpapersByCategory(
-        category: Category,
+        category: ru.yotfr.model.Category,
         coroutineScope: CoroutineScope
-    ): Flow<PagingData<Wallpaper>> {
+    ): Flow<PagingData<ru.yotfr.model.Wallpaper>> {
         // Добавление избранных обоев из БД в кэш
         val favoriteWallpaperIds = favoriteWallpapersDao.getFavoriteWallpapersIds()
         wallpapersCache.initializeCacheWithDbData(favoriteWallpaperIds)
@@ -51,16 +47,16 @@ class WallpaperRepositoryImpl @Inject constructor(
 
 
     override fun getCategories() = flow {
-        emit(ResponseResult.Loading())
+        emit(ru.yotfr.model.ResponseResult.Loading())
         try {
             /*
             API Pixabay не предоставляет методов для получения доступных
             категорий и краткой информации о них
              */
-            val categories = Category.values().map {
+            val categories = ru.yotfr.model.Category.values().map {
                 val categoryResponse = wallpaperApi.getCategoryPreview(it.query())
                 val wallpaper = categoryResponse.hits.first()
-                CategoryModel(
+                ru.yotfr.model.CategoryModel(
                     category = it,
                     previewUrl = wallpaper.previewUrl,
                     wallpapersCount = categoryResponse.total,
@@ -68,13 +64,13 @@ class WallpaperRepositoryImpl @Inject constructor(
                 )
             }
             emit(
-                ResponseResult.Success(
+                ru.yotfr.model.ResponseResult.Success(
                     data = categories
                 )
             )
         } catch (e: Exception) {
             emit(
-                ResponseResult.Error(
+                ru.yotfr.model.ResponseResult.Error(
                     cause = e.mapExceptionCause()
                 )
             )
@@ -83,26 +79,26 @@ class WallpaperRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     override fun getWallpaperById(id: String) = flow {
-        emit(ResponseResult.Loading())
+        emit(ru.yotfr.model.ResponseResult.Loading())
         try {
             val favoriteWallpapersIds = favoriteWallpapersDao.getFavoriteWallpapersIds()
             val wallpaper = wallpaperApi.getWallpaperById(id).hits.first().mapDomain(
                 isFavorite = favoriteWallpapersIds.contains(id)
             )
-            emit(ResponseResult.Success(data = wallpaper))
+            emit(ru.yotfr.model.ResponseResult.Success(data = wallpaper))
         } catch (e: Exception) {
             emit(
-                ResponseResult.Error(
+                ru.yotfr.model.ResponseResult.Error(
                     cause = e.mapExceptionCause()
                 )
             )
         }
     }.flowOn(Dispatchers.IO)
 
-    override fun getFavoriteWallpapers(): Flow<List<Wallpaper>> =
+    override fun getFavoriteWallpapers(): Flow<List<ru.yotfr.model.Wallpaper>> =
         favoriteWallpapersDao.getFavoriteWallpapers().map { it.map { it.mapDomain() } }
 
-    override suspend fun changeWallpaperFavoriteStatus(wallpaper: Wallpaper) {
+    override suspend fun changeWallpaperFavoriteStatus(wallpaper: ru.yotfr.model.Wallpaper) {
         wallpapersCache.updateWallpaperIsFavorite(
             wallpaperId = wallpaper.id,
             isFavorite = !wallpaper.isFavorite
@@ -112,28 +108,6 @@ class WallpaperRepositoryImpl @Inject constructor(
             favoriteWallpapersDao.deleteWallpaper(wallpaper.mapEntity())
         } else {
             favoriteWallpapersDao.upsertWallpaper(changedWallpaper.mapEntity())
-        }
-    }
-
-    private fun Exception.mapExceptionCause(): ErrorCause {
-        return when (this) {
-            is SocketTimeoutException -> {
-                ErrorCause.TimeOut
-            }
-
-            is SSLHandshakeException -> {
-                ErrorCause.VPNDisabled
-            }
-
-            is ru.yotfr.network.exception.NoConnectivityException -> {
-                ErrorCause.NoConnectivity
-            }
-
-            else -> {
-                ErrorCause.Unknown(
-                    message = this.message ?: "Something went wrong"
-                )
-            }
         }
     }
 }

@@ -21,21 +21,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import ru.yotfr.unisoldevtest.R
-import ru.yotfr.unisoldevtest.domain.model.WallpaperInstallOption
+import ru.yotfr.model.WallpaperInstallOption
 import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 import ru.yotfr.unisoldevtest.ui.wallpaper.util.displayName
 
 @Composable
 fun InstallOptionsDialog(
     onDismiss: () -> Unit,
-    onOkPressed: (wallpaperInstallOption: WallpaperInstallOption) -> Unit
+    onOkPressed: (wallpaperInstallOption: ru.yotfr.model.WallpaperInstallOption) -> Unit
 ) {
     val options = listOf(
-        WallpaperInstallOption.HOME_SCREEN,
-        WallpaperInstallOption.LOCK_SCREEN,
-        WallpaperInstallOption.BOTH
+        ru.yotfr.model.WallpaperInstallOption.HOME_SCREEN,
+        ru.yotfr.model.WallpaperInstallOption.LOCK_SCREEN,
+        ru.yotfr.model.WallpaperInstallOption.BOTH
     )
-    var selectedOption by remember { mutableStateOf(WallpaperInstallOption.HOME_SCREEN) }
+    var selectedOption by remember { mutableStateOf(ru.yotfr.model.WallpaperInstallOption.HOME_SCREEN) }
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {

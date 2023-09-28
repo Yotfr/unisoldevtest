@@ -1,6 +1,6 @@
 package ru.yotfr.unisoldevtest.domain.downloader
 
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
+import ru.yotfr.model.Wallpaper
 
 interface Downloader {
 
@@ -11,7 +11,7 @@ interface Downloader {
 
      Проверка на network type производится в UseCase
      */
-    fun downloadFile(wallpaper: Wallpaper): Long
+    fun downloadFile(wallpaper: ru.yotfr.model.Wallpaper): Long
     fun getDownloadStatus(downloadId: Long): Int?
-    fun checkIfFileExists(wallpaper: Wallpaper): Boolean
+    fun checkIfFileExists(wallpaper: ru.yotfr.model.Wallpaper): Boolean
 }

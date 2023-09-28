@@ -1,7 +1,7 @@
 package ru.yotfr.unisoldevtest.ui.favoritewallpapers.event
 
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
+import ru.yotfr.model.Wallpaper
 
 sealed interface FavoriteWallpapersEvent {
-    data class ChangeFavorite(val wallpaper: Wallpaper) : FavoriteWallpapersEvent
+    data class ChangeFavorite(val wallpaper: ru.yotfr.model.Wallpaper) : FavoriteWallpapersEvent
 }

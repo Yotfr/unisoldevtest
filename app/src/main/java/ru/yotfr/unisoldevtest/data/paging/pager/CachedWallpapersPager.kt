@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import ru.yotfr.unisoldevtest.data.paging.pagingcache.WallpapersCache
 import ru.yotfr.unisoldevtest.data.paging.source.WallpaperPageSource
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
+import ru.yotfr.model.Wallpaper
 
 /**
  * [CachedWallpapersPager] Кастомный Pager, соединяет данные, полученные с pagingSourc'а
@@ -26,7 +26,7 @@ class CachedWallpapersPager(
         const val pageSize = 50
     }
 
-    val pagingDataStream: Flow<PagingData<Wallpaper>> =
+    val pagingDataStream: Flow<PagingData<ru.yotfr.model.Wallpaper>> =
         Pager(
             config = PagingConfig(
                 pageSize = pageSize,
@@ -51,9 +51,9 @@ class CachedWallpapersPager(
     }
 
     private fun mergeWithCache(
-        item: Wallpaper,
+        item: ru.yotfr.model.Wallpaper,
         cachedIsFavoriteMap: Map<String, Boolean>
-    ): Wallpaper {
+    ): ru.yotfr.model.Wallpaper {
         val cachedIsFavoriteField = cachedIsFavoriteMap[item.id]
         return item.copy(isFavorite = cachedIsFavoriteField ?: false)
     }

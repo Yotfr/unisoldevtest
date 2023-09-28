@@ -22,16 +22,16 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
+import ru.yotfr.model.Wallpaper
 import ru.yotfr.unisoldevtest.ui.common.WallpaperItem
 import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CategoryWallpaperContent(
-    wallpapers: LazyPagingItems<Wallpaper>,
-    navigateToWallpaper: (Wallpaper) -> Unit,
-    changeFavorite: (Wallpaper) -> Unit,
+    wallpapers: LazyPagingItems<ru.yotfr.model.Wallpaper>,
+    navigateToWallpaper: (ru.yotfr.model.Wallpaper) -> Unit,
+    changeFavorite: (ru.yotfr.model.Wallpaper) -> Unit,
     showToast: (String) -> Unit,
     context: Context
 ) {

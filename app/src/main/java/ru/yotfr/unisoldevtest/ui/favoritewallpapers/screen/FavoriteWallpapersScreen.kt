@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
-import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -24,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.yotfr.unisoldevtest.R
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
+import ru.yotfr.model.Wallpaper
 import ru.yotfr.unisoldevtest.ui.common.WallpaperItem
 import ru.yotfr.unisoldevtest.ui.favoritewallpapers.event.FavoriteWallpapersEvent
 import ru.yotfr.unisoldevtest.ui.favoritewallpapers.viewmodel.FavoriteWallpapersViewModel
@@ -34,7 +33,7 @@ import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 @Composable
 fun FavoriteWallpapersScreen(
     vm: FavoriteWallpapersViewModel = hiltViewModel(),
-    navigateToWallpaper: (Wallpaper) -> Unit
+    navigateToWallpaper: (ru.yotfr.model.Wallpaper) -> Unit
 ) {
     val wallpapers by vm.favoriteWallpapers.collectAsState()
     val context = LocalContext.current

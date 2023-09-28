@@ -2,23 +2,23 @@ package ru.yotfr.unisoldevtest.ui.common
 
 import android.content.Context
 import ru.yotfr.unisoldevtest.R
-import ru.yotfr.unisoldevtest.domain.model.ErrorCause
+import ru.yotfr.model.ErrorCause
 
-fun ErrorCause.displayText(context: Context): String {
+fun ru.yotfr.model.ErrorCause.displayText(context: Context): String {
     return when (this) {
-        ErrorCause.NoConnectivity -> {
+        ru.yotfr.model.ErrorCause.NoConnectivity -> {
             context.getString(R.string.no_connectivity)
         }
 
-        ErrorCause.TimeOut -> {
+        ru.yotfr.model.ErrorCause.TimeOut -> {
             context.getString(R.string.no_connectivity)
         }
 
-        is ErrorCause.Unknown -> {
+        is ru.yotfr.model.ErrorCause.Unknown -> {
             message
         }
 
-        ErrorCause.VPNDisabled -> {
+        ru.yotfr.model.ErrorCause.VPNDisabled -> {
             context.getString(R.string.time_out)
         }
     }

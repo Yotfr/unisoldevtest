@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import ru.yotfr.unisoldevtest.domain.model.Category
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
+import ru.yotfr.model.Category
+import ru.yotfr.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.usecase.ChangeWallpaperFavoriteStatusUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.GetWallpaperByCategoryUseCase
 import ru.yotfr.unisoldevtest.ui.categorywallpapers.event.CategoryWallpapersEvent
@@ -25,7 +25,7 @@ class CategoryWallpaperViewModel @Inject constructor(
 
     private val triggerRefresh = MutableStateFlow(false)
 
-    private val category = MutableStateFlow<Category?>(null)
+    private val category = MutableStateFlow<ru.yotfr.model.Category?>(null)
 
     val wallpapers = combine(
         category, triggerRefresh
@@ -51,13 +51,13 @@ class CategoryWallpaperViewModel @Inject constructor(
         }
     }
 
-    private fun changeFavorite(wallpaper: Wallpaper) {
+    private fun changeFavorite(wallpaper: ru.yotfr.model.Wallpaper) {
         viewModelScope.launch {
             changeWallpaperFavoriteStatusUseCase(wallpaper)
         }
     }
 
-    private fun setCategory(value: Category) {
+    private fun setCategory(value: ru.yotfr.model.Category) {
         category.value = value
     }
 

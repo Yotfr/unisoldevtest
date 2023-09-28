@@ -4,21 +4,20 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import ru.yotfr.network.api.WallpaperApi
 import ru.yotfr.unisoldevtest.data.mapper.mapDomain
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
+import ru.yotfr.model.Wallpaper
 
 class WallpaperPageSource(
     private val wallpaperApi: ru.yotfr.network.api.WallpaperApi,
     private val category: String
-) : PagingSource<Int, Wallpaper>() {
-    override fun getRefreshKey(state: PagingState<Int, Wallpaper>): Int? {
+) : PagingSource<Int, ru.yotfr.model.Wallpaper>() {
+    override fun getRefreshKey(state: PagingState<Int, ru.yotfr.model.Wallpaper>): Int? {
         val anchorPosition = state.anchorPosition ?: return null
         val page = state.closestPageToPosition(anchorPosition) ?: return null
         return page.prevKey?.plus(1) ?: page.nextKey?.minus(1)
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Wallpaper> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ru.yotfr.model.Wallpaper> {
         val page = params.key ?: 1
         val perPage = params.loadSize
         return try {

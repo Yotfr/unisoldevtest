@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.domain.model
+package ru.yotfr.model
 
 sealed interface ErrorCause {
     data object TimeOut : ErrorCause

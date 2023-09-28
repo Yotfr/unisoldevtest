@@ -10,12 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
-import ru.yotfr.unisoldevtest.domain.model.DownloadedImages
+import ru.yotfr.model.DownloadedImages
 import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
 
 @Composable
 fun SavedWallpaperItem(
-    downloadedImage: DownloadedImages,
+    downloadedImage: ru.yotfr.model.DownloadedImages,
     onClick: (String) -> Unit
 ) {
     Surface(

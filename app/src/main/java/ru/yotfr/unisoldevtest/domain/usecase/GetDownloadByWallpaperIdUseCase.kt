@@ -1,13 +1,13 @@
 package ru.yotfr.unisoldevtest.domain.usecase
 
-import ru.yotfr.unisoldevtest.domain.model.WallpaperDownload
+import ru.yotfr.model.WallpaperDownload
 import ru.yotfr.unisoldevtest.domain.repository.WallpaperDownloadsRepository
 import javax.inject.Inject
 
 class GetDownloadByWallpaperIdUseCase @Inject constructor(
     private val wallpaperDownloadsRepository: WallpaperDownloadsRepository
 ) {
-    suspend operator fun invoke(wallpaperId: String): WallpaperDownload? {
+    suspend operator fun invoke(wallpaperId: String): ru.yotfr.model.WallpaperDownload? {
         return wallpaperDownloadsRepository.getDownloadByWallpaperId(wallpaperId)
     }
 }

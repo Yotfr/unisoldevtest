@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.domain.model
+package ru.yotfr.model
 
 sealed class ResponseResult<T>(val data: T? = null, val cause: ErrorCause? = null) {
     class Loading<T>(data: T? = null) : ResponseResult<T>(data, null)

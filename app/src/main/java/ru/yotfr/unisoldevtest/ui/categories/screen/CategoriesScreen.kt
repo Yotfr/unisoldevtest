@@ -27,7 +27,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
-import ru.yotfr.unisoldevtest.domain.model.Category
+import ru.yotfr.model.Category
 import ru.yotfr.unisoldevtest.ui.categories.event.CategoriesEvent
 import ru.yotfr.unisoldevtest.ui.categories.event.CategoriesScreenEvent
 import ru.yotfr.unisoldevtest.ui.categories.viewmodel.CategoriesViewModel
@@ -38,7 +38,7 @@ import ru.yotfr.unisoldevtest.ui.common.displayText
 @Composable
 fun CategoriesScreen(
     vm: CategoriesViewModel = hiltViewModel(),
-    navigateToCategoryWallpaper: (Category) -> Unit
+    navigateToCategoryWallpaper: (ru.yotfr.model.Category) -> Unit
 ) {
     val state by vm.state.collectAsState()
     val pullRefreshState = rememberPullRefreshState(

@@ -16,7 +16,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import darkColors
 import lightColors
 import placeHolderColor
-import ru.yotfr.unisoldevtest.domain.model.ThemeModel
+import ru.yotfr.model.ThemeModel
 import whiteColor
 
 object WallpaperTheme {
@@ -38,18 +38,18 @@ object WallpaperTheme {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WallpaperTheme(
-    theme: ThemeModel,
+    theme: ru.yotfr.model.ThemeModel,
     content: @Composable () -> Unit
 ) {
 
     val colors = when (theme) {
-        ThemeModel.LIGHT -> {
+        ru.yotfr.model.ThemeModel.LIGHT -> {
             lightColors
         }
-        ThemeModel.DARK -> {
+        ru.yotfr.model.ThemeModel.DARK -> {
             darkColors
         }
-        ThemeModel.SYSTEM_DEFAULT -> {
+        ru.yotfr.model.ThemeModel.SYSTEM_DEFAULT -> {
             if (isSystemInDarkTheme()) {
                 darkColors
             } else {
@@ -84,20 +84,20 @@ fun WallpaperTheme(
 
 @Composable
 fun ConfigureSystemBars(
-    theme: ThemeModel
+    theme: ru.yotfr.model.ThemeModel
 ) {
     val systemUiController = rememberSystemUiController()
     val isSystemDarkTheme = isSystemInDarkTheme()
     val blackScrim = Color(0f, 0f, 0f, 0.3f)
 
     val useDarkIcons = when (theme) {
-        ThemeModel.SYSTEM_DEFAULT -> {
+        ru.yotfr.model.ThemeModel.SYSTEM_DEFAULT -> {
             !isSystemDarkTheme
         }
-        ThemeModel.DARK -> {
+        ru.yotfr.model.ThemeModel.DARK -> {
             false
         }
-        ThemeModel.LIGHT -> {
+        ru.yotfr.model.ThemeModel.LIGHT -> {
             true
         }
     }

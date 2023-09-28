@@ -1,6 +1,6 @@
 package ru.yotfr.unisoldevtest.ui.wallpaper.event
 
-import ru.yotfr.unisoldevtest.domain.model.ErrorCause
+import ru.yotfr.model.ErrorCause
 
 sealed interface WallpaperScreenEvent {
     data object ShowDownloadCompleteSnackbar : WallpaperScreenEvent
@@ -10,6 +10,6 @@ sealed interface WallpaperScreenEvent {
     data object ShowInstallInProgressSnackbar : WallpaperScreenEvent
     data object ShowInstallCompletedSnackbar : WallpaperScreenEvent
     data object ShowInstallFailedSnackbar : WallpaperScreenEvent
-    data class ShowErrorSnackbar(val errorCause: ErrorCause) : WallpaperScreenEvent
+    data class ShowErrorSnackbar(val errorCause: ru.yotfr.model.ErrorCause) : WallpaperScreenEvent
     data object ShowDownloadOnlyByWifiAllowedSnackbar : WallpaperScreenEvent
 }

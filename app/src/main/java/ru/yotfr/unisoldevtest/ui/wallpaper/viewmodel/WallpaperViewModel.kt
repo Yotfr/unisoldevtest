@@ -13,12 +13,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.yotfr.unisoldevtest.domain.model.DownloadStatus
-import ru.yotfr.unisoldevtest.domain.model.ErrorCause
-import ru.yotfr.unisoldevtest.domain.model.ResponseResult
-import ru.yotfr.unisoldevtest.domain.model.Wallpaper
-import ru.yotfr.unisoldevtest.domain.model.WallpaperDownload
-import ru.yotfr.unisoldevtest.domain.model.WallpaperInstallOption
+import ru.yotfr.model.DownloadStatus
+import ru.yotfr.model.ErrorCause
+import ru.yotfr.model.ResponseResult
+import ru.yotfr.model.Wallpaper
+import ru.yotfr.model.WallpaperDownload
+import ru.yotfr.model.WallpaperInstallOption
 import ru.yotfr.unisoldevtest.domain.usecase.ChangeWallpaperFavoriteStatusUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.CheckIfFileExistsUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.DeleteWallpaperDownloadUseCase
@@ -63,7 +63,7 @@ class WallpaperViewModel @Inject constructor(
                 } ?: flow { }
             }.collectLatest { response ->
                 when (response) {
-                    is ResponseResult.Error -> {
+                    is ru.yotfr.model.ResponseResult.Error -> {
                         _state.update {
                             it.copy(
                                 isLoading = false
@@ -71,20 +71,20 @@ class WallpaperViewModel @Inject constructor(
                         }
                         _event.send(
                             WallpaperScreenEvent.ShowErrorSnackbar(
-                                errorCause = response.cause ?: ErrorCause.Unknown(
+                                errorCause = response.cause ?: ru.yotfr.model.ErrorCause.Unknown(
                                     message = "Somethings went wrong"
                                 )
                             )
                         )
                     }
-                    is ResponseResult.Loading -> {
+                    is ru.yotfr.model.ResponseResult.Loading -> {
                         _state.update {
                             it.copy(
                                 isLoading = true
                             )
                         }
                     }
-                    is ResponseResult.Success -> {
+                    is ru.yotfr.model.ResponseResult.Success -> {
                         response.data?.let { wallpaper ->
                             /*
                              Для случаев долгой загрузки, для того чтобы уведомить пользовтеля
@@ -149,7 +149,7 @@ class WallpaperViewModel @Inject constructor(
         }
     }
 
-    private fun installWallpaper(wallpaperInstallOption: WallpaperInstallOption) {
+    private fun installWallpaper(wallpaperInstallOption: ru.yotfr.model.WallpaperInstallOption) {
         _state.value.wallpaper?.let { wallpaper ->
             viewModelScope.launch {
                 installWallpaperUseCase(
@@ -157,19 +157,19 @@ class WallpaperViewModel @Inject constructor(
                     wallpaperInstallOption
                 ).collectLatest { response ->
                     when (response) {
-                        is ResponseResult.Error -> {
+                        is ru.yotfr.model.ResponseResult.Error -> {
                             _event.send(
                                 WallpaperScreenEvent.ShowErrorSnackbar(
-                                    errorCause = response.cause ?: ErrorCause.Unknown(
+                                    errorCause = response.cause ?: ru.yotfr.model.ErrorCause.Unknown(
                                         message = "Somethings went wrong"
                                     )
                                 )
                             )
                         }
-                        is ResponseResult.Loading -> {
+                        is ru.yotfr.model.ResponseResult.Loading -> {
                             _event.send(WallpaperScreenEvent.ShowInstallInProgressSnackbar)
                         }
-                        is ResponseResult.Success -> {
+                        is ru.yotfr.model.ResponseResult.Success -> {
                             _event.send(WallpaperScreenEvent.ShowInstallCompletedSnackbar)
                         }
                     }
@@ -188,7 +188,7 @@ class WallpaperViewModel @Inject constructor(
         }
     }
 
-    private fun getDownloadStatus(wallpaperDownload: WallpaperDownload, fromBroadcast: Boolean) {
+    private fun getDownloadStatus(wallpaperDownload: ru.yotfr.model.WallpaperDownload, fromBroadcast: Boolean) {
         viewModelScope.launch {
             wallpaperDownload.downloadId.let { downloadId ->
                 _state.value.wallpaper?.let { wallpaper ->
@@ -204,7 +204,7 @@ class WallpaperViewModel @Inject constructor(
         }
     }
 
-    private fun getDownloadStatus(wallpaper: Wallpaper) {
+    private fun getDownloadStatus(wallpaper: ru.yotfr.model.Wallpaper) {
         viewModelScope.launch {
             val wallpaperDownload = getDownloadByWallpaperIdUseCase(wallpaper.id)
             wallpaperDownload?.downloadId?.let { downloadId ->
@@ -216,22 +216,22 @@ class WallpaperViewModel @Inject constructor(
 
 
     private fun processDownloadStatus(
-        wallpaperStatus: DownloadStatus,
-        wallpaper: Wallpaper,
-        wallpaperDownload: WallpaperDownload,
+        wallpaperStatus: ru.yotfr.model.DownloadStatus,
+        wallpaper: ru.yotfr.model.Wallpaper,
+        wallpaperDownload: ru.yotfr.model.WallpaperDownload,
         fromBroadcast: Boolean = false
     ) {
         viewModelScope.launch {
             when (wallpaperStatus) {
-                DownloadStatus.FAILED -> {
+                ru.yotfr.model.DownloadStatus.FAILED -> {
                     _event.send(WallpaperScreenEvent.ShowDownloadFailedProgressSnackbar)
                     // Удаление модели загрузки из БД
                     deleteWallpaperDownloadUseCase(wallpaperDownload)
                 }
-                DownloadStatus.IN_PROGRESS -> {
+                ru.yotfr.model.DownloadStatus.IN_PROGRESS -> {
                     _event.send(WallpaperScreenEvent.ShowDownloadInProgressSnackbar)
                 }
-                DownloadStatus.SUCCEED -> {
+                ru.yotfr.model.DownloadStatus.SUCCEED -> {
                     if (!isFileExists(wallpaper) || fromBroadcast) {
                         _event.send(WallpaperScreenEvent.ShowDownloadCompleteSnackbar)
                     }
@@ -242,7 +242,7 @@ class WallpaperViewModel @Inject constructor(
         }
     }
 
-    private fun isFileExists(wallpaper: Wallpaper): Boolean = checkIfFileExistsUseCase(wallpaper)
+    private fun isFileExists(wallpaper: ru.yotfr.model.Wallpaper): Boolean = checkIfFileExistsUseCase(wallpaper)
 
 
     private fun downloadWallpaper() {

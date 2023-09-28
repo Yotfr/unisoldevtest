@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import ru.yotfr.unisoldevtest.domain.model.Category
+import ru.yotfr.model.Category
 import ru.yotfr.unisoldevtest.ui.categorywallpapers.screen.CategoryWallpaperScreen
 import ru.yotfr.unisoldevtest.ui.navigation.screens.RootScreens
 import ru.yotfr.unisoldevtest.ui.settings.screen.SettingsScreen
@@ -29,7 +29,7 @@ fun RootNavGraph(
                 navArgument(RootScreens.CATEGORY_KEY) {}
             )
         ) { backStackEntry ->
-            val category = Category.valueOf(
+            val category = ru.yotfr.model.Category.valueOf(
                 backStackEntry.arguments?.getString(
                     RootScreens.CATEGORY_KEY
                 ) ?: throw IllegalArgumentException("Navigated with wrong Category")

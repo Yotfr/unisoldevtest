@@ -8,24 +8,24 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
-import ru.yotfr.unisoldevtest.domain.model.ThemeModel
+import ru.yotfr.model.ThemeModel
 import ru.yotfr.unisoldevtest.domain.userpreference.UserPreference
 
 class UserPreferenceImpl(
     private val dataStore: DataStore<Preferences>
 ) : UserPreference {
-    override suspend fun updateTheme(theme: ThemeModel) {
+    override suspend fun updateTheme(theme: ru.yotfr.model.ThemeModel) {
         dataStore.edit { preferences ->
             preferences[PreferencesKeys.THEME] = theme.themeString
         }
     }
 
-    override fun getTheme(): Flow<ThemeModel> {
+    override fun getTheme(): Flow<ru.yotfr.model.ThemeModel> {
         val theme = dataStore.data
             .map { preferences ->
                 val prefThemeKey = preferences[PreferencesKeys.THEME]
-                ThemeModel.values().firstOrNull { it.themeString == prefThemeKey }
-                    ?: ThemeModel.SYSTEM_DEFAULT
+                ru.yotfr.model.ThemeModel.values().firstOrNull { it.themeString == prefThemeKey }
+                    ?: ru.yotfr.model.ThemeModel.SYSTEM_DEFAULT
             }
         return theme
     }
