@@ -4,12 +4,12 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import ru.yotfr.unisoldevtest.data.datasource.remote.api.WallpaperApi
+import ru.yotfr.network.api.WallpaperApi
 import ru.yotfr.unisoldevtest.data.mapper.mapDomain
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 
 class WallpaperPageSource(
-    private val wallpaperApi: WallpaperApi,
+    private val wallpaperApi: ru.yotfr.network.api.WallpaperApi,
     private val category: String
 ) : PagingSource<Int, Wallpaper>() {
     override fun getRefreshKey(state: PagingState<Int, Wallpaper>): Int? {

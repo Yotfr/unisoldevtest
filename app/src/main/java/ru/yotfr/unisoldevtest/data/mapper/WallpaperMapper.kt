@@ -1,10 +1,10 @@
 package ru.yotfr.unisoldevtest.data.mapper
 
 import ru.yotfr.unisoldevtest.data.datasource.local.entity.WallpaperEntity
-import ru.yotfr.unisoldevtest.data.datasource.remote.model.WallpaperResponse
+import ru.yotfr.network.model.WallpaperResponse
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 
-fun WallpaperResponse.mapDomain(isFavorite: Boolean) : Wallpaper {
+fun ru.yotfr.network.model.WallpaperResponse.mapDomain(isFavorite: Boolean) : Wallpaper {
     return Wallpaper(
         id = id,
         url = url,

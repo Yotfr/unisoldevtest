@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import ru.yotfr.unisoldevtest.data.datasource.local.dao.FavoriteWallpapersDao
-import ru.yotfr.unisoldevtest.data.datasource.remote.api.WallpaperApi
-import ru.yotfr.unisoldevtest.data.datasource.remote.exception.NoConnectivityException
+import ru.yotfr.network.api.WallpaperApi
+import ru.yotfr.network.exception.NoConnectivityException
 import ru.yotfr.unisoldevtest.data.paging.source.WallpaperPageSource
 import ru.yotfr.unisoldevtest.data.mapper.mapDomain
 import ru.yotfr.unisoldevtest.data.mapper.mapEntity
@@ -28,7 +28,7 @@ import javax.inject.Inject
 import javax.net.ssl.SSLHandshakeException
 
 class WallpaperRepositoryImpl @Inject constructor(
-    private val wallpaperApi: WallpaperApi,
+    private val wallpaperApi: ru.yotfr.network.api.WallpaperApi,
     private val favoriteWallpapersDao: FavoriteWallpapersDao,
     private val wallpapersCache: WallpapersCache
 ) : WallpaperRepository {
@@ -125,7 +125,7 @@ class WallpaperRepositoryImpl @Inject constructor(
                 ErrorCause.VPNDisabled
             }
 
-            is NoConnectivityException -> {
+            is ru.yotfr.network.exception.NoConnectivityException -> {
                 ErrorCause.NoConnectivity
             }
 
