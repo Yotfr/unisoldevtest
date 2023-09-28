@@ -34,6 +34,7 @@ internal class StorageLoaderImpl(
                 MediaStore.MediaColumns.WIDTH
             )
 
+            // TODO: assest module
             val selectionArgs = arrayOf("%WallpaperInstaller%")
 
             val sortOrder = MediaStore.MediaColumns.DATE_ADDED + " COLLATE NOCASE DESC"

@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.di
+package ru.yotfr.wallpaperinstaller
 
 import android.content.Context
 import dagger.Module
@@ -6,19 +6,19 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ru.yotfr.storageloader.StorageLoaderImpl
-import ru.yotfr.storageloader.StorageLoader
+import ru.yotfr.wallpaperinstaller.wallpaperinstaller.WallpaperInstaller
+import ru.yotfr.wallpaperinstaller.wallpaperinstaller.WallpaperInstallerImpl
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object StorageLoaderModule {
+internal object InternalWallpaperInstallerModule {
 
     @Provides
     @Singleton
-    fun provideStorageLoader(
+    fun provideWallpaperInstaller(
         @ApplicationContext context: Context
-    ): ru.yotfr.storageloader.StorageLoader {
-        return ru.yotfr.storageloader.StorageLoaderImpl(context)
+    ): WallpaperInstaller {
+        return WallpaperInstallerImpl(context)
     }
 }

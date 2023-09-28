@@ -6,8 +6,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ru.yotfr.unisoldevtest.data.wallpaperinstaller.WallpaperInstallerImpl
-import ru.yotfr.unisoldevtest.domain.wallpaperinstaller.WallpaperInstaller
+import ru.yotfr.wallpaperinstaller.WallpaperInstallerImpl
+import ru.yotfr.wallpaperinstaller.WallpaperInstaller
 import javax.inject.Singleton
 
 @Module
@@ -18,8 +18,8 @@ object WallpaperInstallerModule {
     @Singleton
     fun provideWallpaperInstaller(
         @ApplicationContext context: Context
-    ): WallpaperInstaller {
-        return WallpaperInstallerImpl(context)
+    ): ru.yotfr.wallpaperinstaller.WallpaperInstaller {
+        return ru.yotfr.wallpaperinstaller.WallpaperInstallerImpl(context)
     }
 
 }

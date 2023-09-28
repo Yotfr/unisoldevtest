@@ -1,14 +1,11 @@
 package ru.yotfr.unisoldevtest.domain.usecase
 
 import kotlinx.coroutines.flow.Flow
-import ru.yotfr.model.ResponseResult
-import ru.yotfr.model.Wallpaper
-import ru.yotfr.model.WallpaperInstallOption
-import ru.yotfr.unisoldevtest.domain.wallpaperinstaller.WallpaperInstaller
+import ru.yotfr.wallpaperinstaller.WallpaperInstaller
 import javax.inject.Inject
 
 class InstallWallpaperUseCase @Inject constructor(
-    private val wallpaperInstaller: WallpaperInstaller
+    private val wallpaperInstaller: ru.yotfr.wallpaperinstaller.WallpaperInstaller
 ) {
     operator fun invoke(
         wallpaper: ru.yotfr.model.Wallpaper,

@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/data/shared" />
             <option value="$PROJECT_DIR$/data/storageloader" />
             <option value="$PROJECT_DIR$/data/wallpaperdetails" />
+            <option value="$PROJECT_DIR$/data/wallpaperinstaller" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/categories" />
             <option value="$PROJECT_DIR$/domain/model" />
