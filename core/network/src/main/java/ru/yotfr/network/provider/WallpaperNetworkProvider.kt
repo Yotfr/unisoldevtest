@@ -1,4 +1,4 @@
-package ru.yotfr.network.api
+package ru.yotfr.network.provider
 
 import ru.yotfr.network.model.WallpaperResponse
 import ru.yotfr.network.model.WrappedResponse

@@ -1,17 +1,17 @@
 package ru.yotfr.unisoldevtest.data.mapper
 
-import ru.yotfr.unisoldevtest.data.datasource.local.entity.WallpaperDownloadsEntity
+import ru.yotfr.database.entity.WallpaperDownloadsEntity
 import ru.yotfr.unisoldevtest.domain.model.WallpaperDownload
 
-fun WallpaperDownloadsEntity.mapDomain(): WallpaperDownload {
+fun ru.yotfr.database.entity.WallpaperDownloadsEntity.mapDomain(): WallpaperDownload {
     return WallpaperDownload(
         downloadId = downloadId,
         wallpaperId = wallpaperId
     )
 }
 
-fun WallpaperDownload.mapEntity(): WallpaperDownloadsEntity {
-    return WallpaperDownloadsEntity(
+fun WallpaperDownload.mapEntity(): ru.yotfr.database.entity.WallpaperDownloadsEntity {
+    return ru.yotfr.database.entity.WallpaperDownloadsEntity(
         downloadId = downloadId,
         wallpaperId = wallpaperId
     )

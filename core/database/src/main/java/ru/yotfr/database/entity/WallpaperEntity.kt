@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.data.datasource.local.entity
+package ru.yotfr.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,14 +1,14 @@
-package ru.yotfr.unisoldevtest.data.datasource.local.dao
+package ru.yotfr.database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
-import ru.yotfr.unisoldevtest.data.datasource.local.entity.WallpaperEntity
+import ru.yotfr.database.entity.WallpaperEntity
 
 @Dao
-interface FavoriteWallpapersDao {
+internal interface FavoriteWallpapersDao {
     @Upsert(entity = WallpaperEntity::class)
     suspend fun upsertWallpaper(wallpaperEntity: WallpaperEntity)
 

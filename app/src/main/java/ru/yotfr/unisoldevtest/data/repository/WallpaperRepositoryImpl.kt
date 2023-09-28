@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import ru.yotfr.unisoldevtest.data.datasource.local.dao.FavoriteWallpapersDao
+import ru.yotfr.database.dao.FavoriteWallpapersDao
 import ru.yotfr.network.api.WallpaperApi
 import ru.yotfr.network.exception.NoConnectivityException
 import ru.yotfr.unisoldevtest.data.paging.source.WallpaperPageSource
@@ -29,7 +29,7 @@ import javax.net.ssl.SSLHandshakeException
 
 class WallpaperRepositoryImpl @Inject constructor(
     private val wallpaperApi: ru.yotfr.network.api.WallpaperApi,
-    private val favoriteWallpapersDao: FavoriteWallpapersDao,
+    private val favoriteWallpapersDao: ru.yotfr.database.dao.FavoriteWallpapersDao,
     private val wallpapersCache: WallpapersCache
 ) : WallpaperRepository {
     override suspend fun getWallpapersByCategory(

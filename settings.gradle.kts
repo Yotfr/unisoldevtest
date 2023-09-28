@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "unisoldevtest"
 include(":app")
 include(":core:network")
+include(":core:database")

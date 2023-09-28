@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.di
+package ru.yotfr.database
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -15,18 +15,21 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import ru.yotfr.unisoldevtest.data.userpreference.UserPreferenceImpl
-import ru.yotfr.unisoldevtest.domain.userpreference.UserPreference
+import ru.yotfr.database.datastore.UserPreferencesDataStore
+import ru.yotfr.database.provider.UserPreferencesDataStoreProvider
+import ru.yotfr.database.provider.UserPreferencesDataStoreProviderImpl
 import javax.inject.Singleton
 
-private const val USER_PREFERENCES = "USER_PREFERENCES"
 @Module
 @InstallIn(SingletonComponent::class)
-object PreferenceModule {
+internal object InternalDataStoreModule {
 
+    private const val USER_PREFERENCES = "USER_PREFERENCES"
     @Singleton
     @Provides
-    fun providePreferencesDataStore(@ApplicationContext appContext: Context): DataStore<Preferences> {
+    internal fun providePreferencesDataStore(
+        @ApplicationContext appContext: Context
+    ): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
             corruptionHandler = ReplaceFileCorruptionHandler(
                 produceNewData = { emptyPreferences() }
@@ -37,9 +40,19 @@ object PreferenceModule {
     }
     @Provides
     @Singleton
-    fun provideUserPreference(
+    internal fun provideUserPreferenceDataStore(
         dataStore: DataStore<Preferences>
-    ): UserPreference {
-        return UserPreferenceImpl(dataStore)
+    ): UserPreferencesDataStore {
+        return UserPreferencesDataStore(dataStore)
     }
+
+    @Provides
+    @Singleton
+    fun provideUserPreferencesDataStoreProvider(
+        userPreferencesDataStore: UserPreferencesDataStore
+    ): UserPreferencesDataStoreProvider {
+        return UserPreferencesDataStoreProviderImpl(userPreferencesDataStore)
+    }
+
+
 }

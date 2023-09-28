@@ -1,6 +1,6 @@
 package ru.yotfr.unisoldevtest.data.mapper
 
-import ru.yotfr.unisoldevtest.data.datasource.local.entity.WallpaperEntity
+import ru.yotfr.database.entity.WallpaperEntity
 import ru.yotfr.network.model.WallpaperResponse
 import ru.yotfr.unisoldevtest.domain.model.Wallpaper
 
@@ -16,7 +16,7 @@ fun ru.yotfr.network.model.WallpaperResponse.mapDomain(isFavorite: Boolean) : Wa
     )
 }
 
-fun WallpaperEntity.mapDomain(): Wallpaper {
+fun ru.yotfr.database.entity.WallpaperEntity.mapDomain(): Wallpaper {
     return Wallpaper(
         id = id,
         url = url,
@@ -28,8 +28,8 @@ fun WallpaperEntity.mapDomain(): Wallpaper {
     )
 }
 
-fun Wallpaper.mapEntity(): WallpaperEntity {
-    return WallpaperEntity(
+fun Wallpaper.mapEntity(): ru.yotfr.database.entity.WallpaperEntity {
+    return ru.yotfr.database.entity.WallpaperEntity(
         id = id,
         url = url,
         previewUrl = previewUrl,

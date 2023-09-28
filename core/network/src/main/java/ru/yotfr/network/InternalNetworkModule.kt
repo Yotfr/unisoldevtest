@@ -10,8 +10,8 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.yotfr.network.api.WallpaperApi
-import ru.yotfr.network.api.WallpaperNetworkProvider
-import ru.yotfr.network.api.WallpaperNetworkProviderImpl
+import ru.yotfr.network.provider.WallpaperNetworkProvider
+import ru.yotfr.network.provider.WallpaperNetworkProviderImpl
 import ru.yotfr.network.interceptor.LoggingInterceptor
 import ru.yotfr.network.interceptor.NetworkConnectionInterceptor
 import ru.yotfr.network.interceptor.TimeoutInterceptor
