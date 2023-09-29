@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.yotfr.wallpaperinstaller"
+    namespace = "ru.yotfr.installer"
     compileSdk = 33
 
     defaultConfig {
@@ -34,9 +34,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:installer"))
-    implementation(project(":domain:model"))
-
     coroutinesCore()
     hilt()
 }
