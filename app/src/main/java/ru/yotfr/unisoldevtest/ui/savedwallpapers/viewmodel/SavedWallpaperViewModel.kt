@@ -12,9 +12,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.yotfr.model.ErrorCause
-import ru.yotfr.model.ResponseResult
-import ru.yotfr.unisoldevtest.domain.usecase.GetDownloadedWallpapersUseCase
+import ru.yotfr.storageloader.GetDownloadedWallpapersUseCase
 import ru.yotfr.unisoldevtest.ui.savedwallpapers.event.SavedWallpapersEvent
 import ru.yotfr.unisoldevtest.ui.savedwallpapers.event.SavedWallpapersScreenEvent
 import ru.yotfr.unisoldevtest.ui.savedwallpapers.state.SavedWallpaperScreenState
@@ -23,7 +21,7 @@ import javax.inject.Inject
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class SavedWallpaperViewModel @Inject constructor(
-    private val getDownloadedWallpapersUseCase: GetDownloadedWallpapersUseCase
+    private val getDownloadedWallpapersUseCase: ru.yotfr.storageloader.GetDownloadedWallpapersUseCase
 ) : ViewModel() {
 
     private val triggerRefresh = MutableStateFlow(false)
