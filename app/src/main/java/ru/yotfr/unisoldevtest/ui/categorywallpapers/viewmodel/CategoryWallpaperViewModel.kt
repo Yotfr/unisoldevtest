@@ -9,17 +9,15 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import ru.yotfr.model.Category
-import ru.yotfr.model.Wallpaper
 import ru.yotfr.unisoldevtest.domain.usecase.ChangeWallpaperFavoriteStatusUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.GetWallpaperByCategoryUseCase
+import ru.yotfr.categorywallpapers.usecase.GetWallpaperByCategoryUseCase
 import ru.yotfr.unisoldevtest.ui.categorywallpapers.event.CategoryWallpapersEvent
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class CategoryWallpaperViewModel @Inject constructor(
-    private val getWallpaperByCategoryUseCase: GetWallpaperByCategoryUseCase,
+    private val getWallpaperByCategoryUseCase: ru.yotfr.categorywallpapers.usecase.GetWallpaperByCategoryUseCase,
     private val changeWallpaperFavoriteStatusUseCase: ChangeWallpaperFavoriteStatusUseCase
 ) : ViewModel() {
 
