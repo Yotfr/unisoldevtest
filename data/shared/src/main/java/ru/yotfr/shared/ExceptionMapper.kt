@@ -1,25 +1,26 @@
 package ru.yotfr.shared
 
+import ru.yotfr.model.ErrorCause
 import ru.yotfr.network.model.NoConnectivityException
 import java.net.SocketTimeoutException
 import javax.net.ssl.SSLHandshakeException
 
-fun Exception.mapExceptionCause(): ru.yotfr.model.ErrorCause {
+fun Exception.mapExceptionCause(): ErrorCause {
     return when (this) {
         is SocketTimeoutException -> {
-            ru.yotfr.model.ErrorCause.TimeOut
+            ErrorCause.TimeOut
         }
 
         is SSLHandshakeException -> {
-            ru.yotfr.model.ErrorCause.VPNDisabled
+            ErrorCause.VPNDisabled
         }
 
         is NoConnectivityException -> {
-            ru.yotfr.model.ErrorCause.NoConnectivity
+            ErrorCause.NoConnectivity
         }
 
         else -> {
-            ru.yotfr.model.ErrorCause.Unknown(
+            ErrorCause.Unknown(
                 message = this.message ?: "Something went wrong"
             )
         }

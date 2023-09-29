@@ -4,6 +4,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 import ru.yotfr.shared.query
 import ru.yotfr.model.Category
 import ru.yotfr.model.CategoryModel
@@ -22,15 +23,22 @@ internal class CategoriesRepositoryImpl @Inject constructor(
             API Pixabay не предоставляет методов для получения доступных
             категорий и краткой информации о них
              */
-            val categories = Category.values().map {
-                val categoryResponse = wallpaperNetworkProvider.getCategoryPreview(it.query())
-                val wallpaper = categoryResponse.hits.first()
-                CategoryModel(
-                    category = it,
-                    previewUrl = wallpaper.previewUrl,
-                    wallpapersCount = categoryResponse.total,
-                    aspectRatio = wallpaper.previewWidth.toFloat() / wallpaper.previewHeight
-                )
+            withContext(Dispatchers.Default) {
+
+            }
+            val categories = withContext(Dispatchers.Default) {
+                Category.values().map {
+                    val categoryResponse = withContext(Dispatchers.IO) {
+                        wallpaperNetworkProvider.getCategoryPreview(it.query())
+                    }
+                    val wallpaper = categoryResponse.hits.first()
+                    CategoryModel(
+                        category = it,
+                        previewUrl = wallpaper.previewUrl,
+                        wallpapersCount = categoryResponse.total,
+                        aspectRatio = wallpaper.previewWidth.toFloat() / wallpaper.previewHeight
+                    )
+                }
             }
             emit(
                 ResponseResult.Success(

@@ -2,7 +2,9 @@ package ru.yotfr.categorywallpapers.repository
 
 import androidx.paging.PagingData
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import ru.yotfr.categorywallpapers.paging.pager.CachedWallpapersPager
 import ru.yotfr.categorywallpapers.paging.source.WallpaperPageSource
 import ru.yotfr.database.provider.FavoriteWallpaperDatabaseProvider
@@ -22,7 +24,9 @@ internal class CategoryWallpapersRepositoryImpl @Inject constructor(
         category: Category,
         coroutineScope: CoroutineScope
     ): Flow<PagingData<Wallpaper>> {
-        val favoriteWallpaperIds = favoriteWallpaperDatabaseProvider.getFavoriteWallpapersIds()
+        val favoriteWallpaperIds = withContext(Dispatchers.IO) {
+            favoriteWallpaperDatabaseProvider.getFavoriteWallpapersIds()
+        }
         wallpapersCache.initializeCacheWithDbData(favoriteWallpaperIds)
         return CachedWallpapersPager(
             wallpapersCache = wallpapersCache,

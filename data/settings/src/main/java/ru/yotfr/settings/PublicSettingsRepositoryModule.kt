@@ -1,4 +1,4 @@
-package ru.yotfr.settings.repository
+package ru.yotfr.settings
 
 import dagger.Module
 import dagger.hilt.InstallIn

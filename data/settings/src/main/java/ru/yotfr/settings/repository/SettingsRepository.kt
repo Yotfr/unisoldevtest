@@ -1,4 +1,4 @@
-package ru.yotfr.settings
+package ru.yotfr.settings.repository
 
 import kotlinx.coroutines.flow.Flow
 import ru.yotfr.model.ThemeModel
