@@ -13,13 +13,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.yotfr.model.DownloadStatus
-import ru.yotfr.model.ErrorCause
-import ru.yotfr.model.ResponseResult
-import ru.yotfr.model.Wallpaper
-import ru.yotfr.model.WallpaperDownload
-import ru.yotfr.model.WallpaperInstallOption
-import ru.yotfr.unisoldevtest.domain.usecase.ChangeWallpaperFavoriteStatusUseCase
+import ru.yotfr.favoritewallpapers.ChangeWallpaperFavoriteStatusUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.CheckIfFileExistsUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.DeleteWallpaperDownloadUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.DownloadWallpaperUseCase
@@ -44,7 +38,7 @@ class WallpaperViewModel @Inject constructor(
     private val deleteWallpaperDownloadUseCase: DeleteWallpaperDownloadUseCase,
     private val getDownloadByWallpaperIdUseCase: GetDownloadByWallpaperIdUseCase,
     private val installWallpaperUseCase: InstallWallpaperUseCase,
-    private val changeWallpaperFavoriteStatusUseCase: ChangeWallpaperFavoriteStatusUseCase
+    private val changeWallpaperFavoriteStatusUseCase: ru.yotfr.favoritewallpapers.ChangeWallpaperFavoriteStatusUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(WallpaperScreenState())

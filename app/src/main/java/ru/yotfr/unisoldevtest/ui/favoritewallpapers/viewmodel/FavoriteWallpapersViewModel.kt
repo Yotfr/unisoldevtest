@@ -7,16 +7,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import ru.yotfr.model.Wallpaper
-import ru.yotfr.unisoldevtest.domain.usecase.ChangeWallpaperFavoriteStatusUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.GetFavoriteWallpapersUseCase
+import ru.yotfr.favoritewallpapers.ChangeWallpaperFavoriteStatusUseCase
+import ru.yotfr.favoritewallpapers.GetFavoriteWallpapersUseCase
 import ru.yotfr.unisoldevtest.ui.favoritewallpapers.event.FavoriteWallpapersEvent
 import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteWallpapersViewModel @Inject constructor(
-    private val getFavoriteWallpapersUseCase: GetFavoriteWallpapersUseCase,
-    private val changeWallpaperFavoriteStatusUseCase: ChangeWallpaperFavoriteStatusUseCase
+    private val getFavoriteWallpapersUseCase: ru.yotfr.favoritewallpapers.GetFavoriteWallpapersUseCase,
+    private val changeWallpaperFavoriteStatusUseCase: ru.yotfr.favoritewallpapers.ChangeWallpaperFavoriteStatusUseCase
 ) : ViewModel() {
 
     private val _favoriteWallpapers = MutableStateFlow<List<ru.yotfr.model.Wallpaper>>(emptyList())
