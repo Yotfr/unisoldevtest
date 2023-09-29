@@ -1,6 +1,5 @@
 package ru.yotfr.unisoldevtest.domain.usecase
 
-import ru.yotfr.model.ThemeModel
 import ru.yotfr.unisoldevtest.domain.userpreference.UserPreference
 import javax.inject.Inject
 
