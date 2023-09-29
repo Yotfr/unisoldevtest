@@ -9,21 +9,20 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.yotfr.model.ThemeModel
-import ru.yotfr.unisoldevtest.domain.usecase.ChangeThemeUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.ChangeWiFiOnlyUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.GetThemeUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.GetWiFiOnlyUseCase
+import ru.yotfr.settings.usecase.ChangeThemeUseCase
+import ru.yotfr.settings.usecase.ChangeWiFiOnlyUseCase
+import ru.yotfr.settings.usecase.GetThemeUseCase
+import ru.yotfr.settings.usecase.GetWiFiOnlyUseCase
 import ru.yotfr.unisoldevtest.ui.settings.event.SettingsEvent
 import ru.yotfr.unisoldevtest.ui.settings.state.SettingsScreenState
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val changeThemeUseCase: ChangeThemeUseCase,
-    private val getThemeUseCase: GetThemeUseCase,
-    private val getWiFiOnlyUseCase: GetWiFiOnlyUseCase,
-    private val changeWiFiOnlyUseCase: ChangeWiFiOnlyUseCase
+    private val changeThemeUseCase: ru.yotfr.settings.usecase.ChangeThemeUseCase,
+    private val getThemeUseCase: ru.yotfr.settings.usecase.GetThemeUseCase,
+    private val getWiFiOnlyUseCase: ru.yotfr.settings.usecase.GetWiFiOnlyUseCase,
+    private val changeWiFiOnlyUseCase: ru.yotfr.settings.usecase.ChangeWiFiOnlyUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(SettingsScreenState())

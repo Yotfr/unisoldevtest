@@ -7,12 +7,12 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import ru.yotfr.unisoldevtest.domain.usecase.GetThemeUseCase
+import ru.yotfr.settings.usecase.GetThemeUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val getThemeUseCase: GetThemeUseCase
+    private val getThemeUseCase: ru.yotfr.settings.usecase.GetThemeUseCase
 ) : ViewModel() {
 
     private val _state = mutableStateOf(MainActivityState())
