@@ -20,7 +20,7 @@ import ru.yotfr.unisoldevtest.domain.usecase.DownloadWallpaperUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.GetDownloadByDownloadIdUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.GetDownloadByWallpaperIdUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.GetDownloadStatusUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.GetWallpaperByIdUseCase
+import ru.yotfr.wallpaperdetails.usecase.GetWallpaperByIdUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.InstallWallpaperUseCase
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperEvent
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperScreenEvent
@@ -30,7 +30,7 @@ import javax.inject.Inject
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class WallpaperViewModel @Inject constructor(
-    private val getWallpaperByIdUseCase: GetWallpaperByIdUseCase,
+    private val getWallpaperByIdUseCase: ru.yotfr.wallpaperdetails.usecase.GetWallpaperByIdUseCase,
     private val downloadWallpaperUseCase: DownloadWallpaperUseCase,
     private val checkIfFileExistsUseCase: CheckIfFileExistsUseCase,
     private val getDownloadByDownloadIdUseCase: GetDownloadByDownloadIdUseCase,
