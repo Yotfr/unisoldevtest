@@ -12,9 +12,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.yotfr.model.ErrorCause
-import ru.yotfr.model.ResponseResult
-import ru.yotfr.unisoldevtest.domain.usecase.GetCategoriesUseCase
+import ru.yotfr.categories.GetCategoriesUseCase
 import ru.yotfr.unisoldevtest.ui.categories.event.CategoriesEvent
 import ru.yotfr.unisoldevtest.ui.categories.event.CategoriesScreenEvent
 import ru.yotfr.unisoldevtest.ui.categories.state.CategoriesScreenState

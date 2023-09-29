@@ -63,7 +63,6 @@ dependencies {
     implementation(project(":data:wallpaperdownloads"))
     implementation(project(":data:shared"))
     implementation(project(":data:wallpaperdetails"))
-    implementation(project(":domain:categories"))
     implementation(project(":domain:model"))
 
     dataStore()
