@@ -21,7 +21,7 @@ import ru.yotfr.wallpaperdownloads.usecase.GetDownloadByDownloadIdUseCase
 import ru.yotfr.wallpaperdownloads.usecase.GetDownloadByWallpaperIdUseCase
 import ru.yotfr.wallpaperdownloads.usecase.GetDownloadStatusUseCase
 import ru.yotfr.wallpaperdetails.usecase.GetWallpaperByIdUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.InstallWallpaperUseCase
+import ru.yotfr.wallpaperinstaller.usecase.InstallWallpaperUseCase
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperEvent
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperScreenEvent
 import ru.yotfr.unisoldevtest.ui.wallpaper.state.WallpaperScreenState
@@ -37,7 +37,7 @@ class WallpaperViewModel @Inject constructor(
     private val getDownloadStatusUseCase: ru.yotfr.wallpaperdownloads.usecase.GetDownloadStatusUseCase,
     private val deleteWallpaperDownloadUseCase: ru.yotfr.wallpaperdownloads.usecase.DeleteWallpaperDownloadUseCase,
     private val getDownloadByWallpaperIdUseCase: ru.yotfr.wallpaperdownloads.usecase.GetDownloadByWallpaperIdUseCase,
-    private val installWallpaperUseCase: InstallWallpaperUseCase,
+    private val installWallpaperUseCase: ru.yotfr.wallpaperinstaller.usecase.InstallWallpaperUseCase,
     private val changeWallpaperFavoriteStatusUseCase: ru.yotfr.favoritewallpapers.ChangeWallpaperFavoriteStatusUseCase
 ) : ViewModel() {
 

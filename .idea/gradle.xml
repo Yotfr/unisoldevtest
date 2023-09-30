@@ -39,6 +39,7 @@
             <option value="$PROJECT_DIR$/domain/storageloader" />
             <option value="$PROJECT_DIR$/domain/wallpaperdetails" />
             <option value="$PROJECT_DIR$/domain/wallpaperdownloads" />
+            <option value="$PROJECT_DIR$/domain/wallpaperinstaller" />
           </set>
         </option>
       </GradleProjectSettings>
