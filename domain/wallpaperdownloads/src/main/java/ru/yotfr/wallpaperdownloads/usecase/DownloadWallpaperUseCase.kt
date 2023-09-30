@@ -1,10 +1,11 @@
-package ru.yotfr.unisoldevtest.domain.usecase
+package ru.yotfr.wallpaperdownloads.usecase
 
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
+import ru.yotfr.connectivity.connectivityprovider.ConnectivityProvider
+import ru.yotfr.model.Wallpaper
+import ru.yotfr.model.WallpaperDownload
+import ru.yotfr.settings.repository.SettingsRepository
 import ru.yotfr.wallpaperdownloads.wallpaperdownloader.WallpaperDownloader
 import ru.yotfr.wallpaperdownloads.repository.WallpaperDownloadsRepository
-import ru.yotfr.unisoldevtest.domain.userpreference.UserPreference
 import javax.inject.Inject
 
 /**
@@ -14,13 +15,14 @@ import javax.inject.Inject
 class DownloadWallpaperUseCase @Inject constructor(
     private val wallpaperDownloader: WallpaperDownloader,
     private val wallpaperDownloadsRepository: WallpaperDownloadsRepository,
-    private val userPreference: UserPreference,
-    private val connectivityManager: ConnectivityManager
+    private val settingsRepository: SettingsRepository,
+    private val connectivityProvider: ConnectivityProvider
 ) {
 
-    suspend operator fun invoke(wallpaper: ru.yotfr.model.Wallpaper): Boolean {
-        val allowedOnlyWifi = userPreference.getAllowedOnlyWifiValue()
-        if (!isWiFiAvailable() && allowedOnlyWifi) {
+    suspend operator fun invoke(wallpaper: Wallpaper): Boolean {
+        val allowedOnlyWifi = settingsRepository.getAllowedOnlyWifiValue()
+        val isWiFiAvailable = connectivityProvider.isWifiAvailable()
+        if (!isWiFiAvailable && allowedOnlyWifi) {
             return false
         }
         /*
@@ -31,16 +33,11 @@ class DownloadWallpaperUseCase @Inject constructor(
         val downloadId = wallpaperDownloader.downloadWallpaper(
             wallpaper = wallpaper
         )
-        val wallpaperDownloadModel = ru.yotfr.model.WallpaperDownload(
+        val wallpaperDownloadModel = WallpaperDownload(
             downloadId = downloadId,
             wallpaperId = wallpaper.id
         )
         wallpaperDownloadsRepository.addNewDownload(wallpaperDownloadModel)
         return true
-    }
-
-    private fun isWiFiAvailable(): Boolean {
-        return connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-            ?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
     }
 }

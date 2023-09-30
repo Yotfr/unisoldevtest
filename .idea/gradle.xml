@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/connectivity" />
             <option value="$PROJECT_DIR$/core/database" />
             <option value="$PROJECT_DIR$/core/downloader" />
             <option value="$PROJECT_DIR$/core/installer" />
@@ -31,7 +32,13 @@
             <option value="$PROJECT_DIR$/data/wallpaperinstaller" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/categories" />
+            <option value="$PROJECT_DIR$/domain/categorywallpapers" />
+            <option value="$PROJECT_DIR$/domain/favoritewallpapers" />
             <option value="$PROJECT_DIR$/domain/model" />
+            <option value="$PROJECT_DIR$/domain/settings" />
+            <option value="$PROJECT_DIR$/domain/storageloader" />
+            <option value="$PROJECT_DIR$/domain/wallpaperdetails" />
+            <option value="$PROJECT_DIR$/domain/wallpaperdownloads" />
           </set>
         </option>
       </GradleProjectSettings>

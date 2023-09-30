@@ -14,12 +14,12 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.yotfr.favoritewallpapers.ChangeWallpaperFavoriteStatusUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.CheckIfFileExistsUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.DeleteWallpaperDownloadUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.DownloadWallpaperUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.GetDownloadByDownloadIdUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.GetDownloadByWallpaperIdUseCase
-import ru.yotfr.unisoldevtest.domain.usecase.GetDownloadStatusUseCase
+import ru.yotfr.wallpaperdownloads.usecase.CheckIfFileExistsUseCase
+import ru.yotfr.wallpaperdownloads.usecase.DeleteWallpaperDownloadUseCase
+import ru.yotfr.wallpaperdownloads.usecase.DownloadWallpaperUseCase
+import ru.yotfr.wallpaperdownloads.usecase.GetDownloadByDownloadIdUseCase
+import ru.yotfr.wallpaperdownloads.usecase.GetDownloadByWallpaperIdUseCase
+import ru.yotfr.wallpaperdownloads.usecase.GetDownloadStatusUseCase
 import ru.yotfr.wallpaperdetails.usecase.GetWallpaperByIdUseCase
 import ru.yotfr.unisoldevtest.domain.usecase.InstallWallpaperUseCase
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperEvent
@@ -31,12 +31,12 @@ import javax.inject.Inject
 @HiltViewModel
 class WallpaperViewModel @Inject constructor(
     private val getWallpaperByIdUseCase: ru.yotfr.wallpaperdetails.usecase.GetWallpaperByIdUseCase,
-    private val downloadWallpaperUseCase: DownloadWallpaperUseCase,
-    private val checkIfFileExistsUseCase: CheckIfFileExistsUseCase,
-    private val getDownloadByDownloadIdUseCase: GetDownloadByDownloadIdUseCase,
-    private val getDownloadStatusUseCase: GetDownloadStatusUseCase,
-    private val deleteWallpaperDownloadUseCase: DeleteWallpaperDownloadUseCase,
-    private val getDownloadByWallpaperIdUseCase: GetDownloadByWallpaperIdUseCase,
+    private val downloadWallpaperUseCase: ru.yotfr.wallpaperdownloads.usecase.DownloadWallpaperUseCase,
+    private val checkIfFileExistsUseCase: ru.yotfr.wallpaperdownloads.usecase.CheckIfFileExistsUseCase,
+    private val getDownloadByDownloadIdUseCase: ru.yotfr.wallpaperdownloads.usecase.GetDownloadByDownloadIdUseCase,
+    private val getDownloadStatusUseCase: ru.yotfr.wallpaperdownloads.usecase.GetDownloadStatusUseCase,
+    private val deleteWallpaperDownloadUseCase: ru.yotfr.wallpaperdownloads.usecase.DeleteWallpaperDownloadUseCase,
+    private val getDownloadByWallpaperIdUseCase: ru.yotfr.wallpaperdownloads.usecase.GetDownloadByWallpaperIdUseCase,
     private val installWallpaperUseCase: InstallWallpaperUseCase,
     private val changeWallpaperFavoriteStatusUseCase: ru.yotfr.favoritewallpapers.ChangeWallpaperFavoriteStatusUseCase
 ) : ViewModel() {
