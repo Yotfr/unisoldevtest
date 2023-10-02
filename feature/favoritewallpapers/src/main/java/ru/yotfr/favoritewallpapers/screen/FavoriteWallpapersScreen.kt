@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.ui.favoritewallpapers.screen
+package ru.yotfr.favoritewallpapers.screen
 
 import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -22,17 +23,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import ru.yotfr.unisoldevtest.R
-import ru.yotfr.shared.WallpaperItem
-import ru.yotfr.unisoldevtest.ui.favoritewallpapers.event.FavoriteWallpapersEvent
-import ru.yotfr.unisoldevtest.ui.favoritewallpapers.viewmodel.FavoriteWallpapersViewModel
 import ru.yotfr.designsystem.theme.WallpaperTheme
+import ru.yotfr.resources.R
+import ru.yotfr.favoritewallpapers.event.FavoriteWallpapersEvent
+import ru.yotfr.favoritewallpapers.viewmodel.FavoriteWallpapersViewModel
+import ru.yotfr.model.Wallpaper
+import ru.yotfr.shared.component.WallpaperItem
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FavoriteWallpapersScreen(
     vm: FavoriteWallpapersViewModel = hiltViewModel(),
-    navigateToWallpaper: (ru.yotfr.model.Wallpaper) -> Unit
+    navigateToWallpaper: (Wallpaper) -> Unit
 ) {
     val wallpapers by vm.favoriteWallpapers.collectAsState()
     val context = LocalContext.current
@@ -47,15 +49,15 @@ fun FavoriteWallpapersScreen(
             ) {
                 StaggeredGridCells.Adaptive(175.dp)
             } else StaggeredGridCells.Fixed(2),
-            modifier = Modifier.padding(horizontal = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium),
-            verticalItemSpacing = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small,
-            horizontalArrangement = Arrangement.spacedBy(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small)
+            modifier = Modifier.padding(horizontal = WallpaperTheme.spacing.medium),
+            verticalItemSpacing = WallpaperTheme.spacing.small,
+            horizontalArrangement = Arrangement.spacedBy(WallpaperTheme.spacing.small)
         ) {
             item(span = StaggeredGridItemSpan.FullLine) {
-                Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
+                Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
             }
             items(wallpapers) { wallpaper ->
-                ru.yotfr.shared.WallpaperItem(
+                WallpaperItem(
                     wallpaper = wallpaper,
                     onClick = navigateToWallpaper,
                     onFavoriteClicked = { wall ->
@@ -69,7 +71,7 @@ fun FavoriteWallpapersScreen(
                 )
             }
             item(span = StaggeredGridItemSpan.FullLine) {
-                Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
+                Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
             }
         }
         if (wallpapers.isEmpty()) {
@@ -79,7 +81,7 @@ fun FavoriteWallpapersScreen(
             ) {
                 Text(
                     text = stringResource(id = R.string.no_favorites),
-                    style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.title
+                    style = WallpaperTheme.typography.title
                 )
             }
         }

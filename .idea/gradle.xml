@@ -45,6 +45,7 @@
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/categories" />
             <option value="$PROJECT_DIR$/feature/categorywallpapers" />
+            <option value="$PROJECT_DIR$/feature/favoritewallpapers" />
             <option value="$PROJECT_DIR$/feature/shared" />
           </set>
         </option>
