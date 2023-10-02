@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.ui.categorywallpapers.screen
+package ru.yotfr.categorywallpapers.screen
 
 import android.content.Context
 import android.content.res.Configuration

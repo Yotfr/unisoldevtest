@@ -44,6 +44,7 @@
             <option value="$PROJECT_DIR$/domain/wallpaperinstaller" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/categories" />
+            <option value="$PROJECT_DIR$/feature/categorywallpapers" />
             <option value="$PROJECT_DIR$/feature/shared" />
           </set>
         </option>

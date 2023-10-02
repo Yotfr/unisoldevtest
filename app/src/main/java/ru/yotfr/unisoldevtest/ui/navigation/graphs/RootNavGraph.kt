@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import ru.yotfr.model.Category
-import ru.yotfr.unisoldevtest.ui.categorywallpapers.screen.CategoryWallpaperScreen
+import ru.yotfr.categorywallpapers.screen.CategoryWallpaperScreen
 import ru.yotfr.unisoldevtest.ui.navigation.screens.RootScreens
 import ru.yotfr.unisoldevtest.ui.settings.screen.SettingsScreen
 import ru.yotfr.unisoldevtest.ui.wallpaper.screen.WallpaperScreen
@@ -34,7 +34,7 @@ fun RootNavGraph(
                     RootScreens.CATEGORY_KEY
                 ) ?: throw IllegalArgumentException("Navigated with wrong Category")
             )
-            CategoryWallpaperScreen(
+            ru.yotfr.categorywallpapers.screen.CategoryWallpaperScreen(
                 category = category,
                 navigateBack = { navController.popBackStack() },
                 navigateToWallpaper = { wallpaper ->

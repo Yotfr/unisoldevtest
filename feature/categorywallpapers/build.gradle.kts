@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.categories"
+    namespace = "ru.yotfr.categorywallpapers"
     compileSdk = 33
 
     defaultConfig {
@@ -34,13 +34,15 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain:categories"))
+    implementation(project(":domain:categorywallpapers"))
+    implementation(project(":domain:favoritewallpapers"))
     implementation(project(":domain:model"))
     implementation(project(":core:resources"))
     implementation(project(":core:designsystem"))
     implementation(project(":feature:shared"))
 
     coil()
+    paging()
     coroutinesCore()
     coroutinesAndroid()
     navigation()

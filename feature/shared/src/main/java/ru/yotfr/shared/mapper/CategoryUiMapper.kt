@@ -1,4 +1,4 @@
-package com.example.categories.util
+package ru.yotfr.shared.mapper
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource

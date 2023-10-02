@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.ui.categorywallpapers.viewmodel
+package ru.yotfr.categorywallpapers.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,16 +9,16 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import ru.yotfr.favoritewallpapers.ChangeWallpaperFavoriteStatusUseCase
 import ru.yotfr.categorywallpapers.usecase.GetWallpaperByCategoryUseCase
-import ru.yotfr.unisoldevtest.ui.categorywallpapers.event.CategoryWallpapersEvent
+import ru.yotfr.categorywallpapers.event.CategoryWallpapersEvent
+import ru.yotfr.favoritewallpapers.usecase.ChangeWallpaperFavoriteStatusUseCase
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class CategoryWallpaperViewModel @Inject constructor(
-    private val getWallpaperByCategoryUseCase: ru.yotfr.categorywallpapers.usecase.GetWallpaperByCategoryUseCase,
-    private val changeWallpaperFavoriteStatusUseCase: ru.yotfr.favoritewallpapers.ChangeWallpaperFavoriteStatusUseCase
+    private val getWallpaperByCategoryUseCase: GetWallpaperByCategoryUseCase,
+    private val changeWallpaperFavoriteStatusUseCase: ChangeWallpaperFavoriteStatusUseCase
 ) : ViewModel() {
 
     private val triggerRefresh = MutableStateFlow(false)

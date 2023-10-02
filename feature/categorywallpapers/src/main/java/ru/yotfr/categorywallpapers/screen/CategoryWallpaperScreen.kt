@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.ui.categorywallpapers.screen
+package ru.yotfr.categorywallpapers.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
@@ -24,11 +24,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import kotlinx.coroutines.launch
+import ru.yotfr.categorywallpapers.event.CategoryWallpapersEvent
+import ru.yotfr.categorywallpapers.viewmodel.CategoryWallpaperViewModel
 import ru.yotfr.model.Category
 import ru.yotfr.model.Wallpaper
-import com.example.categories.util.displayName
-import ru.yotfr.unisoldevtest.ui.categorywallpapers.event.CategoryWallpapersEvent
-import ru.yotfr.unisoldevtest.ui.categorywallpapers.viewmodel.CategoryWallpaperViewModel
+import ru.yotfr.shared.mapper.displayName
 
 @OptIn(
     ExperimentalMaterialApi::class,
@@ -37,9 +37,9 @@ import ru.yotfr.unisoldevtest.ui.categorywallpapers.viewmodel.CategoryWallpaperV
 @Composable
 fun CategoryWallpaperScreen(
     vm: CategoryWallpaperViewModel = hiltViewModel(),
-    category: ru.yotfr.model.Category,
+    category: Category,
     navigateBack: () -> Unit,
-    navigateToWallpaper: (ru.yotfr.model.Wallpaper) -> Unit
+    navigateToWallpaper: (Wallpaper) -> Unit
 ) {
     val wallpapers = vm.wallpapers.collectAsLazyPagingItems()
     val scope = rememberCoroutineScope()

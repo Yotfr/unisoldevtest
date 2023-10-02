@@ -24,7 +24,7 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import ru.yotfr.model.Category
 import ru.yotfr.model.CategoryModel
-import com.example.categories.util.displayName
+import ru.yotfr.shared.mapper.displayName
 import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @Composable
