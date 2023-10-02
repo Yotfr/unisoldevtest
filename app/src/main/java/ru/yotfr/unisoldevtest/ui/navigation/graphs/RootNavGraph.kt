@@ -9,8 +9,8 @@ import androidx.navigation.navArgument
 import ru.yotfr.model.Category
 import ru.yotfr.categorywallpapers.screen.CategoryWallpaperScreen
 import ru.yotfr.unisoldevtest.ui.navigation.screens.RootScreens
-import ru.yotfr.unisoldevtest.ui.settings.screen.SettingsScreen
-import ru.yotfr.unisoldevtest.ui.wallpaper.screen.WallpaperScreen
+import ru.yotfr.settings.screen.SettingsScreen
+import ru.yotfr.wallpaperdetails.screen.WallpaperScreen
 
 @Composable
 fun RootNavGraph(
@@ -55,7 +55,7 @@ fun RootNavGraph(
             val id = backStackEntry.arguments?.getString(
                 RootScreens.WALLPAPER_ID_KEY
             ) ?: throw IllegalArgumentException("Navigated with wrong WallpaperID")
-            WallpaperScreen(
+            ru.yotfr.wallpaperdetails.screen.WallpaperScreen(
                 id = id,
                 navigateBack = { navController.popBackStack() }
             )
@@ -64,7 +64,7 @@ fun RootNavGraph(
         composable(
             route = RootScreens.Settings.route
         ) {
-            SettingsScreen(
+            ru.yotfr.settings.screen.SettingsScreen(
                 navigateBack = { navController.popBackStack() }
             )
         }

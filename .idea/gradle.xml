@@ -47,7 +47,9 @@
             <option value="$PROJECT_DIR$/feature/categorywallpapers" />
             <option value="$PROJECT_DIR$/feature/favoritewallpapers" />
             <option value="$PROJECT_DIR$/feature/savedwallpapers" />
+            <option value="$PROJECT_DIR$/feature/settings" />
             <option value="$PROJECT_DIR$/feature/shared" />
+            <option value="$PROJECT_DIR$/feature/wallpaperdetails" />
           </set>
         </option>
       </GradleProjectSettings>
