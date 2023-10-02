@@ -23,8 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.yotfr.unisoldevtest.R
-import ru.yotfr.model.Wallpaper
-import ru.yotfr.unisoldevtest.ui.common.WallpaperItem
+import ru.yotfr.shared.WallpaperItem
 import ru.yotfr.unisoldevtest.ui.favoritewallpapers.event.FavoriteWallpapersEvent
 import ru.yotfr.unisoldevtest.ui.favoritewallpapers.viewmodel.FavoriteWallpapersViewModel
 import ru.yotfr.designsystem.theme.WallpaperTheme
@@ -56,7 +55,7 @@ fun FavoriteWallpapersScreen(
                 Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
             }
             items(wallpapers) { wallpaper ->
-                WallpaperItem(
+                ru.yotfr.shared.WallpaperItem(
                     wallpaper = wallpaper,
                     onClick = navigateToWallpaper,
                     onFavoriteClicked = { wall ->

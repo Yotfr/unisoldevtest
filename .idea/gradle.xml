@@ -42,6 +42,9 @@
             <option value="$PROJECT_DIR$/domain/wallpaperdetails" />
             <option value="$PROJECT_DIR$/domain/wallpaperdownloads" />
             <option value="$PROJECT_DIR$/domain/wallpaperinstaller" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/categories" />
+            <option value="$PROJECT_DIR$/feature/shared" />
           </set>
         </option>
       </GradleProjectSettings>

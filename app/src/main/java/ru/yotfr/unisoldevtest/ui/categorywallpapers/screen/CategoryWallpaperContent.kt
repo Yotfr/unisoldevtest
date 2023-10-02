@@ -22,8 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
-import ru.yotfr.model.Wallpaper
-import ru.yotfr.unisoldevtest.ui.common.WallpaperItem
+import ru.yotfr.shared.WallpaperItem
 import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -53,7 +52,7 @@ fun CategoryWallpaperContent(
             key = wallpapers.itemKey { it.id }
         ) { index ->
             wallpapers[index]?.let { wallpaper ->
-                WallpaperItem(
+                ru.yotfr.shared.WallpaperItem(
                     wallpaper = wallpaper,
                     onClick = navigateToWallpaper,
                     onFavoriteClicked = changeFavorite,

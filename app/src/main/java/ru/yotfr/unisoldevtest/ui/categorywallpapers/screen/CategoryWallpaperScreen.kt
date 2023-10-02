@@ -26,7 +26,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import kotlinx.coroutines.launch
 import ru.yotfr.model.Category
 import ru.yotfr.model.Wallpaper
-import ru.yotfr.unisoldevtest.ui.categories.util.displayName
+import com.example.categories.util.displayName
 import ru.yotfr.unisoldevtest.ui.categorywallpapers.event.CategoryWallpapersEvent
 import ru.yotfr.unisoldevtest.ui.categorywallpapers.viewmodel.CategoryWallpaperViewModel
 

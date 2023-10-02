@@ -42,7 +42,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.R
-import ru.yotfr.unisoldevtest.ui.common.displayText
+import ru.yotfr.shared.displayText
 import ru.yotfr.unisoldevtest.ui.savedwallpapers.event.SavedWallpapersEvent
 import ru.yotfr.unisoldevtest.ui.savedwallpapers.event.SavedWallpapersScreenEvent
 import ru.yotfr.unisoldevtest.ui.savedwallpapers.viewmodel.SavedWallpaperViewModel

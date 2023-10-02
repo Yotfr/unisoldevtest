@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import ru.yotfr.unisoldevtest.ui.categories.screen.CategoriesScreen
+import com.example.categories.screen.CategoriesScreen
 import ru.yotfr.unisoldevtest.ui.favoritewallpapers.screen.FavoriteWallpapersScreen
 import ru.yotfr.unisoldevtest.ui.navigation.screens.BottomBarScreens
 import ru.yotfr.unisoldevtest.ui.navigation.screens.RootScreens
@@ -20,7 +20,7 @@ fun NavGraphBuilder.bottomBarNavGraph(
         composable(
             route = BottomBarScreens.Categories.route
         ) {
-            CategoriesScreen(
+            com.example.categories.screen.CategoriesScreen(
                 navigateToCategoryWallpaper = { category ->
                     navController.navigate(
                         RootScreens.WallpapersByCategory.passCategory(

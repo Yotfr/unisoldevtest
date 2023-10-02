@@ -41,7 +41,7 @@ import coil.request.ImageRequest
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import ru.yotfr.unisoldevtest.R
-import ru.yotfr.unisoldevtest.ui.common.displayText
+import ru.yotfr.shared.displayText
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperEvent
 import ru.yotfr.unisoldevtest.ui.wallpaper.event.WallpaperScreenEvent
 import ru.yotfr.unisoldevtest.ui.wallpaper.viewmodel.WallpaperViewModel
