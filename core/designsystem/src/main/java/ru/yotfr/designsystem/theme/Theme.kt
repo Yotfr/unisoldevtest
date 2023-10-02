@@ -1,7 +1,5 @@
-package ru.yotfr.unisoldevtest.ui.theme
+package ru.yotfr.designsystem.theme
 
-import ExtraColors
-import LocalExtraColors
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -11,13 +9,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
-import blackColor
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import darkColors
-import lightColors
-import placeHolderColor
-import ru.yotfr.model.ThemeModel
-import whiteColor
 
 object WallpaperTheme {
 
@@ -38,18 +30,18 @@ object WallpaperTheme {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WallpaperTheme(
-    theme: ru.yotfr.model.ThemeModel,
+    theme: Theme,
     content: @Composable () -> Unit
 ) {
 
     val colors = when (theme) {
-        ru.yotfr.model.ThemeModel.LIGHT -> {
+        Theme.LIGHT -> {
             lightColors
         }
-        ru.yotfr.model.ThemeModel.DARK -> {
+        Theme.DARK -> {
             darkColors
         }
-        ru.yotfr.model.ThemeModel.SYSTEM_DEFAULT -> {
+        Theme.SYSTEM_DEFAULT -> {
             if (isSystemInDarkTheme()) {
                 darkColors
             } else {
@@ -84,20 +76,20 @@ fun WallpaperTheme(
 
 @Composable
 fun ConfigureSystemBars(
-    theme: ru.yotfr.model.ThemeModel
+    theme: Theme
 ) {
     val systemUiController = rememberSystemUiController()
     val isSystemDarkTheme = isSystemInDarkTheme()
     val blackScrim = Color(0f, 0f, 0f, 0.3f)
 
     val useDarkIcons = when (theme) {
-        ru.yotfr.model.ThemeModel.SYSTEM_DEFAULT -> {
+        Theme.SYSTEM_DEFAULT -> {
             !isSystemDarkTheme
         }
-        ru.yotfr.model.ThemeModel.DARK -> {
+        Theme.DARK -> {
             false
         }
-        ru.yotfr.model.ThemeModel.LIGHT -> {
+        Theme.LIGHT -> {
             true
         }
     }
@@ -112,4 +104,10 @@ fun ConfigureSystemBars(
             }
         )
     }
+}
+
+enum class Theme {
+    LIGHT,
+    DARK,
+    SYSTEM_DEFAULT
 }

@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.ui.theme
+package ru.yotfr.designsystem.theme
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.compositionLocalOf
@@ -6,7 +6,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
-import ru.yotfr.unisoldevtest.R
+import ru.yotfr.resources.R
 
 private val Geologica = FontFamily(
     fonts = listOf(

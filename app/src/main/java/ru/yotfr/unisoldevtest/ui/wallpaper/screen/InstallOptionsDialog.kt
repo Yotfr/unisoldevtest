@@ -22,7 +22,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import ru.yotfr.unisoldevtest.R
 import ru.yotfr.model.WallpaperInstallOption
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 import ru.yotfr.unisoldevtest.ui.wallpaper.util.displayName
 
 @Composable
@@ -41,7 +41,7 @@ fun InstallOptionsDialog(
         title = {
             Text(
                 text = stringResource(id = R.string.apply),
-                style = WallpaperTheme.typography.title
+                style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.title
             )
         },
         text = {
@@ -67,7 +67,7 @@ fun InstallOptionsDialog(
                         )
                         Text(
                             text = wallpaperInstallOption.displayName(),
-                            style = WallpaperTheme.typography.body,
+                            style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.body,
                             modifier = Modifier.padding(start = 16.dp)
                         )
                     }
@@ -81,7 +81,7 @@ fun InstallOptionsDialog(
                 }) {
                 Text(
                     stringResource(id = R.string.ok),
-                    style = WallpaperTheme.typography.label
+                    style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.label
                 )
             }
         },
@@ -92,7 +92,7 @@ fun InstallOptionsDialog(
                 }) {
                 Text(
                     stringResource(id = R.string.cancel),
-                    style = WallpaperTheme.typography.label
+                    style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.label
                 )
             }
         }

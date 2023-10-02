@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import ru.yotfr.unisoldevtest.R
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,7 +50,7 @@ fun WallpaperTopBar(
                     Icon(
                         imageVector = Icons.Outlined.ArrowBack,
                         contentDescription = stringResource(id = R.string.save),
-                        tint = WallpaperTheme.extraColors.onWallpaperText
+                        tint = ru.yotfr.designsystem.theme.WallpaperTheme.extraColors.onWallpaperText
                     )
                 }
             },

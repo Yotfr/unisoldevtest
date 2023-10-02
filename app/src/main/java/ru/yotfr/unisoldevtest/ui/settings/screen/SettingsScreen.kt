@@ -33,7 +33,7 @@ import ru.yotfr.unisoldevtest.R
 import ru.yotfr.unisoldevtest.ui.settings.event.SettingsEvent
 import ru.yotfr.unisoldevtest.ui.settings.util.displayName
 import ru.yotfr.unisoldevtest.ui.settings.viewmodel.SettingsViewModel
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,7 +55,7 @@ fun SettingsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPaddings)
-                .padding(WallpaperTheme.spacing.medium)
+                .padding(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium)
         ) {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -68,18 +68,18 @@ fun SettingsScreen(
                             isChangeThemeDialogVisible = true
                         }
                         .padding(
-                            vertical = WallpaperTheme.spacing.medium
+                            vertical = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium
                         ),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
                         text = stringResource(id = R.string.appearance),
-                        style = WallpaperTheme.typography.bodyLarge
+                        style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.bodyLarge
                     )
                     Text(
                         text = state.currentTheme.displayName(),
-                        style = WallpaperTheme.typography.bodyLarge,
+                        style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.secondary
                     )
                 }
@@ -90,14 +90,14 @@ fun SettingsScreen(
                             isChangeThemeDialogVisible = true
                         }
                         .padding(
-                            vertical = WallpaperTheme.spacing.medium
+                            vertical = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium
                         ),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
                         text = stringResource(id = R.string.wi_fi_only_settings),
-                        style = WallpaperTheme.typography.bodyLarge
+                        style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.bodyLarge
                     )
                     Switch(
                         checked = state.onlyWifiEnabled,

@@ -21,7 +21,7 @@ import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import ru.yotfr.model.Wallpaper
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @Composable
 fun WallpaperItem(
@@ -31,7 +31,7 @@ fun WallpaperItem(
     context: Context
 ) {
     Surface(
-        shape = WallpaperTheme.shape.default,
+        shape = ru.yotfr.designsystem.theme.WallpaperTheme.shape.default,
         color = MaterialTheme.colorScheme.surface
     ) {
         Box(
@@ -43,7 +43,7 @@ fun WallpaperItem(
             AsyncImage(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(color = WallpaperTheme.extraColors.placeHolderColor)
+                    .background(color = ru.yotfr.designsystem.theme.WallpaperTheme.extraColors.placeHolderColor)
                     .aspectRatio(wallpaper.aspectRatio),
                 model = ImageRequest.Builder(context.applicationContext)
                     .data(wallpaper.previewUrl)
@@ -64,7 +64,7 @@ fun WallpaperItem(
                     imageVector = if (wallpaper.isFavorite) Icons.Filled.Favorite
                     else Icons.Outlined.FavoriteBorder,
                     contentDescription = null,
-                    tint = WallpaperTheme.extraColors.onWallpaperText
+                    tint = ru.yotfr.designsystem.theme.WallpaperTheme.extraColors.onWallpaperText
                 )
             }
         }

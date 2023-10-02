@@ -10,7 +10,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import ru.yotfr.unisoldevtest.R
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -21,7 +21,7 @@ fun SettingsTopBar(
         title = {
             Text(
                 text = stringResource(id = R.string.settings),
-                style = WallpaperTheme.typography.title
+                style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.title
             )
         },
         navigationIcon = {

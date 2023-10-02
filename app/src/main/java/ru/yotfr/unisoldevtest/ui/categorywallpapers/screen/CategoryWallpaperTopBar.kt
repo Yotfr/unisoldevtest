@@ -8,7 +8,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +30,7 @@ fun CategoryWallpaperTopBar(
         title = {
             Text(
                 text = title,
-                style = WallpaperTheme.typography.title
+                style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.title
             )
         }
     )

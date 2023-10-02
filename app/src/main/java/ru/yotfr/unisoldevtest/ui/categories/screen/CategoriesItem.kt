@@ -25,7 +25,7 @@ import coil.request.ImageRequest
 import ru.yotfr.model.Category
 import ru.yotfr.model.CategoryModel
 import ru.yotfr.unisoldevtest.ui.categories.util.displayName
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @Composable
 fun CategoryItem(
@@ -34,7 +34,7 @@ fun CategoryItem(
     context: Context
 ) {
     Surface(
-        shape = WallpaperTheme.shape.default
+        shape = ru.yotfr.designsystem.theme.WallpaperTheme.shape.default
     ) {
         Box(
             modifier = Modifier
@@ -46,7 +46,7 @@ fun CategoryItem(
                 modifier = Modifier
                     .fillMaxSize()
                     .aspectRatio(categoryModel.aspectRatio)
-                    .background(color = WallpaperTheme.extraColors.placeHolderColor)
+                    .background(color = ru.yotfr.designsystem.theme.WallpaperTheme.extraColors.placeHolderColor)
                     .drawWithCache {
                         onDrawWithContent {
                             drawContent()
@@ -77,22 +77,22 @@ fun CategoryItem(
                     .fillMaxSize()
                     .align(Alignment.BottomCenter)
                     .padding(
-                        start = WallpaperTheme.spacing.small,
-                        end = WallpaperTheme.spacing.small,
-                        bottom = WallpaperTheme.spacing.small
+                        start = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small,
+                        end = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small,
+                        bottom = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small
                     ),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom
             ) {
                 Text(
                     text = categoryModel.category.displayName(),
-                    color = WallpaperTheme.extraColors.onWallpaperText,
-                    style = WallpaperTheme.typography.body
+                    color = ru.yotfr.designsystem.theme.WallpaperTheme.extraColors.onWallpaperText,
+                    style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.body
                 )
                 Text(
                     text = categoryModel.wallpapersCount.toString(),
-                    color = WallpaperTheme.extraColors.onWallpaperText,
-                    style = WallpaperTheme.typography.body
+                    color = ru.yotfr.designsystem.theme.WallpaperTheme.extraColors.onWallpaperText,
+                    style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.body
                 )
             }
         }

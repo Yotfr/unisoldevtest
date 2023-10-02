@@ -24,7 +24,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
 import ru.yotfr.model.Wallpaper
 import ru.yotfr.unisoldevtest.ui.common.WallpaperItem
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -41,12 +41,12 @@ fun CategoryWallpaperContent(
         ) {
             StaggeredGridCells.Adaptive(175.dp)
         } else StaggeredGridCells.Fixed(2),
-        modifier = Modifier.padding(horizontal = WallpaperTheme.spacing.medium),
-        verticalItemSpacing = WallpaperTheme.spacing.small,
-        horizontalArrangement = Arrangement.spacedBy(WallpaperTheme.spacing.small)
+        modifier = Modifier.padding(horizontal = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium),
+        verticalItemSpacing = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small,
+        horizontalArrangement = Arrangement.spacedBy(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small)
     ) {
         item(span = StaggeredGridItemSpan.FullLine) {
-            Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
+            Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
         }
         items(
             count = wallpapers.itemCount,
@@ -68,13 +68,13 @@ fun CategoryWallpaperContent(
                         modifier = Modifier
                             .size(48.dp)
                             .align(Alignment.Center),
-                        color = WallpaperTheme.extraColors.onWallpaperText
+                        color = ru.yotfr.designsystem.theme.WallpaperTheme.extraColors.onWallpaperText
                     )
                 }
             }
         }
         item(span = StaggeredGridItemSpan.FullLine) {
-            Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
+            Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
         }
     }
     if (wallpapers.loadState.refresh is LoadState.Error) {

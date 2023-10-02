@@ -17,7 +17,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import ru.yotfr.model.Category
 import ru.yotfr.unisoldevtest.ui.categories.state.CategoriesScreenState
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -32,12 +32,12 @@ fun CategoriesContent(
         ) {
             StaggeredGridCells.Adaptive(175.dp)
         } else StaggeredGridCells.Fixed(2),
-        modifier = Modifier.padding(horizontal = WallpaperTheme.spacing.medium),
-        verticalItemSpacing = WallpaperTheme.spacing.small,
-        horizontalArrangement = Arrangement.spacedBy(WallpaperTheme.spacing.small)
+        modifier = Modifier.padding(horizontal = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium),
+        verticalItemSpacing = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small,
+        horizontalArrangement = Arrangement.spacedBy(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small)
     ) {
         item(span = StaggeredGridItemSpan.FullLine) {
-            Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
+            Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
         }
         items(
             items = state.categories,
@@ -50,7 +50,7 @@ fun CategoriesContent(
             )
         }
         item(span = StaggeredGridItemSpan.FullLine) {
-            Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
+            Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
         }
     }
 }

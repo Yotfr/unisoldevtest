@@ -27,7 +27,7 @@ import ru.yotfr.model.Wallpaper
 import ru.yotfr.unisoldevtest.ui.common.WallpaperItem
 import ru.yotfr.unisoldevtest.ui.favoritewallpapers.event.FavoriteWallpapersEvent
 import ru.yotfr.unisoldevtest.ui.favoritewallpapers.viewmodel.FavoriteWallpapersViewModel
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -48,12 +48,12 @@ fun FavoriteWallpapersScreen(
             ) {
                 StaggeredGridCells.Adaptive(175.dp)
             } else StaggeredGridCells.Fixed(2),
-            modifier = Modifier.padding(horizontal = WallpaperTheme.spacing.medium),
-            verticalItemSpacing = WallpaperTheme.spacing.small,
-            horizontalArrangement = Arrangement.spacedBy(WallpaperTheme.spacing.small)
+            modifier = Modifier.padding(horizontal = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium),
+            verticalItemSpacing = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small,
+            horizontalArrangement = Arrangement.spacedBy(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small)
         ) {
             item(span = StaggeredGridItemSpan.FullLine) {
-                Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
+                Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
             }
             items(wallpapers) { wallpaper ->
                 WallpaperItem(
@@ -70,7 +70,7 @@ fun FavoriteWallpapersScreen(
                 )
             }
             item(span = StaggeredGridItemSpan.FullLine) {
-                Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
+                Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
             }
         }
         if (wallpapers.isEmpty()) {
@@ -80,7 +80,7 @@ fun FavoriteWallpapersScreen(
             ) {
                 Text(
                     text = stringResource(id = R.string.no_favorites),
-                    style = WallpaperTheme.typography.title
+                    style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.title
                 )
             }
         }

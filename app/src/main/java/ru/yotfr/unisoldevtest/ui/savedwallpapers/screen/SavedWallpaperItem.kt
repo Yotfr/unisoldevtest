@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 import ru.yotfr.model.DownloadedImages
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @Composable
 fun SavedWallpaperItem(
@@ -19,7 +19,7 @@ fun SavedWallpaperItem(
     onClick: (String) -> Unit
 ) {
     Surface(
-        shape = WallpaperTheme.shape.default,
+        shape = ru.yotfr.designsystem.theme.WallpaperTheme.shape.default,
         color = MaterialTheme.colorScheme.surface
     ) {
         Box(
@@ -31,7 +31,7 @@ fun SavedWallpaperItem(
             AsyncImage(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(color = WallpaperTheme.extraColors.placeHolderColor),
+                    .background(color = ru.yotfr.designsystem.theme.WallpaperTheme.extraColors.placeHolderColor),
                 model = downloadedImage.uri,
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,

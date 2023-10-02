@@ -16,10 +16,12 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/connectivity" />
             <option value="$PROJECT_DIR$/core/database" />
+            <option value="$PROJECT_DIR$/core/designsystem" />
             <option value="$PROJECT_DIR$/core/downloader" />
             <option value="$PROJECT_DIR$/core/installer" />
             <option value="$PROJECT_DIR$/core/memorycache" />
             <option value="$PROJECT_DIR$/core/network" />
+            <option value="$PROJECT_DIR$/core/resources" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/categories" />
             <option value="$PROJECT_DIR$/data/categorywallpapers" />

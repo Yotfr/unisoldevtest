@@ -8,7 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.core.view.WindowCompat
 import dagger.hilt.android.AndroidEntryPoint
 import ru.yotfr.unisoldevtest.ui.root.RootScreen
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
 
 
         setContent {
-            WallpaperTheme(
+            ru.yotfr.designsystem.theme.WallpaperTheme(
                 theme = state.theme
             ) {
                 RootScreen()

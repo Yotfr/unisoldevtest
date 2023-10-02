@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.ui.theme
+package ru.yotfr.designsystem.theme
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.compositionLocalOf

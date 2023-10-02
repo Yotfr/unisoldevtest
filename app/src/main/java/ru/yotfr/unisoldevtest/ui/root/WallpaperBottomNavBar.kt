@@ -9,7 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import ru.yotfr.unisoldevtest.ui.navigation.screens.BottomBarScreens
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @Composable
 fun WallpaperBottomNavBar(
@@ -29,7 +29,7 @@ fun WallpaperBottomNavBar(
                 label = {
                     Text(
                         text = stringResource(screen.stringResId),
-                        style = WallpaperTheme.typography.label
+                        style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.label
                     )
                 },
                 selected = isScreenSelected(screen),

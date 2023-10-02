@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import ru.yotfr.unisoldevtest.R
 import ru.yotfr.model.ThemeModel
 import ru.yotfr.unisoldevtest.ui.settings.util.displayName
-import ru.yotfr.unisoldevtest.ui.theme.WallpaperTheme
+import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @Composable
 fun ChangeThemeDialog(
@@ -42,7 +42,7 @@ fun ChangeThemeDialog(
         title = {
             Text(
                 text = stringResource(id = R.string.apply),
-                style = WallpaperTheme.typography.title
+                style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.title
             )
         },
         text = {
@@ -68,7 +68,7 @@ fun ChangeThemeDialog(
                         )
                         Text(
                             text = theme.displayName(),
-                            style = WallpaperTheme.typography.body,
+                            style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.body,
                             modifier = Modifier.padding(start = 16.dp)
                         )
                     }
@@ -82,7 +82,7 @@ fun ChangeThemeDialog(
                 }) {
                 Text(
                     stringResource(id = R.string.ok),
-                    style = WallpaperTheme.typography.label
+                    style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.label
                 )
             }
         },
@@ -93,7 +93,7 @@ fun ChangeThemeDialog(
                 }) {
                 Text(
                     stringResource(id = R.string.cancel),
-                    style = WallpaperTheme.typography.label
+                    style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.label
                 )
             }
         }
