@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.ui.savedwallpapers.viewmodel
+package ru.yotfr.savedwallpapers.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,16 +12,16 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.yotfr.storageloader.GetDownloadedWallpapersUseCase
-import ru.yotfr.unisoldevtest.ui.savedwallpapers.event.SavedWallpapersEvent
-import ru.yotfr.unisoldevtest.ui.savedwallpapers.event.SavedWallpapersScreenEvent
-import ru.yotfr.unisoldevtest.ui.savedwallpapers.state.SavedWallpaperScreenState
+import ru.yotfr.savedwallpapers.event.SavedWallpapersEvent
+import ru.yotfr.savedwallpapers.event.SavedWallpapersScreenEvent
+import ru.yotfr.savedwallpapers.state.SavedWallpaperScreenState
+import ru.yotfr.storageloader.usecase.GetDownloadedWallpapersUseCase
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class SavedWallpaperViewModel @Inject constructor(
-    private val getDownloadedWallpapersUseCase: ru.yotfr.storageloader.GetDownloadedWallpapersUseCase
+    private val getDownloadedWallpapersUseCase: GetDownloadedWallpapersUseCase
 ) : ViewModel() {
 
     private val triggerRefresh = MutableStateFlow(false)

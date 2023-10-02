@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.ui.savedwallpapers.screen
+package ru.yotfr.savedwallpapers.screen
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
@@ -41,12 +41,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
-import ru.yotfr.unisoldevtest.R
-import ru.yotfr.shared.displayText
-import ru.yotfr.unisoldevtest.ui.savedwallpapers.event.SavedWallpapersEvent
-import ru.yotfr.unisoldevtest.ui.savedwallpapers.event.SavedWallpapersScreenEvent
-import ru.yotfr.unisoldevtest.ui.savedwallpapers.viewmodel.SavedWallpaperViewModel
+import ru.yotfr.resources.R
+import ru.yotfr.savedwallpapers.event.SavedWallpapersEvent
+import ru.yotfr.savedwallpapers.event.SavedWallpapersScreenEvent
+import ru.yotfr.savedwallpapers.viewmodel.SavedWallpaperViewModel
 import ru.yotfr.designsystem.theme.WallpaperTheme
+import ru.yotfr.shared.mapper.displayText
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class,
@@ -102,12 +102,12 @@ fun SavedWallpaperScreen(
                 ) {
                     StaggeredGridCells.Adaptive(175.dp)
                 } else StaggeredGridCells.Fixed(2),
-                modifier = Modifier.padding(horizontal = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium),
-                verticalItemSpacing = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small,
-                horizontalArrangement = Arrangement.spacedBy(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small)
+                modifier = Modifier.padding(horizontal = WallpaperTheme.spacing.medium),
+                verticalItemSpacing = WallpaperTheme.spacing.small,
+                horizontalArrangement = Arrangement.spacedBy(WallpaperTheme.spacing.small)
             ) {
                 item(span = StaggeredGridItemSpan.FullLine) {
-                    Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
+                    Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
                 }
                 items(state.wallpapers) { savedImage ->
                     SavedWallpaperItem(
@@ -116,7 +116,7 @@ fun SavedWallpaperScreen(
                     )
                 }
                 item(span = StaggeredGridItemSpan.FullLine) {
-                    Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
+                    Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
                 }
             }
             if (state.wallpapers.isEmpty()) {
@@ -126,7 +126,7 @@ fun SavedWallpaperScreen(
                 ) {
                     Text(
                         text = stringResource(id = R.string.no_saved),
-                        style = ru.yotfr.designsystem.theme.WallpaperTheme.typography.title
+                        style = WallpaperTheme.typography.title
                     )
                 }
             }

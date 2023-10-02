@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.yotfr.favoritewallpapers"
+    namespace = "ru.yotfr.savedwallpapers"
     compileSdk = 33
 
     defaultConfig {
@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain:favoritewallpapers"))
+    implementation(project(":domain:storageloader"))
     implementation(project(":domain:model"))
     implementation(project(":core:resources"))
     implementation(project(":core:designsystem"))

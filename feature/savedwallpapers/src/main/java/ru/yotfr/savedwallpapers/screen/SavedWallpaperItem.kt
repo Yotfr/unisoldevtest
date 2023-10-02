@@ -1,4 +1,4 @@
-package ru.yotfr.unisoldevtest.ui.savedwallpapers.screen
+package ru.yotfr.savedwallpapers.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -9,17 +9,18 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.core.net.toUri
 import coil.compose.AsyncImage
 import ru.yotfr.model.DownloadedImages
 import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @Composable
 fun SavedWallpaperItem(
-    downloadedImage: ru.yotfr.model.DownloadedImages,
+    downloadedImage: DownloadedImages,
     onClick: (String) -> Unit
 ) {
     Surface(
-        shape = ru.yotfr.designsystem.theme.WallpaperTheme.shape.default,
+        shape = WallpaperTheme.shape.default,
         color = MaterialTheme.colorScheme.surface
     ) {
         Box(
@@ -31,8 +32,8 @@ fun SavedWallpaperItem(
             AsyncImage(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(color = ru.yotfr.designsystem.theme.WallpaperTheme.extraColors.placeHolderColor),
-                model = downloadedImage.uri,
+                    .background(color = WallpaperTheme.extraColors.placeHolderColor),
+                model = downloadedImage.uri.toUri(),
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,
             )

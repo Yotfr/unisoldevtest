@@ -8,7 +8,7 @@ import com.example.categories.screen.CategoriesScreen
 import ru.yotfr.favoritewallpapers.screen.FavoriteWallpapersScreen
 import ru.yotfr.unisoldevtest.ui.navigation.screens.BottomBarScreens
 import ru.yotfr.unisoldevtest.ui.navigation.screens.RootScreens
-import ru.yotfr.unisoldevtest.ui.savedwallpapers.screen.SavedWallpaperScreen
+import ru.yotfr.savedwallpapers.screen.SavedWallpaperScreen
 
 fun NavGraphBuilder.bottomBarNavGraph(
     navController: NavHostController
@@ -46,7 +46,7 @@ fun NavGraphBuilder.bottomBarNavGraph(
         composable(
             route = BottomBarScreens.SavedWallpapers.route
         ) {
-            SavedWallpaperScreen(
+            ru.yotfr.savedwallpapers.screen.SavedWallpaperScreen(
                 navigateToWallpaper = { wallaperId ->
                     navController.navigate(
                         RootScreens.WallpaperDetails.passId(
