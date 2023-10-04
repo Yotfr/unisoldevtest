@@ -1,4 +1,4 @@
-# Тестовое задание для Unisoldev
+# WallpaperInstaller
 Приложение - утилита для установки изображения в качестве обоев рабочего стола смартфона
 
 ## ВАЖНО
@@ -19,7 +19,7 @@
 
 ### Architecture & Tools :
 
-- MVVM Clean architecture
+- MVVM Multi-Module( By feature & by layer )
 - Hilt
 - Coroutines
 - Retrofit
