@@ -35,7 +35,7 @@ android {
 
 dependencies {
     implementation(project(":data:favoritewallpapers"))
-    implementation(project(":domain:model"))
+    implementation(project(":domain:shared"))
 
     coroutinesCore()
     hilt()

@@ -22,15 +22,16 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
-import ru.yotfr.shared.WallpaperItem
 import ru.yotfr.designsystem.theme.WallpaperTheme
+import ru.yotfr.shared.component.WallpaperItem
+import ru.yotfr.shared.model.Wallpaper
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CategoryWallpaperContent(
-    wallpapers: LazyPagingItems<ru.yotfr.model.Wallpaper>,
-    navigateToWallpaper: (ru.yotfr.model.Wallpaper) -> Unit,
-    changeFavorite: (ru.yotfr.model.Wallpaper) -> Unit,
+internal fun CategoryWallpaperContent(
+    wallpapers: LazyPagingItems<Wallpaper>,
+    navigateToWallpaper: (Wallpaper) -> Unit,
+    changeFavorite: (Wallpaper) -> Unit,
     showToast: (String) -> Unit,
     context: Context
 ) {
@@ -40,19 +41,19 @@ fun CategoryWallpaperContent(
         ) {
             StaggeredGridCells.Adaptive(175.dp)
         } else StaggeredGridCells.Fixed(2),
-        modifier = Modifier.padding(horizontal = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium),
-        verticalItemSpacing = ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small,
-        horizontalArrangement = Arrangement.spacedBy(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.small)
+        modifier = Modifier.padding(horizontal = WallpaperTheme.spacing.medium),
+        verticalItemSpacing = WallpaperTheme.spacing.small,
+        horizontalArrangement = Arrangement.spacedBy(WallpaperTheme.spacing.small)
     ) {
         item(span = StaggeredGridItemSpan.FullLine) {
-            Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
+            Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
         }
         items(
             count = wallpapers.itemCount,
             key = wallpapers.itemKey { it.id }
         ) { index ->
             wallpapers[index]?.let { wallpaper ->
-                ru.yotfr.shared.WallpaperItem(
+                WallpaperItem(
                     wallpaper = wallpaper,
                     onClick = navigateToWallpaper,
                     onFavoriteClicked = changeFavorite,
@@ -67,13 +68,13 @@ fun CategoryWallpaperContent(
                         modifier = Modifier
                             .size(48.dp)
                             .align(Alignment.Center),
-                        color = ru.yotfr.designsystem.theme.WallpaperTheme.extraColors.onWallpaperText
+                        color = WallpaperTheme.extraColors.onWallpaperText
                     )
                 }
             }
         }
         item(span = StaggeredGridItemSpan.FullLine) {
-            Spacer(modifier = Modifier.height(ru.yotfr.designsystem.theme.WallpaperTheme.spacing.medium))
+            Spacer(modifier = Modifier.height(WallpaperTheme.spacing.medium))
         }
     }
     if (wallpapers.loadState.refresh is LoadState.Error) {

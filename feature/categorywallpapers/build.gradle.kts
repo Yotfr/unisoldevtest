@@ -24,6 +24,12 @@ android {
             )
         }
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.2"
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -36,10 +42,10 @@ android {
 dependencies {
     implementation(project(":domain:categorywallpapers"))
     implementation(project(":domain:favoritewallpapers"))
-    implementation(project(":domain:model"))
     implementation(project(":core:resources"))
     implementation(project(":core:designsystem"))
     implementation(project(":feature:shared"))
+    implementation(project(":domain:shared"))
 
     coil()
     paging()

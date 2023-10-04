@@ -53,7 +53,7 @@ import ru.yotfr.shared.mapper.displayText
     ExperimentalMaterial3Api::class
 )
 @Composable
-fun SavedWallpaperScreen(
+internal fun SavedWallpaperScreen(
     vm: SavedWallpaperViewModel = hiltViewModel(),
     navigateToWallpaper: (String) -> Unit
 ) {

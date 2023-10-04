@@ -1,7 +1,7 @@
 package ru.yotfr.wallpaperdownloads.usecase
 
 import android.app.DownloadManager
-import ru.yotfr.model.DownloadStatus
+import ru.yotfr.shared.model.DownloadStatus
 import ru.yotfr.wallpaperdownloads.wallpaperdownloader.WallpaperDownloader
 import javax.inject.Inject
 

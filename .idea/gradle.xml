@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -36,8 +35,8 @@
             <option value="$PROJECT_DIR$/domain/categories" />
             <option value="$PROJECT_DIR$/domain/categorywallpapers" />
             <option value="$PROJECT_DIR$/domain/favoritewallpapers" />
-            <option value="$PROJECT_DIR$/domain/model" />
             <option value="$PROJECT_DIR$/domain/settings" />
+            <option value="$PROJECT_DIR$/domain/shared" />
             <option value="$PROJECT_DIR$/domain/storageloader" />
             <option value="$PROJECT_DIR$/domain/wallpaperdetails" />
             <option value="$PROJECT_DIR$/domain/wallpaperdownloads" />
@@ -46,6 +45,7 @@
             <option value="$PROJECT_DIR$/feature/categories" />
             <option value="$PROJECT_DIR$/feature/categorywallpapers" />
             <option value="$PROJECT_DIR$/feature/favoritewallpapers" />
+            <option value="$PROJECT_DIR$/feature/home" />
             <option value="$PROJECT_DIR$/feature/savedwallpapers" />
             <option value="$PROJECT_DIR$/feature/settings" />
             <option value="$PROJECT_DIR$/feature/shared" />

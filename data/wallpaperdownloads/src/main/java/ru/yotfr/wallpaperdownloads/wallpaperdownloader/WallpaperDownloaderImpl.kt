@@ -1,7 +1,7 @@
 package ru.yotfr.wallpaperdownloads.wallpaperdownloader
 
 import ru.yotfr.wallpaperdownloads.downloader.Downloader
-import ru.yotfr.model.Wallpaper
+import ru.yotfr.shared.model.Wallpaper
 import javax.inject.Inject
 
 internal class WallpaperDownloaderImpl @Inject constructor(

@@ -1,6 +1,6 @@
 package ru.yotfr.wallpaperdownloads.usecase
 
-import ru.yotfr.model.Wallpaper
+import ru.yotfr.shared.model.Wallpaper
 import ru.yotfr.wallpaperdownloads.wallpaperdownloader.WallpaperDownloader
 import javax.inject.Inject
 

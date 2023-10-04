@@ -38,7 +38,7 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:memorycache"))
     implementation(project(":data:shared"))
-    implementation(project(":domain:model"))
+    implementation(project(":domain:shared"))
 
     paging()
     coroutinesCore()

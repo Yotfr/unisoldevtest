@@ -1,6 +1,6 @@
 package ru.yotfr.shared
 
-import ru.yotfr.model.Category
+import ru.yotfr.shared.model.Category
 
 
 fun Category.query(): String {

@@ -21,12 +21,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import ru.yotfr.resources.R
-import ru.yotfr.model.ThemeModel
 import ru.yotfr.shared.mapper.displayName
 import ru.yotfr.designsystem.theme.WallpaperTheme
+import ru.yotfr.shared.model.ThemeModel
 
 @Composable
-fun ChangeThemeDialog(
+internal fun ChangeThemeDialog(
     currentTheme: ThemeModel,
     onDismiss: () -> Unit,
     onOkPressed: (selectedTheme: ThemeModel) -> Unit

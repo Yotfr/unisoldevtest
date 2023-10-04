@@ -4,10 +4,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ru.yotfr.installer.installer.Installer
 import ru.yotfr.installer.model.InstallResult
-import ru.yotfr.model.ErrorCause
-import ru.yotfr.model.ResponseResult
-import ru.yotfr.model.Wallpaper
-import ru.yotfr.model.WallpaperInstallOption
+import ru.yotfr.shared.model.ErrorCause
+import ru.yotfr.shared.model.ResponseResult
+import ru.yotfr.shared.model.Wallpaper
+import ru.yotfr.shared.model.WallpaperInstallOption
 import javax.inject.Inject
 
 

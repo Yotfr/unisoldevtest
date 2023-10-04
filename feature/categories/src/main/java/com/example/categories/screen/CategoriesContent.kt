@@ -16,13 +16,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.example.categories.state.CategoriesScreenState
+import ru.yotfr.shared.model.Category
 import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CategoriesContent(
+internal fun CategoriesContent(
     state: CategoriesScreenState,
-    onCategoryClicked: (ru.yotfr.model.Category) -> Unit,
+    onCategoryClicked: (Category) -> Unit,
     context: Context
 ) {
     LazyVerticalStaggeredGrid(

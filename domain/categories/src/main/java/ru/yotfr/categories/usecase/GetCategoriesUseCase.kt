@@ -2,8 +2,8 @@ package ru.yotfr.categories.usecase
 
 import kotlinx.coroutines.flow.Flow
 import ru.yotfr.categories.repository.CategoriesRepository
-import ru.yotfr.model.CategoryModel
-import ru.yotfr.model.ResponseResult
+import ru.yotfr.shared.model.CategoryModel
+import ru.yotfr.shared.model.ResponseResult
 import javax.inject.Inject
 
 class GetCategoriesUseCase @Inject constructor(

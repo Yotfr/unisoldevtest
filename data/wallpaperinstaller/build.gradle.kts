@@ -35,7 +35,7 @@ android {
 
 dependencies {
     implementation(project(":core:installer"))
-    implementation(project(":domain:model"))
+    implementation(project(":domain:shared"))
 
     coroutinesCore()
     hilt()

@@ -14,7 +14,7 @@ import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsTopBar(
+internal fun SettingsTopBar(
     navigateBack: () -> Unit
 ) {
     TopAppBar(

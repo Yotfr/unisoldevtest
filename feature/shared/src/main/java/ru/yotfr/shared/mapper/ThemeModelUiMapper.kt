@@ -3,7 +3,7 @@ package ru.yotfr.shared.mapper
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import ru.yotfr.resources.R
-import ru.yotfr.model.ThemeModel
+import ru.yotfr.shared.model.ThemeModel
 
 @Composable
 fun ThemeModel.displayName(): String {

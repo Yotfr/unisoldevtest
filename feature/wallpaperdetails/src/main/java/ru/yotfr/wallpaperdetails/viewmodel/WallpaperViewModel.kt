@@ -14,12 +14,12 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.yotfr.favoritewallpapers.usecase.ChangeWallpaperFavoriteStatusUseCase
-import ru.yotfr.model.DownloadStatus
-import ru.yotfr.model.ErrorCause
-import ru.yotfr.model.ResponseResult
-import ru.yotfr.model.Wallpaper
-import ru.yotfr.model.WallpaperDownload
-import ru.yotfr.model.WallpaperInstallOption
+import ru.yotfr.shared.model.DownloadStatus
+import ru.yotfr.shared.model.ErrorCause
+import ru.yotfr.shared.model.ResponseResult
+import ru.yotfr.shared.model.Wallpaper
+import ru.yotfr.shared.model.WallpaperDownload
+import ru.yotfr.shared.model.WallpaperInstallOption
 import ru.yotfr.wallpaperdownloads.usecase.CheckIfFileExistsUseCase
 import ru.yotfr.wallpaperdownloads.usecase.DeleteWallpaperDownloadUseCase
 import ru.yotfr.wallpaperdownloads.usecase.DownloadWallpaperUseCase
@@ -35,7 +35,7 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
-class WallpaperViewModel @Inject constructor(
+internal class WallpaperViewModel @Inject constructor(
     private val getWallpaperByIdUseCase: GetWallpaperByIdUseCase,
     private val downloadWallpaperUseCase: DownloadWallpaperUseCase,
     private val checkIfFileExistsUseCase: CheckIfFileExistsUseCase,

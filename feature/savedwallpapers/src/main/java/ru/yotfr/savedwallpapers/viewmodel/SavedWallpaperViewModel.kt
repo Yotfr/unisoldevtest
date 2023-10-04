@@ -15,12 +15,14 @@ import kotlinx.coroutines.launch
 import ru.yotfr.savedwallpapers.event.SavedWallpapersEvent
 import ru.yotfr.savedwallpapers.event.SavedWallpapersScreenEvent
 import ru.yotfr.savedwallpapers.state.SavedWallpaperScreenState
+import ru.yotfr.shared.model.ErrorCause
+import ru.yotfr.shared.model.ResponseResult
 import ru.yotfr.storageloader.usecase.GetDownloadedWallpapersUseCase
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
-class SavedWallpaperViewModel @Inject constructor(
+internal class SavedWallpaperViewModel @Inject constructor(
     private val getDownloadedWallpapersUseCase: GetDownloadedWallpapersUseCase
 ) : ViewModel() {
 
@@ -38,7 +40,7 @@ class SavedWallpaperViewModel @Inject constructor(
                 getDownloadedWallpapersUseCase()
             }.collectLatest { response ->
                 when (response) {
-                    is ru.yotfr.model.ResponseResult.Error -> {
+                    is ResponseResult.Error -> {
                         _state.update {
                             it.copy(
                                 isLoading = false
@@ -46,14 +48,14 @@ class SavedWallpaperViewModel @Inject constructor(
                         }
                         _event.send(
                             SavedWallpapersScreenEvent.ShowErrorToast(
-                                error = response.cause ?: ru.yotfr.model.ErrorCause.Unknown(
+                                error = response.cause ?: ErrorCause.Unknown(
                                     message = "Somethings went wrong"
                                 )
                             )
                         )
                     }
 
-                    is ru.yotfr.model.ResponseResult.Loading -> {
+                    is ResponseResult.Loading -> {
                         _state.update {
                             it.copy(
                                 isLoading = true
@@ -61,7 +63,7 @@ class SavedWallpaperViewModel @Inject constructor(
                         }
                     }
 
-                    is ru.yotfr.model.ResponseResult.Success -> {
+                    is ResponseResult.Success -> {
                         _state.update {
                             it.copy(
                                 isLoading = false,

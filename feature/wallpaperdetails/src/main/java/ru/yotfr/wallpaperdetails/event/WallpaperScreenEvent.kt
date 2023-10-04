@@ -1,8 +1,8 @@
 package ru.yotfr.wallpaperdetails.event
 
-import ru.yotfr.model.ErrorCause
+import ru.yotfr.shared.model.ErrorCause
 
-sealed interface WallpaperScreenEvent {
+internal sealed interface WallpaperScreenEvent {
     data object ShowDownloadCompleteSnackbar : WallpaperScreenEvent
     data object ShowDownloadInProgressSnackbar : WallpaperScreenEvent
     data object ShowDownloadFailedProgressSnackbar : WallpaperScreenEvent

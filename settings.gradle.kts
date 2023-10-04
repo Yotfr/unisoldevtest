@@ -13,12 +13,11 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "unisoldevtest"
+rootProject.name = "wallpaperinstaller"
 include(":app")
 include(":core:network")
 include(":core:database")
 include(":data:categories")
-include(":domain:model")
 include(":data:shared")
 include(":data:categorywallpapers")
 include(":data:favoritewallpapers")
@@ -48,3 +47,5 @@ include(":feature:favoritewallpapers")
 include(":feature:savedwallpapers")
 include(":feature:settings")
 include(":feature:wallpaperdetails")
+include(":feature:home")
+include(":domain:shared")

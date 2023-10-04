@@ -37,7 +37,7 @@ dependencies {
     implementation(project(":core:connectivity"))
     implementation(project(":data:wallpaperdownloads"))
     implementation(project(":data:settings"))
-    implementation(project(":domain:model"))
+    implementation(project(":domain:shared"))
 
     coroutinesCore()
     hilt()

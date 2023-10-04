@@ -49,7 +49,7 @@ import ru.yotfr.wallpaperdetails.viewmodel.WallpaperViewModel
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WallpaperScreen(
+internal fun WallpaperScreen(
     vm: WallpaperViewModel = hiltViewModel(),
     id: String,
     navigateBack: () -> Unit

@@ -26,16 +26,16 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import kotlinx.coroutines.launch
 import ru.yotfr.categorywallpapers.event.CategoryWallpapersEvent
 import ru.yotfr.categorywallpapers.viewmodel.CategoryWallpaperViewModel
-import ru.yotfr.model.Category
-import ru.yotfr.model.Wallpaper
 import ru.yotfr.shared.mapper.displayName
+import ru.yotfr.shared.model.Category
+import ru.yotfr.shared.model.Wallpaper
 
 @OptIn(
     ExperimentalMaterialApi::class,
     ExperimentalMaterial3Api::class
 )
 @Composable
-fun CategoryWallpaperScreen(
+internal fun CategoryWallpaperScreen(
     vm: CategoryWallpaperViewModel = hiltViewModel(),
     category: Category,
     navigateBack: () -> Unit,

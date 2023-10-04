@@ -4,9 +4,9 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import ru.yotfr.model.Wallpaper
 import ru.yotfr.network.provider.WallpaperNetworkProvider
 import ru.yotfr.shared.mapDomain
+import ru.yotfr.shared.model.Wallpaper
 
 internal class WallpaperPageSource(
     private val wallpaperNetworkProvider: WallpaperNetworkProvider,

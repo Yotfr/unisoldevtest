@@ -20,12 +20,13 @@ import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
+import ru.yotfr.shared.model.Wallpaper
 
 @Composable
 fun WallpaperItem(
-    wallpaper: ru.yotfr.model.Wallpaper,
-    onClick: (ru.yotfr.model.Wallpaper) -> Unit,
-    onFavoriteClicked: (ru.yotfr.model.Wallpaper) -> Unit,
+    wallpaper: Wallpaper,
+    onClick: (Wallpaper) -> Unit,
+    onFavoriteClicked: (Wallpaper) -> Unit,
     context: Context
 ) {
     Surface(

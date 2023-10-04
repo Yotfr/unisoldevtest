@@ -1,8 +1,8 @@
 package ru.yotfr.settings.state
 
-import ru.yotfr.model.ThemeModel
+import ru.yotfr.shared.model.ThemeModel
 
-data class SettingsScreenState(
+internal data class SettingsScreenState(
     val currentTheme: ThemeModel = ThemeModel.SYSTEM_DEFAULT,
     val onlyWifiEnabled: Boolean = true
 )

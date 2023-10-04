@@ -1,6 +1,6 @@
 package ru.yotfr.wallpaperdownloads.repository
 
-import ru.yotfr.model.WallpaperDownload
+import ru.yotfr.shared.model.WallpaperDownload
 
 interface WallpaperDownloadsRepository {
     suspend fun addNewDownload(download: WallpaperDownload)

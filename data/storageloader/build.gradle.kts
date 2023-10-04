@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain:model"))
+    implementation(project(":domain:shared"))
 
     coroutinesCore()
     hilt()

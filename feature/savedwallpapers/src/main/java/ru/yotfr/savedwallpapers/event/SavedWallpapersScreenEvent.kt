@@ -1,7 +1,7 @@
 package ru.yotfr.savedwallpapers.event
 
-import ru.yotfr.model.ErrorCause
+import ru.yotfr.shared.model.ErrorCause
 
-sealed interface SavedWallpapersScreenEvent {
+internal sealed interface SavedWallpapersScreenEvent {
     data class ShowErrorToast(val error: ErrorCause) : SavedWallpapersScreenEvent
 }

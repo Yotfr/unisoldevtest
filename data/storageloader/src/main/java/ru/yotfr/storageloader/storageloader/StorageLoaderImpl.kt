@@ -7,9 +7,9 @@ import android.provider.MediaStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import ru.yotfr.model.DownloadedImages
-import ru.yotfr.model.ErrorCause
-import ru.yotfr.model.ResponseResult
+import ru.yotfr.shared.model.DownloadedImages
+import ru.yotfr.shared.model.ErrorCause
+import ru.yotfr.shared.model.ResponseResult
 
 internal class StorageLoaderImpl(
     private val context: Context

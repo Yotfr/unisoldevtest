@@ -11,11 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.core.net.toUri
 import coil.compose.AsyncImage
-import ru.yotfr.model.DownloadedImages
 import ru.yotfr.designsystem.theme.WallpaperTheme
+import ru.yotfr.shared.model.DownloadedImages
 
 @Composable
-fun SavedWallpaperItem(
+internal fun SavedWallpaperItem(
     downloadedImage: DownloadedImages,
     onClick: (String) -> Unit
 ) {

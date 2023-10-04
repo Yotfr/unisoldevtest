@@ -12,18 +12,20 @@ import kotlinx.coroutines.launch
 import ru.yotfr.categorywallpapers.usecase.GetWallpaperByCategoryUseCase
 import ru.yotfr.categorywallpapers.event.CategoryWallpapersEvent
 import ru.yotfr.favoritewallpapers.usecase.ChangeWallpaperFavoriteStatusUseCase
+import ru.yotfr.shared.model.Category
+import ru.yotfr.shared.model.Wallpaper
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
-class CategoryWallpaperViewModel @Inject constructor(
+internal class CategoryWallpaperViewModel @Inject constructor(
     private val getWallpaperByCategoryUseCase: GetWallpaperByCategoryUseCase,
     private val changeWallpaperFavoriteStatusUseCase: ChangeWallpaperFavoriteStatusUseCase
 ) : ViewModel() {
 
     private val triggerRefresh = MutableStateFlow(false)
 
-    private val category = MutableStateFlow<ru.yotfr.model.Category?>(null)
+    private val category = MutableStateFlow<Category?>(null)
 
     val wallpapers = combine(
         category, triggerRefresh
@@ -49,13 +51,13 @@ class CategoryWallpaperViewModel @Inject constructor(
         }
     }
 
-    private fun changeFavorite(wallpaper: ru.yotfr.model.Wallpaper) {
+    private fun changeFavorite(wallpaper: Wallpaper) {
         viewModelScope.launch {
             changeWallpaperFavoriteStatusUseCase(wallpaper)
         }
     }
 
-    private fun setCategory(value: ru.yotfr.model.Category) {
+    private fun setCategory(value: Category) {
         category.value = value
     }
 

@@ -2,6 +2,7 @@ package ru.yotfr.memorycache.pagingcache
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import javax.inject.Inject
 
 /**
  * [WallpapersPagingCacheImpl] нужен для изменения элементов pagingData (изменения статуса isFavorite)
@@ -15,7 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
  * все пагинируемые данные после каждого изменения элемента, либо подтягивать флоу с БД со списком id избранных обоев
  * до экрана и узнавать наличие каждого элемента  слишком дорого
  */
-internal class WallpapersPagingCacheImpl : WallpapersPagingCache {
+internal class WallpapersPagingCacheImpl @Inject constructor() : WallpapersPagingCache {
 
     private val cachedWallpapersIsFavoriteFieldStream =
         MutableStateFlow<Map<String, Boolean>>(emptyMap())

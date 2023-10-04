@@ -1,7 +1,7 @@
 package ru.yotfr.designsystem.theme
 
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
@@ -15,4 +15,4 @@ data class Spacing(
     val extraLarge: Dp = 64.dp
 )
 
-val LocalSpacing = compositionLocalOf { Spacing() }
+val LocalSpacing = staticCompositionLocalOf { Spacing() }

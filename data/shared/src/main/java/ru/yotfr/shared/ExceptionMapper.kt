@@ -1,7 +1,7 @@
 package ru.yotfr.shared
 
-import ru.yotfr.model.ErrorCause
 import ru.yotfr.network.model.NoConnectivityException
+import ru.yotfr.shared.model.ErrorCause
 import java.net.SocketTimeoutException
 import javax.net.ssl.SSLHandshakeException
 

@@ -24,7 +24,7 @@ import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WallpaperTopBar(
+internal fun WallpaperTopBar(
     onArrowBackPressed: () -> Unit,
     isVisible: Boolean,
     modifier: Modifier

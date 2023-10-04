@@ -10,15 +10,16 @@ import kotlinx.coroutines.launch
 import ru.yotfr.favoritewallpapers.event.FavoriteWallpapersEvent
 import ru.yotfr.favoritewallpapers.usecase.ChangeWallpaperFavoriteStatusUseCase
 import ru.yotfr.favoritewallpapers.usecase.GetFavoriteWallpapersUseCase
+import ru.yotfr.shared.model.Wallpaper
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteWallpapersViewModel @Inject constructor(
+internal class FavoriteWallpapersViewModel @Inject constructor(
     private val getFavoriteWallpapersUseCase: GetFavoriteWallpapersUseCase,
     private val changeWallpaperFavoriteStatusUseCase: ChangeWallpaperFavoriteStatusUseCase
 ) : ViewModel() {
 
-    private val _favoriteWallpapers = MutableStateFlow<List<ru.yotfr.model.Wallpaper>>(emptyList())
+    private val _favoriteWallpapers = MutableStateFlow<List<Wallpaper>>(emptyList())
     val favoriteWallpapers = _favoriteWallpapers.asStateFlow()
 
     init {
@@ -37,7 +38,7 @@ class FavoriteWallpapersViewModel @Inject constructor(
         }
     }
 
-    private fun changeFavorite(wallpaper: ru.yotfr.model.Wallpaper) {
+    private fun changeFavorite(wallpaper: Wallpaper) {
         viewModelScope.launch {
             changeWallpaperFavoriteStatusUseCase(wallpaper)
         }

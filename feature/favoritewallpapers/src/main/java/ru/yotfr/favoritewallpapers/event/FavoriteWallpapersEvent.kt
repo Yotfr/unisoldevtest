@@ -1,7 +1,7 @@
 package ru.yotfr.favoritewallpapers.event
 
-import ru.yotfr.model.Wallpaper
+import ru.yotfr.shared.model.Wallpaper
 
-sealed interface FavoriteWallpapersEvent {
+internal sealed interface FavoriteWallpapersEvent {
     data class ChangeFavorite(val wallpaper: Wallpaper) : FavoriteWallpapersEvent
 }

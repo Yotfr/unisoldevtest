@@ -4,10 +4,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import ru.yotfr.database.provider.FavoriteWallpaperDatabaseProvider
-import ru.yotfr.model.ResponseResult
 import ru.yotfr.network.provider.WallpaperNetworkProvider
 import ru.yotfr.shared.mapDomain
 import ru.yotfr.shared.mapExceptionCause
+import ru.yotfr.shared.model.ResponseResult
 import javax.inject.Inject
 
 internal class WallpaperDetailsRepositoryImpl @Inject constructor(

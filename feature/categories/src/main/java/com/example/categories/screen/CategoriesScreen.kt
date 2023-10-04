@@ -30,14 +30,15 @@ import kotlinx.coroutines.launch
 import com.example.categories.event.CategoriesEvent
 import com.example.categories.event.CategoriesScreenEvent
 import com.example.categories.viewmodel.CategoriesViewModel
+import ru.yotfr.shared.model.Category
 import ru.yotfr.shared.mapper.displayText
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun CategoriesScreen(
+internal fun CategoriesScreen(
     vm: CategoriesViewModel = hiltViewModel(),
-    navigateToCategoryWallpaper: (ru.yotfr.model.Category) -> Unit
+    navigateToCategoryWallpaper: (Category) -> Unit
 ) {
     val state by vm.state.collectAsState()
     val pullRefreshState = rememberPullRefreshState(

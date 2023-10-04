@@ -1,7 +1,7 @@
 package ru.yotfr.settings.repository
 
 import kotlinx.coroutines.flow.Flow
-import ru.yotfr.model.ThemeModel
+import ru.yotfr.shared.model.ThemeModel
 
 interface SettingsRepository {
     suspend fun updateTheme(theme: ThemeModel)

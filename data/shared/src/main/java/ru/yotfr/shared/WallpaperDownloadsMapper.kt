@@ -1,7 +1,7 @@
 package ru.yotfr.shared
 
 import ru.yotfr.database.entity.WallpaperDownloadsEntity
-import ru.yotfr.model.WallpaperDownload
+import ru.yotfr.shared.model.WallpaperDownload
 
 fun WallpaperDownloadsEntity.mapDomain(): WallpaperDownload {
     return WallpaperDownload(

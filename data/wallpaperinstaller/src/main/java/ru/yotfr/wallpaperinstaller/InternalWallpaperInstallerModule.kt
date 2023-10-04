@@ -1,7 +1,7 @@
 package ru.yotfr.wallpaperinstaller
 
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.yotfr.wallpaperinstaller.wallpaperinstaller.WallpaperInstaller
@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 internal interface InternalWallpaperInstallerModule {
 
-    @Provides
+    @Binds
     @Singleton
     fun bindWallpaperInstaller(
        wallpaperInstallerImpl: WallpaperInstallerImpl

@@ -16,13 +16,14 @@ import com.example.categories.event.CategoriesEvent
 import com.example.categories.event.CategoriesScreenEvent
 import com.example.categories.state.CategoriesScreenState
 import ru.yotfr.categories.usecase.GetCategoriesUseCase
-import ru.yotfr.model.ErrorCause
-import ru.yotfr.model.ResponseResult
+import ru.yotfr.shared.model.ErrorCause
+import ru.yotfr.shared.model.ErrorCause.*
+import ru.yotfr.shared.model.ResponseResult
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
-class CategoriesViewModel @Inject constructor(
+internal class CategoriesViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModel() {
 
@@ -48,7 +49,7 @@ class CategoriesViewModel @Inject constructor(
                         }
                         _event.send(
                             CategoriesScreenEvent.ShowErrorToast(
-                                error = response.cause ?: ErrorCause.Unknown(
+                                error = response.cause ?: Unknown(
                                     message = "Somethings went wrong"
                                 )
                             )

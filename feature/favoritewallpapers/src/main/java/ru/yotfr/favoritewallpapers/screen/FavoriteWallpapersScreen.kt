@@ -27,12 +27,12 @@ import ru.yotfr.designsystem.theme.WallpaperTheme
 import ru.yotfr.resources.R
 import ru.yotfr.favoritewallpapers.event.FavoriteWallpapersEvent
 import ru.yotfr.favoritewallpapers.viewmodel.FavoriteWallpapersViewModel
-import ru.yotfr.model.Wallpaper
 import ru.yotfr.shared.component.WallpaperItem
+import ru.yotfr.shared.model.Wallpaper
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun FavoriteWallpapersScreen(
+internal fun FavoriteWallpapersScreen(
     vm: FavoriteWallpapersViewModel = hiltViewModel(),
     navigateToWallpaper: (Wallpaper) -> Unit
 ) {

@@ -1,9 +1,9 @@
 package ru.yotfr.wallpaperinstaller.wallpaperinstaller
 
 import kotlinx.coroutines.flow.Flow
-import ru.yotfr.model.ResponseResult
-import ru.yotfr.model.Wallpaper
-import ru.yotfr.model.WallpaperInstallOption
+import ru.yotfr.shared.model.ResponseResult
+import ru.yotfr.shared.model.Wallpaper
+import ru.yotfr.shared.model.WallpaperInstallOption
 
 interface WallpaperInstaller {
     fun installWallpaper(

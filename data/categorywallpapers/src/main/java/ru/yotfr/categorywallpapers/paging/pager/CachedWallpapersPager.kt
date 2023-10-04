@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import ru.yotfr.categorywallpapers.paging.source.WallpaperPageSource
 import ru.yotfr.memorycache.pagingcache.WallpapersPagingCache
-import ru.yotfr.model.Wallpaper
+import ru.yotfr.shared.model.Wallpaper
 
 /**
  * [CachedWallpapersPager] Кастомный Pager, соединяет данные, полученные с pagingSourc'а

@@ -35,7 +35,7 @@ import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(
+internal fun SettingsScreen(
     vm: SettingsViewModel = hiltViewModel(),
     navigateBack: () -> Unit
 ) {

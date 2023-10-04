@@ -1,8 +1,8 @@
 package ru.yotfr.shared
 
 import ru.yotfr.database.entity.WallpaperEntity
-import ru.yotfr.model.Wallpaper
 import ru.yotfr.network.model.WallpaperResponse
+import ru.yotfr.shared.model.Wallpaper
 
 fun WallpaperResponse.mapDomain(isFavorite: Boolean = false) : Wallpaper {
     return Wallpaper(

@@ -1,7 +1,7 @@
 package com.example.categories.event
 
-import ru.yotfr.model.ErrorCause
+import ru.yotfr.shared.model.ErrorCause
 
-sealed interface CategoriesScreenEvent {
+internal sealed interface CategoriesScreenEvent {
     data class ShowErrorToast(val error: ErrorCause) : CategoriesScreenEvent
 }

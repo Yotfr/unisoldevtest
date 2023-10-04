@@ -1,7 +1,7 @@
 package ru.yotfr.favoritewallpapers.usecase
 
 import ru.yotfr.favoritewallpapers.repository.FavoriteWallpapersRepository
-import ru.yotfr.model.Wallpaper
+import ru.yotfr.shared.model.Wallpaper
 import javax.inject.Inject
 
 class ChangeWallpaperFavoriteStatusUseCase @Inject constructor(

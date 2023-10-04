@@ -1,22 +1,21 @@
 package ru.yotfr.categories.repository
 
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import ru.yotfr.shared.query
-import ru.yotfr.model.Category
-import ru.yotfr.model.CategoryModel
-import ru.yotfr.model.ResponseResult
 import ru.yotfr.network.provider.WallpaperNetworkProvider
 import ru.yotfr.shared.mapExceptionCause
+import ru.yotfr.shared.model.Category
+import ru.yotfr.shared.model.CategoryModel
+import ru.yotfr.shared.model.ResponseResult
 import javax.inject.Inject
 
 internal class CategoriesRepositoryImpl @Inject constructor(
     private val wallpaperNetworkProvider: WallpaperNetworkProvider
 ) : CategoriesRepository {
-    override fun getCategories(): Flow<ResponseResult<List<CategoryModel>>> = flow {
+    override fun getCategories() = flow {
         emit(ResponseResult.Loading())
         try {
             /*

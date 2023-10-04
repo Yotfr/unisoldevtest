@@ -1,6 +1,6 @@
 package ru.yotfr.wallpaperdownloads.wallpaperdownloader
 
-import ru.yotfr.model.Wallpaper
+import ru.yotfr.shared.model.Wallpaper
 
 interface WallpaperDownloader {
 

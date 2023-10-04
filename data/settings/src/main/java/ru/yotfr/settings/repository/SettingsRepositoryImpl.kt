@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import ru.yotfr.database.provider.UserPreferencesDataStoreProvider
-import ru.yotfr.model.ThemeModel
+import ru.yotfr.shared.model.ThemeModel
 import javax.inject.Inject
 
 internal class SettingsRepositoryImpl @Inject constructor(

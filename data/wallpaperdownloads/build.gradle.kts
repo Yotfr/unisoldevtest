@@ -37,7 +37,7 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:downloader"))
     implementation(project(":data:shared"))
-    implementation(project(":domain:model"))
+    implementation(project(":domain:shared"))
 
     coroutinesCore()
     hilt()

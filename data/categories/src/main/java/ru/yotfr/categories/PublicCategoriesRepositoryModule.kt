@@ -1,8 +1,9 @@
 package ru.yotfr.categories
 
 import dagger.Module
-import javax.inject.Singleton
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module(includes = [InternalCategoriesRepositoryModule::class])
-@Singleton
+@InstallIn(SingletonComponent::class)
 object PublicCategoriesRepositoryModule

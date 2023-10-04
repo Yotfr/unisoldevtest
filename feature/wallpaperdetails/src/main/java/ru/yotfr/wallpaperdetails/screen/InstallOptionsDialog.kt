@@ -21,12 +21,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import ru.yotfr.resources.R
-import ru.yotfr.model.WallpaperInstallOption
 import ru.yotfr.designsystem.theme.WallpaperTheme
+import ru.yotfr.shared.model.WallpaperInstallOption
 import ru.yotfr.wallpaperdetails.util.displayName
 
 @Composable
-fun InstallOptionsDialog(
+internal fun InstallOptionsDialog(
     onDismiss: () -> Unit,
     onOkPressed: (wallpaperInstallOption: WallpaperInstallOption) -> Unit
 ) {

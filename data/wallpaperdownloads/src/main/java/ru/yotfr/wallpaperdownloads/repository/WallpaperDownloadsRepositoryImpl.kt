@@ -3,9 +3,9 @@ package ru.yotfr.wallpaperdownloads.repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ru.yotfr.database.provider.WallpaperDownloadsDatabaseProvider
-import ru.yotfr.model.WallpaperDownload
 import ru.yotfr.shared.mapDomain
 import ru.yotfr.shared.mapEntity
+import ru.yotfr.shared.model.WallpaperDownload
 import javax.inject.Inject
 
 internal class WallpaperDownloadsRepositoryImpl @Inject constructor(

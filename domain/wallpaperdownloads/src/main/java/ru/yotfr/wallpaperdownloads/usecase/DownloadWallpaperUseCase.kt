@@ -1,9 +1,9 @@
 package ru.yotfr.wallpaperdownloads.usecase
 
 import ru.yotfr.connectivity.connectivityprovider.ConnectivityProvider
-import ru.yotfr.model.Wallpaper
-import ru.yotfr.model.WallpaperDownload
 import ru.yotfr.settings.repository.SettingsRepository
+import ru.yotfr.shared.model.Wallpaper
+import ru.yotfr.shared.model.WallpaperDownload
 import ru.yotfr.wallpaperdownloads.wallpaperdownloader.WallpaperDownloader
 import ru.yotfr.wallpaperdownloads.repository.WallpaperDownloadsRepository
 import javax.inject.Inject

@@ -1,5 +1,5 @@
 package ru.yotfr.savedwallpapers.event
 
-sealed interface SavedWallpapersEvent {
+internal sealed interface SavedWallpapersEvent {
     data object PullRefresh : SavedWallpapersEvent
 }

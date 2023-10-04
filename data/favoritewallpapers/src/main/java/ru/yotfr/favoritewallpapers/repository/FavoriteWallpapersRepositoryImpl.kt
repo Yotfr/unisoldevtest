@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import ru.yotfr.database.provider.FavoriteWallpaperDatabaseProvider
 import ru.yotfr.memorycache.pagingcache.WallpapersPagingCache
-import ru.yotfr.model.Wallpaper
 import ru.yotfr.shared.mapDomain
 import ru.yotfr.shared.mapEntity
+import ru.yotfr.shared.model.Wallpaper
 import javax.inject.Inject
 
 internal class FavoriteWallpapersRepositoryImpl @Inject constructor(

@@ -1,8 +1,8 @@
 package ru.yotfr.wallpaperdetails.event
 
-import ru.yotfr.model.WallpaperInstallOption
+import ru.yotfr.shared.model.WallpaperInstallOption
 
-sealed interface WallpaperEvent {
+internal sealed interface WallpaperEvent {
     data class EnteredScreen(val wallpaperId: String) : WallpaperEvent
     data object ChangeBarsVisibility : WallpaperEvent
     data object DownloadWallpaper : WallpaperEvent

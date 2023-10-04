@@ -1,8 +1,8 @@
 package ru.yotfr.savedwallpapers.state
 
-import ru.yotfr.model.DownloadedImages
+import ru.yotfr.shared.model.DownloadedImages
 
-data class SavedWallpaperScreenState(
+internal data class SavedWallpaperScreenState(
     val isLoading: Boolean = false,
     val wallpapers: List<DownloadedImages> = emptyList()
 )

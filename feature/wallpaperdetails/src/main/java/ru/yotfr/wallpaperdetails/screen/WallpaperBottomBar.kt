@@ -27,7 +27,7 @@ import ru.yotfr.resources.R
 import ru.yotfr.designsystem.theme.WallpaperTheme
 
 @Composable
-fun WallpaperBottomButtonBar(
+internal fun WallpaperBottomButtonBar(
     modifier: Modifier,
     isVisible: Boolean,
     onSaveClicked: () -> Unit,

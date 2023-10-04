@@ -15,10 +15,11 @@ import ru.yotfr.settings.usecase.GetThemeUseCase
 import ru.yotfr.settings.usecase.GetWiFiOnlyUseCase
 import ru.yotfr.settings.event.SettingsEvent
 import ru.yotfr.settings.state.SettingsScreenState
+import ru.yotfr.shared.model.ThemeModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor(
+internal class SettingsViewModel @Inject constructor(
     private val changeThemeUseCase: ChangeThemeUseCase,
     private val getThemeUseCase: GetThemeUseCase,
     private val getWiFiOnlyUseCase: GetWiFiOnlyUseCase,
@@ -63,7 +64,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    private fun changeTheme(newTheme: ru.yotfr.model.ThemeModel) {
+    private fun changeTheme(newTheme: ThemeModel) {
         viewModelScope.launch {
             changeThemeUseCase(newTheme)
         }

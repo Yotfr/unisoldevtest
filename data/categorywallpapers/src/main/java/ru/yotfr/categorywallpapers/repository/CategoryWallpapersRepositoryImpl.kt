@@ -9,9 +9,9 @@ import ru.yotfr.categorywallpapers.paging.pager.CachedWallpapersPager
 import ru.yotfr.categorywallpapers.paging.source.WallpaperPageSource
 import ru.yotfr.database.provider.FavoriteWallpaperDatabaseProvider
 import ru.yotfr.memorycache.pagingcache.WallpapersPagingCache
-import ru.yotfr.model.Category
-import ru.yotfr.model.Wallpaper
 import ru.yotfr.network.provider.WallpaperNetworkProvider
+import ru.yotfr.shared.model.Category
+import ru.yotfr.shared.model.Wallpaper
 import ru.yotfr.shared.query
 import javax.inject.Inject
 
